@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rnaBMuo5Dyk=",
+  "dgSpecHash": "6dEEHvB/w6M=",
   "success": true,
-  "projectFilePath": "D:\\lamlai\\lamlai.csproj",
+  "projectFilePath": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\lamlai.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\TUF\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\TUF\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

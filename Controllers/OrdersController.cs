@@ -22,46 +22,6 @@ namespace test2.Controllers
             _context = context;
         }
 
-        //[HttpPost("addtocart")]
-        //[Authorize]
-        //public async Task<IActionResult> AddToCart(int productId, int quantity)
-        //{
-        //    try
-        //    {
-        //        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        //        if (userIdClaim == null || !int.TryParse(userIdClaim, out int userId))
-        //        {
-        //            return BadRequest("Người dùng không hợp lệ.");
-        //        }
-
-        //        var product = await _context.Products.FindAsync(productId);
-        //        if (product == null)
-        //        {
-        //            return NotFound("Không tìm thấy sản phẩm.");
-        //        }
-
-        //        if (product.Quantity < quantity)
-        //        {
-        //            return BadRequest("Số lượng sản phẩm không đủ.");
-        //        }
-
-        //        // Create the cart item information to return
-        //        var cartItem = new
-        //        {
-        //            ProductId = product.ProductId,
-        //            ProductName = product.ProductName,
-        //            Quantity = quantity,
-        //            Price = product.Price
-        //        };
-
-        //        return Ok(new { message = "Sản phẩm đã được thêm vào giỏ hàng.", cartItem });
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(500, $"Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng: {ex.Message}");
-        //    }
-        //}
-
         // GET: api/Orders
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
@@ -157,7 +117,6 @@ namespace test2.Controllers
         {
             try
             {
-                // Kiểm tra sản phẩm
                 var product = await _context.Products.FindAsync(request.ProductId);
                 if (product == null)
                     return NotFound("Không tìm thấy sản phẩm.");
@@ -165,39 +124,56 @@ namespace test2.Controllers
                 if (product.Quantity < request.Quantity)
                     return BadRequest("Số lượng sản phẩm không đủ.");
 
-                // Tạo đơn hàng
-                var order = new Order
+                // 🔍 Kiểm tra xem user đã có đơn hàng "Pending" chưa
+                var order = await _context.Orders
+                    .Where(o => o.UserId == request.UserId && o.OrderStatus == "Pending")
+                    .Include(o => o.OrderItems)
+                    .FirstOrDefaultAsync();
+
+                if (order == null)
                 {
-                    UserId = request.UserId,
-                    OrderDate = DateTime.Now,
-                    OrderStatus = "Pending",
-                    TotalAmount = product.Price * request.Quantity,
-                    OrderItems = new List<OrderItem>() // Khởi tạo danh sách OrderItems
-                };
+                    // Nếu chưa có, tạo đơn hàng mới
+                    order = new Order
+                    {
+                        UserId = request.UserId,
+                        OrderDate = DateTime.UtcNow,
+                        OrderStatus = "Pending",
+                        TotalAmount = 0
+                    };
+                    _context.Orders.Add(order);
+                    await _context.SaveChangesAsync();
+                }
 
-                _context.Orders.Add(order);
-                await _context.SaveChangesAsync();
-                Console.WriteLine($"✅ Order saved successfully with ID: {order.OrderId}");
-
-                // Tạo OrderItem
-                var orderItem = new OrderItem
+                // 🔍 Kiểm tra sản phẩm đã có trong giỏ hàng chưa
+                var orderItem = order.OrderItems.FirstOrDefault(oi => oi.ProductId == request.ProductId);
+                if (orderItem != null)
                 {
-                    OrderId = order.OrderId,
-                    ProductId = request.ProductId,
-                    ProductName = product.ProductName,
-                    Quantity = request.Quantity,
-                    Price = product.Price
-                };
+                    // Nếu có, cập nhật số lượng
+                    orderItem.Quantity += request.Quantity;
+                    orderItem.Price = orderItem.Quantity * product.Price;
+                }
+                else
+                {
+                    // Nếu chưa có, thêm mới vào giỏ hàng
+                    orderItem = new OrderItem
+                    {
+                        OrderId = order.OrderId,
+                        ProductId = request.ProductId,
+                        ProductName = product.ProductName,
+                        Quantity = request.Quantity,
+                        Price = product.Price * request.Quantity
+                    };
+                    _context.OrderItems.Add(orderItem);
+                }
 
-                _context.OrderItems.Add(orderItem);
+                // ✅ Cập nhật tổng tiền đơn hàng
+                order.TotalAmount = order.OrderItems.Sum(oi => (decimal?)oi.Price) ?? 0;
                 await _context.SaveChangesAsync();
-                Console.WriteLine($"✅ OrderItem saved successfully for OrderId: {order.OrderId}");
 
                 return Ok(new { message = "Sản phẩm đã được thêm vào giỏ hàng.", order });
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"❌ Error: {ex.InnerException?.Message ?? ex.Message}");
                 return StatusCode(500, $"Lỗi: {ex.InnerException?.Message ?? ex.Message}");
             }
         }
@@ -207,57 +183,147 @@ namespace test2.Controllers
         {
             try
             {
-                // Kiểm tra OrderItem có tồn tại không
                 var orderItem = await _context.OrderItems.FindAsync(request.OrderItemId);
                 if (orderItem == null)
                     return NotFound("Không tìm thấy sản phẩm trong giỏ hàng.");
 
-                // Kiểm tra sản phẩm có tồn tại không
                 var product = await _context.Products.FindAsync(orderItem.ProductId);
                 if (product == null)
                     return NotFound("Sản phẩm không tồn tại.");
 
-                // Kiểm tra số lượng hợp lệ
-                if (request.Quantity <= 0)
+                var order = await _context.Orders.FindAsync(orderItem.OrderId);
+                if (order == null)
+                    return NotFound("Không tìm thấy đơn hàng.");
+
+                // 🚨 Kiểm tra trạng thái đơn hàng: Nếu đã thanh toán hoặc hoàn thành, không cho phép cập nhật
+                if (order.OrderStatus == "Paid" || order.OrderStatus == "Completed")
+                    return BadRequest("Không thể cập nhật giỏ hàng vì đơn hàng đã được thanh toán.");
+
+                if (request.Quantity < 0)
                     return BadRequest("Số lượng sản phẩm phải lớn hơn 0.");
 
                 if (request.Quantity > product.Quantity)
-                    return BadRequest("Số lượng sản phẩm không đủ trong kho.");
+                    return BadRequest("Số lượng sản phẩm không đủ.");
 
-                // Cập nhật số lượng và giá
-                orderItem.Quantity = request.Quantity;
-                orderItem.Price = product.Price * request.Quantity;
-
-                // Cập nhật lại tổng tiền của đơn hàng
-                var order = await _context.Orders.FindAsync(orderItem.OrderId);
-                if (order != null)
+                if (request.Quantity == 0)
                 {
-                    order.TotalAmount = _context.OrderItems
-                        .Where(oi => oi.OrderId == order.OrderId)
-                        .Sum(oi => (decimal?)oi.Price) ?? 0; // Nếu tất cả đều null thì trả về 0
+                    // 🗑 Nếu số lượng = 0, xóa sản phẩm khỏi giỏ hàng
+                    _context.OrderItems.Remove(orderItem);
                 }
                 else
                 {
-                    return NotFound("Không tìm thấy đơn hàng.");
+                    // ✏ Nếu số lượng > 0, cập nhật lại giỏ hàng
+                    orderItem.Quantity = request.Quantity;
+                    orderItem.Price = product.Price * request.Quantity;
                 }
+
+                // ✅ Cập nhật tổng tiền đơn hàng
+                order.TotalAmount = _context.OrderItems
+                    .Where(oi => oi.OrderId == order.OrderId)
+                    .Sum(oi => (decimal?)oi.Price) ?? 0;
 
                 await _context.SaveChangesAsync();
                 return Ok(new { message = "Cập nhật giỏ hàng thành công.", orderItem });
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"❌ Lỗi: {ex.InnerException?.Message ?? ex.Message}");
                 return StatusCode(500, $"Lỗi: {ex.InnerException?.Message ?? ex.Message}");
             }
         }
 
-        // DTO nhận dữ liệu từ client
-        public class UpdateCartItemRequest
+        [HttpDelete("removefromcart/{orderItemId}")]
+        public async Task<IActionResult> RemoveFromCart(int orderItemId)
         {
-            public int OrderItemId { get; set; }
-            public int Quantity { get; set; }
+            try
+            {
+                // 🔍 Tìm OrderItem cần xóa
+                var orderItem = await _context.OrderItems.FindAsync(orderItemId);
+                if (orderItem == null)
+                    return NotFound("Không tìm thấy sản phẩm trong giỏ hàng.");
+
+                // 🔍 Lấy Order tương ứng
+                var order = await _context.Orders.FindAsync(orderItem.OrderId);
+                if (order == null)
+                    return NotFound("Không tìm thấy đơn hàng.");
+
+                // 🗑 Xóa sản phẩm khỏi giỏ hàng
+                _context.OrderItems.Remove(orderItem);
+
+                // ✅ Cập nhật lại tổng tiền của Order
+                order.TotalAmount = _context.OrderItems
+                    .Where(oi => oi.OrderId == order.OrderId)
+                    .Sum(oi => (decimal?)oi.Price) ?? 0;
+
+                // 🗑 Nếu đơn hàng không còn sản phẩm nào → Xóa đơn hàng luôn
+                if (!_context.OrderItems.Any(oi => oi.OrderId == order.OrderId))
+                {
+                    _context.Orders.Remove(order);
+                }
+
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "Đã xóa sản phẩm khỏi giỏ hàng.", orderId = order.OrderId });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Lỗi: {ex.InnerException?.Message ?? ex.Message}");
+            }
+        }
+
+
+        [HttpPost("confirm-payment")]
+        public async Task<IActionResult> ConfirmPayment([FromBody] ConfirmPaymentRequest request)
+        {
+            try
+            {
+                var order = await _context.Orders
+                    .Include(o => o.OrderItems)
+                    .FirstOrDefaultAsync(o => o.OrderId == request.OrderId && o.OrderStatus == "Pending");
+
+                if (order == null)
+                    return NotFound("Không tìm thấy đơn hàng hoặc đơn hàng không hợp lệ.");
+
+                // Kiểm tra lại từng sản phẩm trong đơn hàng trước khi trừ kho
+                foreach (var orderItem in order.OrderItems)
+                {
+                    var product = await _context.Products.FindAsync(orderItem.ProductId);
+                    if (product == null)
+                        return NotFound($"Sản phẩm {orderItem.ProductName} không tồn tại.");
+
+                    if (product.Quantity < orderItem.Quantity)
+                        return BadRequest($"Sản phẩm {orderItem.ProductName} không đủ số lượng trong kho.");
+
+                    // ✅ Trừ số lượng sản phẩm trong kho
+                    product.Quantity -= orderItem.Quantity;
+                }
+
+                // ✅ Cập nhật trạng thái đơn hàng
+                order.OrderStatus = "Paid"; // Đơn hàng đã thanh toán
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Thanh toán thành công!", order });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Lỗi: {ex.InnerException?.Message ?? ex.Message}");
+            }
+        }
+
+        // ✅ Định nghĩa class ngay trong API
+        public class ConfirmPaymentRequest
+        {
+            public int OrderId { get; set; }
         }
 
 
     }
+
+    // DTO nhận dữ liệu từ client
+    public class UpdateCartItemRequest
+    {
+        public int OrderItemId { get; set; }
+        public int Quantity { get; set; }
+    }
+
+
 }
+
