@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using lamlai.DTOs;
-using lamlai.Models;
+using lamlai2.DTOs;
+using lamlai2.Models;
 
-namespace test2.Controllers
+namespace lamlai2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

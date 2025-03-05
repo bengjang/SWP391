@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\lamlai2.props" />
+</Project>

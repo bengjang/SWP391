@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace lamlai.Models;
+namespace lamlai2.Models;
 
 public partial class TestContext : DbContext
 {
@@ -34,8 +34,6 @@ public partial class TestContext : DbContext
     public virtual DbSet<Product> Products { get; set; }
 
     public virtual DbSet<ProductCodeCounter> ProductCodeCounters { get; set; }
-
-    public virtual DbSet<Promotion> Promotions { get; set; }
 
     public virtual DbSet<QuizAnswer> QuizAnswers { get; set; }
 
@@ -178,11 +176,16 @@ public partial class TestContext : DbContext
                 .HasDefaultValue("Pending");
             entity.Property(e => e.TotalAmount).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.UserId).HasColumnName("UserID");
+            entity.Property(e => e.VoucherId).HasColumnName("VoucherID");
 
             entity.HasOne(d => d.User).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Orders__UserID__10566F31");
+
+            entity.HasOne(d => d.Voucher).WithMany(p => p.Orders)
+                .HasForeignKey(d => d.VoucherId)
+                .HasConstraintName("FK_Orders_Voucher");
         });
 
         modelBuilder.Entity<OrderItem>(entity =>
@@ -218,7 +221,9 @@ public partial class TestContext : DbContext
 
             entity.Property(e => e.PaymentId).HasColumnName("PaymentID");
             entity.Property(e => e.Amount).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.DiscountAmount).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.OrderId).HasColumnName("OrderID");
+            entity.Property(e => e.OriginalAmount).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.PaymentDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
@@ -273,28 +278,6 @@ public partial class TestContext : DbContext
 
             entity.Property(e => e.CategoryType).HasMaxLength(255);
             entity.Property(e => e.Counter).HasDefaultValue(0);
-        });
-
-        modelBuilder.Entity<Promotion>(entity =>
-        {
-            entity.HasKey(e => e.PromotionId).HasName("PK__Promotio__52C42F2F07A5F6BC");
-
-            entity.HasIndex(e => e.ProductId, "IX_Promotions_ProductID");
-
-            entity.Property(e => e.PromotionId).HasColumnName("PromotionID");
-            entity.Property(e => e.Condition).HasMaxLength(50);
-            entity.Property(e => e.EndDate).HasColumnType("datetime");
-            entity.Property(e => e.EventName).HasMaxLength(255);
-            entity.Property(e => e.ProductId).HasColumnName("ProductID");
-            entity.Property(e => e.StartDate).HasColumnType("datetime");
-            entity.Property(e => e.Status)
-                .HasMaxLength(50)
-                .HasDefaultValue("Active");
-
-            entity.HasOne(d => d.Product).WithMany(p => p.Promotions)
-                .HasForeignKey(d => d.ProductId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Promotion__Produ__160F4887");
         });
 
         modelBuilder.Entity<QuizAnswer>(entity =>
@@ -422,28 +405,21 @@ public partial class TestContext : DbContext
 
         modelBuilder.Entity<Voucher>(entity =>
         {
-            entity.HasKey(e => e.VoucherId).HasName("PK__Vouchers__3AEE79C1BECE8D3F");
-
-            entity.HasIndex(e => e.UserId, "IX_Vouchers_UserID");
+            entity.HasKey(e => e.VoucherId).HasName("PK__Vouchers__3AEE79C163EDE4BC");
 
             entity.Property(e => e.VoucherId).HasColumnName("VoucherID");
-            entity.Property(e => e.Condition).HasMaxLength(50);
-            entity.Property(e => e.EndDate)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
-            entity.Property(e => e.StartDate)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(500);
+            entity.Property(e => e.DiscountPercent).HasColumnType("decimal(5, 2)");
+            entity.Property(e => e.EndDate).HasColumnType("datetime");
+            entity.Property(e => e.MinOrderAmount)
+                .HasDefaultValue(0m)
+                .HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.Quantity).HasDefaultValue(0);
+            entity.Property(e => e.StartDate).HasColumnType("datetime");
             entity.Property(e => e.Status)
                 .HasMaxLength(50)
                 .HasDefaultValue("Active");
-            entity.Property(e => e.UserId).HasColumnName("UserID");
             entity.Property(e => e.VoucherName).HasMaxLength(255);
-
-            entity.HasOne(d => d.User).WithMany(p => p.Vouchers)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Vouchers__UserID__1F98B2C1");
         });
 
         OnModelCreatingPartial(modelBuilder);

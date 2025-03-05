@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace lamlai.Models;
+namespace lamlai2.Models;
 
 public partial class User
 {
@@ -38,6 +38,4 @@ public partial class User
     public virtual ICollection<UserQuizResponse> UserQuizResponses { get; set; } = new List<UserQuizResponse>();
 
     public virtual ICollection<UserSkinTypeResult> UserSkinTypeResults { get; set; } = new List<UserSkinTypeResult>();
-
-    public virtual ICollection<Voucher> Vouchers { get; set; } = new List<Voucher>();
 }

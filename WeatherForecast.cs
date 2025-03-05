@@ -1,4 +1,4 @@
-namespace lamlai
+namespace lamlai2
 {
     public class WeatherForecast
     {

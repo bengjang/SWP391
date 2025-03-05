@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace lamlai.Models;
+namespace lamlai2.Models;
 
 public partial class QuizAnswer
 {

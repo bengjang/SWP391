@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace lamlai.Models;
+namespace lamlai2.Models;
 
 public partial class Payment
 {
@@ -14,6 +14,10 @@ public partial class Payment
     public decimal Amount { get; set; }
 
     public string PaymentStatus { get; set; } = null!;
+
+    public decimal? DiscountAmount { get; set; }
+
+    public decimal OriginalAmount { get; set; }
 
     public virtual Order Order { get; set; } = null!;
 }

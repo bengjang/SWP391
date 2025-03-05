@@ -8,7 +8,7 @@
 //using Google.Apis.Oauth2.v2;
 //using Google.Apis.Oauth2.v2.Data;
 //using Google.Apis.Services;
-//using lamlai.Models; // Cập nhật namespace cho phù hợp
+//using lamlai2.Models; // Cập nhật namespace cho phù hợp
 
 //namespace test2.Controllers
 //{

@@ -1,6 +1,6 @@
 [
   {
-    "ContainingType": "lamlai.Controllers.CancelRequestsController",
+    "ContainingType": "lamlai2.Controllers.CancelRequestsController",
     "Method": "GetCancelRequests",
     "RelativePath": "api/CancelRequests",
     "HttpMethod": "GET",
@@ -9,7 +9,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai.Models.CancelRequest, lamlai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai2.Models.CancelRequest, lamlai2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -20,7 +20,7 @@
     ]
   },
   {
-    "ContainingType": "lamlai.Controllers.CancelRequestsController",
+    "ContainingType": "lamlai2.Controllers.CancelRequestsController",
     "Method": "PostCancelRequest",
     "RelativePath": "api/CancelRequests",
     "HttpMethod": "POST",
@@ -29,13 +29,13 @@
     "Parameters": [
       {
         "Name": "cancelRequest",
-        "Type": "lamlai.Models.CancelRequest",
+        "Type": "lamlai2.Models.CancelRequest",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.CancelRequest",
+        "Type": "lamlai2.Models.CancelRequest",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -46,7 +46,7 @@
     ]
   },
   {
-    "ContainingType": "lamlai.Controllers.CancelRequestsController",
+    "ContainingType": "lamlai2.Controllers.CancelRequestsController",
     "Method": "GetCancelRequest",
     "RelativePath": "api/CancelRequests/{id}",
     "HttpMethod": "GET",
@@ -61,7 +61,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.CancelRequest",
+        "Type": "lamlai2.Models.CancelRequest",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -72,7 +72,7 @@
     ]
   },
   {
-    "ContainingType": "lamlai.Controllers.CancelRequestsController",
+    "ContainingType": "lamlai2.Controllers.CancelRequestsController",
     "Method": "PutCancelRequest",
     "RelativePath": "api/CancelRequests/{id}",
     "HttpMethod": "PUT",
@@ -86,14 +86,14 @@
       },
       {
         "Name": "cancelRequest",
-        "Type": "lamlai.Models.CancelRequest",
+        "Type": "lamlai2.Models.CancelRequest",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "lamlai.Controllers.CancelRequestsController",
+    "ContainingType": "lamlai2.Controllers.CancelRequestsController",
     "Method": "DeleteCancelRequest",
     "RelativePath": "api/CancelRequests/{id}",
     "HttpMethod": "DELETE",
@@ -109,7 +109,116 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "lamlai.Controllers.ConversationsController",
+    "ContainingType": "lamlai2.Controllers.CategoryController",
+    "Method": "GetCategory",
+    "RelativePath": "api/Category",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai2.Models.Category, lamlai2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "lamlai2.Controllers.CategoryController",
+    "Method": "PostCategory",
+    "RelativePath": "api/Category",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "category",
+        "Type": "lamlai2.Models.Category",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "lamlai2.Models.Category",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "lamlai2.Controllers.CategoryController",
+    "Method": "GetCategory",
+    "RelativePath": "api/Category/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "lamlai2.Models.Category",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "lamlai2.Controllers.CategoryController",
+    "Method": "PutCategory",
+    "RelativePath": "api/Category/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "category",
+        "Type": "lamlai2.Models.Category",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "lamlai2.Controllers.CategoryController",
+    "Method": "DeleteCategory",
+    "RelativePath": "api/Category/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "lamlai2.Controllers.ConversationsController",
     "Method": "GetConversations",
     "RelativePath": "api/Conversations",
     "HttpMethod": "GET",
@@ -118,7 +227,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai.Models.Conversation, lamlai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai2.Models.Conversation, lamlai2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -129,7 +238,7 @@
     ]
   },
   {
-    "ContainingType": "lamlai.Controllers.ConversationsController",
+    "ContainingType": "lamlai2.Controllers.ConversationsController",
     "Method": "PostConversation",
     "RelativePath": "api/Conversations",
     "HttpMethod": "POST",
@@ -138,13 +247,13 @@
     "Parameters": [
       {
         "Name": "conversation",
-        "Type": "lamlai.Models.Conversation",
+        "Type": "lamlai2.Models.Conversation",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.Conversation",
+        "Type": "lamlai2.Models.Conversation",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -155,7 +264,7 @@
     ]
   },
   {
-    "ContainingType": "lamlai.Controllers.ConversationsController",
+    "ContainingType": "lamlai2.Controllers.ConversationsController",
     "Method": "GetConversation",
     "RelativePath": "api/Conversations/{id}",
     "HttpMethod": "GET",
@@ -170,7 +279,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.Conversation",
+        "Type": "lamlai2.Models.Conversation",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -181,7 +290,7 @@
     ]
   },
   {
-    "ContainingType": "lamlai.Controllers.ConversationsController",
+    "ContainingType": "lamlai2.Controllers.ConversationsController",
     "Method": "PutConversation",
     "RelativePath": "api/Conversations/{id}",
     "HttpMethod": "PUT",
@@ -195,14 +304,14 @@
       },
       {
         "Name": "conversation",
-        "Type": "lamlai.Models.Conversation",
+        "Type": "lamlai2.Models.Conversation",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "lamlai.Controllers.ConversationsController",
+    "ContainingType": "lamlai2.Controllers.ConversationsController",
     "Method": "DeleteConversation",
     "RelativePath": "api/Conversations/{id}",
     "HttpMethod": "DELETE",
@@ -218,7 +327,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.MessagesController",
+    "ContainingType": "lamlai2.Controllers.MessagesController",
     "Method": "GetMessages",
     "RelativePath": "api/Messages",
     "HttpMethod": "GET",
@@ -227,7 +336,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai.Models.Message, lamlai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai2.Models.Message, lamlai2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -238,7 +347,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.MessagesController",
+    "ContainingType": "lamlai2.Controllers.MessagesController",
     "Method": "PostMessage",
     "RelativePath": "api/Messages",
     "HttpMethod": "POST",
@@ -247,13 +356,13 @@
     "Parameters": [
       {
         "Name": "message",
-        "Type": "lamlai.Models.Message",
+        "Type": "lamlai2.Models.Message",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.Message",
+        "Type": "lamlai2.Models.Message",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -264,7 +373,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.MessagesController",
+    "ContainingType": "lamlai2.Controllers.MessagesController",
     "Method": "GetMessage",
     "RelativePath": "api/Messages/{id}",
     "HttpMethod": "GET",
@@ -279,7 +388,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.Message",
+        "Type": "lamlai2.Models.Message",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -290,7 +399,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.MessagesController",
+    "ContainingType": "lamlai2.Controllers.MessagesController",
     "Method": "PutMessage",
     "RelativePath": "api/Messages/{id}",
     "HttpMethod": "PUT",
@@ -304,14 +413,14 @@
       },
       {
         "Name": "message",
-        "Type": "lamlai.Models.Message",
+        "Type": "lamlai2.Models.Message",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.MessagesController",
+    "ContainingType": "lamlai2.Controllers.MessagesController",
     "Method": "DeleteMessage",
     "RelativePath": "api/Messages/{id}",
     "HttpMethod": "DELETE",
@@ -327,7 +436,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.NotificationsController",
+    "ContainingType": "lamlai2.Controllers.NotificationsController",
     "Method": "GetNotifications",
     "RelativePath": "api/Notifications",
     "HttpMethod": "GET",
@@ -336,7 +445,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai.Models.Notification, lamlai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai2.Models.Notification, lamlai2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -347,7 +456,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.NotificationsController",
+    "ContainingType": "lamlai2.Controllers.NotificationsController",
     "Method": "PostNotification",
     "RelativePath": "api/Notifications",
     "HttpMethod": "POST",
@@ -356,13 +465,13 @@
     "Parameters": [
       {
         "Name": "notification",
-        "Type": "lamlai.Models.Notification",
+        "Type": "lamlai2.Models.Notification",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.Notification",
+        "Type": "lamlai2.Models.Notification",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -373,7 +482,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.NotificationsController",
+    "ContainingType": "lamlai2.Controllers.NotificationsController",
     "Method": "GetNotification",
     "RelativePath": "api/Notifications/{id}",
     "HttpMethod": "GET",
@@ -388,7 +497,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.Notification",
+        "Type": "lamlai2.Models.Notification",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -399,7 +508,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.NotificationsController",
+    "ContainingType": "lamlai2.Controllers.NotificationsController",
     "Method": "PutNotification",
     "RelativePath": "api/Notifications/{id}",
     "HttpMethod": "PUT",
@@ -413,14 +522,14 @@
       },
       {
         "Name": "notification",
-        "Type": "lamlai.Models.Notification",
+        "Type": "lamlai2.Models.Notification",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.NotificationsController",
+    "ContainingType": "lamlai2.Controllers.NotificationsController",
     "Method": "DeleteNotification",
     "RelativePath": "api/Notifications/{id}",
     "HttpMethod": "DELETE",
@@ -436,7 +545,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.OrderItemsController",
+    "ContainingType": "lamlai2.Controllers.OrderItemsController",
     "Method": "GetOrderItems",
     "RelativePath": "api/OrderItems",
     "HttpMethod": "GET",
@@ -445,7 +554,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai.Models.OrderItem, lamlai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai2.Models.OrderItem, lamlai2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -456,7 +565,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.OrderItemsController",
+    "ContainingType": "lamlai2.Controllers.OrderItemsController",
     "Method": "PostOrderItem",
     "RelativePath": "api/OrderItems",
     "HttpMethod": "POST",
@@ -465,13 +574,13 @@
     "Parameters": [
       {
         "Name": "orderItem",
-        "Type": "lamlai.Models.OrderItem",
+        "Type": "lamlai2.Models.OrderItem",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.OrderItem",
+        "Type": "lamlai2.Models.OrderItem",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -482,7 +591,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.OrderItemsController",
+    "ContainingType": "lamlai2.Controllers.OrderItemsController",
     "Method": "GetOrderItem",
     "RelativePath": "api/OrderItems/{id}",
     "HttpMethod": "GET",
@@ -497,7 +606,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.OrderItem",
+        "Type": "lamlai2.Models.OrderItem",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -508,7 +617,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.OrderItemsController",
+    "ContainingType": "lamlai2.Controllers.OrderItemsController",
     "Method": "PutOrderItem",
     "RelativePath": "api/OrderItems/{id}",
     "HttpMethod": "PUT",
@@ -522,14 +631,14 @@
       },
       {
         "Name": "orderItem",
-        "Type": "lamlai.Models.OrderItem",
+        "Type": "lamlai2.Models.OrderItem",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.OrderItemsController",
+    "ContainingType": "lamlai2.Controllers.OrderItemsController",
     "Method": "DeleteOrderItem",
     "RelativePath": "api/OrderItems/{id}",
     "HttpMethod": "DELETE",
@@ -545,7 +654,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.OrdersController",
+    "ContainingType": "lamlai2.Controllers.OrdersController",
     "Method": "GetOrders",
     "RelativePath": "api/Orders",
     "HttpMethod": "GET",
@@ -554,7 +663,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai.Models.Order, lamlai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai2.Models.Order, lamlai2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -565,7 +674,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.OrdersController",
+    "ContainingType": "lamlai2.Controllers.OrdersController",
     "Method": "PostOrder",
     "RelativePath": "api/Orders",
     "HttpMethod": "POST",
@@ -574,13 +683,13 @@
     "Parameters": [
       {
         "Name": "order",
-        "Type": "lamlai.Models.Order",
+        "Type": "lamlai2.Models.Order",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.Order",
+        "Type": "lamlai2.Models.Order",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -591,7 +700,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.OrdersController",
+    "ContainingType": "lamlai2.Controllers.OrdersController",
     "Method": "GetOrder",
     "RelativePath": "api/Orders/{id}",
     "HttpMethod": "GET",
@@ -606,7 +715,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.Order",
+        "Type": "lamlai2.Models.Order",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -617,7 +726,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.OrdersController",
+    "ContainingType": "lamlai2.Controllers.OrdersController",
     "Method": "PutOrder",
     "RelativePath": "api/Orders/{id}",
     "HttpMethod": "PUT",
@@ -631,14 +740,14 @@
       },
       {
         "Name": "order",
-        "Type": "lamlai.Models.Order",
+        "Type": "lamlai2.Models.Order",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.OrdersController",
+    "ContainingType": "lamlai2.Controllers.OrdersController",
     "Method": "DeleteOrder",
     "RelativePath": "api/Orders/{id}",
     "HttpMethod": "DELETE",
@@ -654,7 +763,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.OrdersController",
+    "ContainingType": "lamlai2.Controllers.OrdersController",
     "Method": "AddToCart",
     "RelativePath": "api/Orders/addtocart",
     "HttpMethod": "POST",
@@ -663,14 +772,78 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "test2.Controllers.OrdersController\u002BAddToCartRequest",
+        "Type": "lamlai2.Controllers.OrdersController\u002BAddToCartRequest",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.OrdersController",
+    "ContainingType": "lamlai2.Controllers.OrdersController",
+    "Method": "ApplyVoucher",
+    "RelativePath": "api/Orders/applyvoucher",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "lamlai2.Controllers.OrdersController\u002BApplyVoucherRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "lamlai2.Controllers.OrdersController",
+    "Method": "ConfirmPayment",
+    "RelativePath": "api/Orders/confirm-payment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "lamlai2.Controllers.OrdersController\u002BConfirmPaymentRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "lamlai2.Controllers.OrdersController",
+    "Method": "RemoveFromCart",
+    "RelativePath": "api/Orders/removefromcart/{orderItemId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderItemId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "lamlai2.Controllers.OrdersController",
+    "Method": "RemoveOrder",
+    "RelativePath": "api/Orders/removeorderid/{orderId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "lamlai2.Controllers.OrdersController",
     "Method": "UpdateCartItem",
     "RelativePath": "api/Orders/updatecartitem",
     "HttpMethod": "PUT",
@@ -679,14 +852,14 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "test2.Controllers.OrdersController\u002BUpdateCartItemRequest",
+        "Type": "lamlai2.Controllers.UpdateCartItemRequest",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.PaymentsController",
+    "ContainingType": "lamlai2.Controllers.PaymentsController",
     "Method": "GetPayments",
     "RelativePath": "api/Payments",
     "HttpMethod": "GET",
@@ -695,7 +868,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai.Models.Payment, lamlai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai2.Models.Payment, lamlai2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -706,7 +879,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.PaymentsController",
+    "ContainingType": "lamlai2.Controllers.PaymentsController",
     "Method": "PostPayment",
     "RelativePath": "api/Payments",
     "HttpMethod": "POST",
@@ -715,13 +888,13 @@
     "Parameters": [
       {
         "Name": "payment",
-        "Type": "lamlai.Models.Payment",
+        "Type": "lamlai2.Models.Payment",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.Payment",
+        "Type": "lamlai2.Models.Payment",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -732,7 +905,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.PaymentsController",
+    "ContainingType": "lamlai2.Controllers.PaymentsController",
     "Method": "GetPayment",
     "RelativePath": "api/Payments/{id}",
     "HttpMethod": "GET",
@@ -747,7 +920,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.Payment",
+        "Type": "lamlai2.Models.Payment",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -758,7 +931,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.PaymentsController",
+    "ContainingType": "lamlai2.Controllers.PaymentsController",
     "Method": "PutPayment",
     "RelativePath": "api/Payments/{id}",
     "HttpMethod": "PUT",
@@ -772,14 +945,14 @@
       },
       {
         "Name": "payment",
-        "Type": "lamlai.Models.Payment",
+        "Type": "lamlai2.Models.Payment",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.PaymentsController",
+    "ContainingType": "lamlai2.Controllers.PaymentsController",
     "Method": "DeletePayment",
     "RelativePath": "api/Payments/{id}",
     "HttpMethod": "DELETE",
@@ -795,7 +968,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.ProductCodeCountersController",
+    "ContainingType": "lamlai2.Controllers.ProductCodeCountersController",
     "Method": "GetProductCodeCounters",
     "RelativePath": "api/ProductCodeCounters",
     "HttpMethod": "GET",
@@ -804,7 +977,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai.Models.ProductCodeCounter, lamlai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai2.Models.ProductCodeCounter, lamlai2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -815,7 +988,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.ProductCodeCountersController",
+    "ContainingType": "lamlai2.Controllers.ProductCodeCountersController",
     "Method": "PostProductCodeCounter",
     "RelativePath": "api/ProductCodeCounters",
     "HttpMethod": "POST",
@@ -824,13 +997,13 @@
     "Parameters": [
       {
         "Name": "productCodeCounter",
-        "Type": "lamlai.Models.ProductCodeCounter",
+        "Type": "lamlai2.Models.ProductCodeCounter",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.ProductCodeCounter",
+        "Type": "lamlai2.Models.ProductCodeCounter",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -841,7 +1014,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.ProductCodeCountersController",
+    "ContainingType": "lamlai2.Controllers.ProductCodeCountersController",
     "Method": "GetProductCodeCounter",
     "RelativePath": "api/ProductCodeCounters/{id}",
     "HttpMethod": "GET",
@@ -856,7 +1029,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.ProductCodeCounter",
+        "Type": "lamlai2.Models.ProductCodeCounter",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -867,7 +1040,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.ProductCodeCountersController",
+    "ContainingType": "lamlai2.Controllers.ProductCodeCountersController",
     "Method": "PutProductCodeCounter",
     "RelativePath": "api/ProductCodeCounters/{id}",
     "HttpMethod": "PUT",
@@ -881,14 +1054,14 @@
       },
       {
         "Name": "productCodeCounter",
-        "Type": "lamlai.Models.ProductCodeCounter",
+        "Type": "lamlai2.Models.ProductCodeCounter",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.ProductCodeCountersController",
+    "ContainingType": "lamlai2.Controllers.ProductCodeCountersController",
     "Method": "DeleteProductCodeCounter",
     "RelativePath": "api/ProductCodeCounters/{id}",
     "HttpMethod": "DELETE",
@@ -904,7 +1077,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.ProductsController",
+    "ContainingType": "lamlai2.Controllers.ProductsController",
     "Method": "GetProducts",
     "RelativePath": "api/Products",
     "HttpMethod": "GET",
@@ -913,7 +1086,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai.Models.Product, lamlai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai2.Models.Product, lamlai2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -924,7 +1097,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.ProductsController",
+    "ContainingType": "lamlai2.Controllers.ProductsController",
     "Method": "PostProduct",
     "RelativePath": "api/Products",
     "HttpMethod": "POST",
@@ -933,13 +1106,13 @@
     "Parameters": [
       {
         "Name": "product",
-        "Type": "lamlai.Models.Product",
+        "Type": "lamlai2.Models.Product",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.Product",
+        "Type": "lamlai2.Models.Product",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -950,7 +1123,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.ProductsController",
+    "ContainingType": "lamlai2.Controllers.ProductsController",
     "Method": "GetProduct",
     "RelativePath": "api/Products/{id}",
     "HttpMethod": "GET",
@@ -965,7 +1138,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.Product",
+        "Type": "lamlai2.Models.Product",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -976,7 +1149,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.ProductsController",
+    "ContainingType": "lamlai2.Controllers.ProductsController",
     "Method": "PutProduct",
     "RelativePath": "api/Products/{id}",
     "HttpMethod": "PUT",
@@ -990,14 +1163,14 @@
       },
       {
         "Name": "product",
-        "Type": "lamlai.Models.Product",
+        "Type": "lamlai2.Models.Product",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.ProductsController",
+    "ContainingType": "lamlai2.Controllers.ProductsController",
     "Method": "DeleteProduct",
     "RelativePath": "api/Products/{id}",
     "HttpMethod": "DELETE",
@@ -1013,7 +1186,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.ProductsController",
+    "ContainingType": "lamlai2.Controllers.ProductsController",
     "Method": "SearchProducts",
     "RelativePath": "api/Products/search",
     "HttpMethod": "GET",
@@ -1028,7 +1201,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai.Models.Product, lamlai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai2.Models.Product, lamlai2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1039,116 +1212,23 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.PromotionsController",
-    "Method": "GetPromotions",
-    "RelativePath": "api/Promotions",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai.Models.Promotion, lamlai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "test2.Controllers.PromotionsController",
-    "Method": "PostPromotion",
-    "RelativePath": "api/Promotions",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "promotion",
-        "Type": "lamlai.Models.Promotion",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "lamlai.Models.Promotion",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "test2.Controllers.PromotionsController",
-    "Method": "GetPromotion",
-    "RelativePath": "api/Promotions/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "lamlai.Models.Promotion",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "test2.Controllers.PromotionsController",
-    "Method": "PutPromotion",
-    "RelativePath": "api/Promotions/{id}",
+    "ContainingType": "lamlai2.Controllers.ProductsController",
+    "Method": "UpdateProductQuantity",
+    "RelativePath": "api/Products/updateQuantity",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "promotion",
-        "Type": "lamlai.Models.Promotion",
+        "Name": "request",
+        "Type": "lamlai2.Controllers.ProductsController\u002BUpdateProductQuantityRequest",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.PromotionsController",
-    "Method": "DeletePromotion",
-    "RelativePath": "api/Promotions/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "test2.Controllers.QuizController",
+    "ContainingType": "lamlai2.Controllers.QuizController",
     "Method": "GetQuizQuestions",
     "RelativePath": "api/Quiz/questions",
     "HttpMethod": "GET",
@@ -1157,7 +1237,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai.DTOs.QuizQuestionDto, lamlai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai2.DTOs.QuizQuestionDto, lamlai2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1168,7 +1248,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.QuizController",
+    "ContainingType": "lamlai2.Controllers.QuizController",
     "Method": "ResetQuiz",
     "RelativePath": "api/Quiz/reset",
     "HttpMethod": "POST",
@@ -1177,14 +1257,14 @@
     "Parameters": [
       {
         "Name": "submission",
-        "Type": "lamlai.DTOs.QuizSubmissionDto",
+        "Type": "lamlai2.DTOs.QuizSubmissionDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.QuizController",
+    "ContainingType": "lamlai2.Controllers.QuizController",
     "Method": "SubmitQuizResponses",
     "RelativePath": "api/Quiz/submit",
     "HttpMethod": "POST",
@@ -1193,14 +1273,14 @@
     "Parameters": [
       {
         "Name": "submission",
-        "Type": "lamlai.DTOs.QuizSubmissionDto",
+        "Type": "lamlai2.DTOs.QuizSubmissionDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.QuizAnswersController",
+    "ContainingType": "lamlai2.Controllers.QuizAnswersController",
     "Method": "GetQuizAnswers",
     "RelativePath": "api/QuizAnswers",
     "HttpMethod": "GET",
@@ -1209,7 +1289,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai.Models.QuizAnswer, lamlai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai2.Models.QuizAnswer, lamlai2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1220,7 +1300,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.QuizAnswersController",
+    "ContainingType": "lamlai2.Controllers.QuizAnswersController",
     "Method": "PostQuizAnswer",
     "RelativePath": "api/QuizAnswers",
     "HttpMethod": "POST",
@@ -1229,13 +1309,13 @@
     "Parameters": [
       {
         "Name": "quizAnswer",
-        "Type": "lamlai.Models.QuizAnswer",
+        "Type": "lamlai2.Models.QuizAnswer",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.QuizAnswer",
+        "Type": "lamlai2.Models.QuizAnswer",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1246,7 +1326,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.QuizAnswersController",
+    "ContainingType": "lamlai2.Controllers.QuizAnswersController",
     "Method": "GetQuizAnswer",
     "RelativePath": "api/QuizAnswers/{id}",
     "HttpMethod": "GET",
@@ -1261,7 +1341,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.QuizAnswer",
+        "Type": "lamlai2.Models.QuizAnswer",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1272,7 +1352,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.QuizAnswersController",
+    "ContainingType": "lamlai2.Controllers.QuizAnswersController",
     "Method": "PutQuizAnswer",
     "RelativePath": "api/QuizAnswers/{id}",
     "HttpMethod": "PUT",
@@ -1286,14 +1366,14 @@
       },
       {
         "Name": "quizAnswer",
-        "Type": "lamlai.Models.QuizAnswer",
+        "Type": "lamlai2.Models.QuizAnswer",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.QuizAnswersController",
+    "ContainingType": "lamlai2.Controllers.QuizAnswersController",
     "Method": "DeleteQuizAnswer",
     "RelativePath": "api/QuizAnswers/{id}",
     "HttpMethod": "DELETE",
@@ -1309,7 +1389,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.QuizQuestionsController",
+    "ContainingType": "lamlai2.Controllers.QuizQuestionsController",
     "Method": "GetQuizQuestions",
     "RelativePath": "api/QuizQuestions",
     "HttpMethod": "GET",
@@ -1318,7 +1398,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai.Models.QuizQuestion, lamlai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai2.Models.QuizQuestion, lamlai2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1329,7 +1409,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.QuizQuestionsController",
+    "ContainingType": "lamlai2.Controllers.QuizQuestionsController",
     "Method": "PostQuizQuestion",
     "RelativePath": "api/QuizQuestions",
     "HttpMethod": "POST",
@@ -1338,13 +1418,13 @@
     "Parameters": [
       {
         "Name": "quizQuestion",
-        "Type": "lamlai.Models.QuizQuestion",
+        "Type": "lamlai2.Models.QuizQuestion",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.QuizQuestion",
+        "Type": "lamlai2.Models.QuizQuestion",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1355,7 +1435,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.QuizQuestionsController",
+    "ContainingType": "lamlai2.Controllers.QuizQuestionsController",
     "Method": "GetQuizQuestion",
     "RelativePath": "api/QuizQuestions/{id}",
     "HttpMethod": "GET",
@@ -1370,7 +1450,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.QuizQuestion",
+        "Type": "lamlai2.Models.QuizQuestion",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1381,7 +1461,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.QuizQuestionsController",
+    "ContainingType": "lamlai2.Controllers.QuizQuestionsController",
     "Method": "PutQuizQuestion",
     "RelativePath": "api/QuizQuestions/{id}",
     "HttpMethod": "PUT",
@@ -1395,14 +1475,14 @@
       },
       {
         "Name": "quizQuestion",
-        "Type": "lamlai.Models.QuizQuestion",
+        "Type": "lamlai2.Models.QuizQuestion",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.QuizQuestionsController",
+    "ContainingType": "lamlai2.Controllers.QuizQuestionsController",
     "Method": "DeleteQuizQuestion",
     "RelativePath": "api/QuizQuestions/{id}",
     "HttpMethod": "DELETE",
@@ -1418,7 +1498,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.ReviewsController",
+    "ContainingType": "lamlai2.Controllers.ReviewsController",
     "Method": "GetReviews",
     "RelativePath": "api/Reviews",
     "HttpMethod": "GET",
@@ -1427,7 +1507,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai.Models.Review, lamlai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai2.Models.Review, lamlai2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1438,7 +1518,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.ReviewsController",
+    "ContainingType": "lamlai2.Controllers.ReviewsController",
     "Method": "PostReview",
     "RelativePath": "api/Reviews",
     "HttpMethod": "POST",
@@ -1447,13 +1527,13 @@
     "Parameters": [
       {
         "Name": "review",
-        "Type": "lamlai.Models.Review",
+        "Type": "lamlai2.Models.Review",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.Review",
+        "Type": "lamlai2.Models.Review",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1464,7 +1544,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.ReviewsController",
+    "ContainingType": "lamlai2.Controllers.ReviewsController",
     "Method": "GetReview",
     "RelativePath": "api/Reviews/{id}",
     "HttpMethod": "GET",
@@ -1479,7 +1559,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.Review",
+        "Type": "lamlai2.Models.Review",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1490,7 +1570,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.ReviewsController",
+    "ContainingType": "lamlai2.Controllers.ReviewsController",
     "Method": "PutReview",
     "RelativePath": "api/Reviews/{id}",
     "HttpMethod": "PUT",
@@ -1504,14 +1584,14 @@
       },
       {
         "Name": "review",
-        "Type": "lamlai.Models.Review",
+        "Type": "lamlai2.Models.Review",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.ReviewsController",
+    "ContainingType": "lamlai2.Controllers.ReviewsController",
     "Method": "DeleteReview",
     "RelativePath": "api/Reviews/{id}",
     "HttpMethod": "DELETE",
@@ -1528,7 +1608,7 @@
   },
   {
     "ContainingType": "Program\u002B\u003C\u003Ec",
-    "Method": "\u003C\u003CMain\u003E$\u003Eb__0_5",
+    "Method": "\u003C\u003CMain\u003E$\u003Eb__0_4",
     "RelativePath": "api/test",
     "HttpMethod": "GET",
     "IsController": false,
@@ -1545,7 +1625,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.UserQuizResponsesController",
+    "ContainingType": "lamlai2.Controllers.UserQuizResponsesController",
     "Method": "GetUserQuizResponses",
     "RelativePath": "api/UserQuizResponses",
     "HttpMethod": "GET",
@@ -1554,7 +1634,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai.Models.UserQuizResponse, lamlai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai2.Models.UserQuizResponse, lamlai2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1565,7 +1645,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.UserQuizResponsesController",
+    "ContainingType": "lamlai2.Controllers.UserQuizResponsesController",
     "Method": "PostUserQuizResponse",
     "RelativePath": "api/UserQuizResponses",
     "HttpMethod": "POST",
@@ -1574,13 +1654,13 @@
     "Parameters": [
       {
         "Name": "userQuizResponse",
-        "Type": "lamlai.Models.UserQuizResponse",
+        "Type": "lamlai2.Models.UserQuizResponse",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.UserQuizResponse",
+        "Type": "lamlai2.Models.UserQuizResponse",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1591,7 +1671,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.UserQuizResponsesController",
+    "ContainingType": "lamlai2.Controllers.UserQuizResponsesController",
     "Method": "GetUserQuizResponse",
     "RelativePath": "api/UserQuizResponses/{id}",
     "HttpMethod": "GET",
@@ -1606,7 +1686,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.UserQuizResponse",
+        "Type": "lamlai2.Models.UserQuizResponse",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1617,7 +1697,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.UserQuizResponsesController",
+    "ContainingType": "lamlai2.Controllers.UserQuizResponsesController",
     "Method": "PutUserQuizResponse",
     "RelativePath": "api/UserQuizResponses/{id}",
     "HttpMethod": "PUT",
@@ -1631,14 +1711,14 @@
       },
       {
         "Name": "userQuizResponse",
-        "Type": "lamlai.Models.UserQuizResponse",
+        "Type": "lamlai2.Models.UserQuizResponse",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.UserQuizResponsesController",
+    "ContainingType": "lamlai2.Controllers.UserQuizResponsesController",
     "Method": "DeleteUserQuizResponse",
     "RelativePath": "api/UserQuizResponses/{id}",
     "HttpMethod": "DELETE",
@@ -1654,7 +1734,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.UsersController",
+    "ContainingType": "lamlai2.Controllers.UsersController",
     "Method": "GetUsers",
     "RelativePath": "api/Users",
     "HttpMethod": "GET",
@@ -1663,7 +1743,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai.Models.User, lamlai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai2.Models.User, lamlai2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1674,7 +1754,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.UsersController",
+    "ContainingType": "lamlai2.Controllers.UsersController",
     "Method": "GetUser",
     "RelativePath": "api/Users/{id}",
     "HttpMethod": "GET",
@@ -1689,7 +1769,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.User",
+        "Type": "lamlai2.Models.User",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1700,7 +1780,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.UsersController",
+    "ContainingType": "lamlai2.Controllers.UsersController",
     "Method": "PutUser",
     "RelativePath": "api/Users/{id}",
     "HttpMethod": "PUT",
@@ -1714,14 +1794,14 @@
       },
       {
         "Name": "user",
-        "Type": "lamlai.Models.User",
+        "Type": "lamlai2.Models.User",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.UsersController",
+    "ContainingType": "lamlai2.Controllers.UsersController",
     "Method": "DeleteUser",
     "RelativePath": "api/Users/{id}",
     "HttpMethod": "DELETE",
@@ -1737,7 +1817,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.UsersController",
+    "ContainingType": "lamlai2.Controllers.UsersController",
     "Method": "ForgotPassword",
     "RelativePath": "api/Users/forgot-password",
     "HttpMethod": "POST",
@@ -1746,14 +1826,14 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "test2.Controllers.ForgotPasswordRequest",
+        "Type": "lamlai2.Controllers.ForgotPasswordRequest",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.UsersController",
+    "ContainingType": "lamlai2.Controllers.UsersController",
     "Method": "Login",
     "RelativePath": "api/Users/login",
     "HttpMethod": "POST",
@@ -1762,14 +1842,14 @@
     "Parameters": [
       {
         "Name": "loginRequest",
-        "Type": "test2.Controllers.LoginRequest",
+        "Type": "lamlai2.Controllers.LoginRequest",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.UsersController",
+    "ContainingType": "lamlai2.Controllers.UsersController",
     "Method": "GetCurrentUserProfile",
     "RelativePath": "api/Users/profile",
     "HttpMethod": "GET",
@@ -1779,7 +1859,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.UsersController",
+    "ContainingType": "lamlai2.Controllers.UsersController",
     "Method": "UpdateCurrentUserProfile",
     "RelativePath": "api/Users/profile",
     "HttpMethod": "PUT",
@@ -1788,14 +1868,14 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "test2.Controllers.UpdateProfileRequest",
+        "Type": "lamlai2.Controllers.UpdateProfileRequest",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.UsersController",
+    "ContainingType": "lamlai2.Controllers.UsersController",
     "Method": "GetUserProfile",
     "RelativePath": "api/Users/profile/{id}",
     "HttpMethod": "GET",
@@ -1811,7 +1891,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.UsersController",
+    "ContainingType": "lamlai2.Controllers.UsersController",
     "Method": "Register",
     "RelativePath": "api/Users/register",
     "HttpMethod": "POST",
@@ -1820,13 +1900,13 @@
     "Parameters": [
       {
         "Name": "registerRequest",
-        "Type": "test2.Controllers.RegisterRequest",
+        "Type": "lamlai2.Controllers.RegisterRequest",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.User",
+        "Type": "lamlai2.Models.User",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1837,7 +1917,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.UsersController",
+    "ContainingType": "lamlai2.Controllers.UsersController",
     "Method": "UpdateUserByAdmin",
     "RelativePath": "api/Users/update/{id}",
     "HttpMethod": "PUT",
@@ -1851,14 +1931,14 @@
       },
       {
         "Name": "request",
-        "Type": "test2.Controllers.UpdateUserRequest",
+        "Type": "lamlai2.Controllers.UpdateUserRequest",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.UserSkinTypeResultsController",
+    "ContainingType": "lamlai2.Controllers.UserSkinTypeResultsController",
     "Method": "GetUserSkinTypeResults",
     "RelativePath": "api/UserSkinTypeResults",
     "HttpMethod": "GET",
@@ -1867,7 +1947,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai.Models.UserSkinTypeResult, lamlai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai2.Models.UserSkinTypeResult, lamlai2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1878,7 +1958,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.UserSkinTypeResultsController",
+    "ContainingType": "lamlai2.Controllers.UserSkinTypeResultsController",
     "Method": "PostUserSkinTypeResult",
     "RelativePath": "api/UserSkinTypeResults",
     "HttpMethod": "POST",
@@ -1887,13 +1967,13 @@
     "Parameters": [
       {
         "Name": "userSkinTypeResult",
-        "Type": "lamlai.Models.UserSkinTypeResult",
+        "Type": "lamlai2.Models.UserSkinTypeResult",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.UserSkinTypeResult",
+        "Type": "lamlai2.Models.UserSkinTypeResult",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1904,7 +1984,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.UserSkinTypeResultsController",
+    "ContainingType": "lamlai2.Controllers.UserSkinTypeResultsController",
     "Method": "GetUserSkinTypeResult",
     "RelativePath": "api/UserSkinTypeResults/{id}",
     "HttpMethod": "GET",
@@ -1919,7 +1999,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.UserSkinTypeResult",
+        "Type": "lamlai2.Models.UserSkinTypeResult",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1930,7 +2010,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.UserSkinTypeResultsController",
+    "ContainingType": "lamlai2.Controllers.UserSkinTypeResultsController",
     "Method": "PutUserSkinTypeResult",
     "RelativePath": "api/UserSkinTypeResults/{id}",
     "HttpMethod": "PUT",
@@ -1944,14 +2024,14 @@
       },
       {
         "Name": "userSkinTypeResult",
-        "Type": "lamlai.Models.UserSkinTypeResult",
+        "Type": "lamlai2.Models.UserSkinTypeResult",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.UserSkinTypeResultsController",
+    "ContainingType": "lamlai2.Controllers.UserSkinTypeResultsController",
     "Method": "DeleteUserSkinTypeResult",
     "RelativePath": "api/UserSkinTypeResults/{id}",
     "HttpMethod": "DELETE",
@@ -1967,7 +2047,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.VouchersController",
+    "ContainingType": "lamlai2.Controllers.VouchersController",
     "Method": "GetVouchers",
     "RelativePath": "api/Vouchers",
     "HttpMethod": "GET",
@@ -1976,7 +2056,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai.Models.Voucher, lamlai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai2.Models.Voucher, lamlai2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1987,7 +2067,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.VouchersController",
+    "ContainingType": "lamlai2.Controllers.VouchersController",
     "Method": "PostVoucher",
     "RelativePath": "api/Vouchers",
     "HttpMethod": "POST",
@@ -1996,13 +2076,13 @@
     "Parameters": [
       {
         "Name": "voucher",
-        "Type": "lamlai.Models.Voucher",
+        "Type": "lamlai2.Models.Voucher",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.Voucher",
+        "Type": "lamlai2.Models.Voucher",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2013,7 +2093,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.VouchersController",
+    "ContainingType": "lamlai2.Controllers.VouchersController",
     "Method": "GetVoucher",
     "RelativePath": "api/Vouchers/{id}",
     "HttpMethod": "GET",
@@ -2028,7 +2108,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.Voucher",
+        "Type": "lamlai2.Models.Voucher",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2039,7 +2119,7 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.VouchersController",
+    "ContainingType": "lamlai2.Controllers.VouchersController",
     "Method": "PutVoucher",
     "RelativePath": "api/Vouchers/{id}",
     "HttpMethod": "PUT",
@@ -2053,14 +2133,14 @@
       },
       {
         "Name": "voucher",
-        "Type": "lamlai.Models.Voucher",
+        "Type": "lamlai2.Models.Voucher",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.VouchersController",
+    "ContainingType": "lamlai2.Controllers.VouchersController",
     "Method": "DeleteVoucher",
     "RelativePath": "api/Vouchers/{id}",
     "HttpMethod": "DELETE",

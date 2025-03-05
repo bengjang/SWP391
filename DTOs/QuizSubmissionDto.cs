@@ -1,4 +1,4 @@
-﻿namespace lamlai.DTOs
+﻿namespace lamlai2.DTOs
 {
     public class QuizSubmissionDto
     {
