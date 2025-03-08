@@ -1,7 +1,5 @@
-﻿
-using lamlai2.Models;
+﻿using lamlai.Models;
 using Microsoft.EntityFrameworkCore;
-
 using System.Text.Json.Serialization;
 
 
@@ -23,12 +21,13 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Add services to the container.
+// Add services to the container.a
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.PropertyNameCaseInsensitive = true; // Không phân biệt hoa thường
     options.JsonSerializerOptions.WriteIndented = true; // Format JSON đẹp hơn
-    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles; // Loại bỏ "$id"
+
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

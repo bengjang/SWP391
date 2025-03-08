@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using lamlai2.Models;
+using lamlai.Models;
 
-namespace lamlai2.Controllers
+namespace test2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -19,14 +20,14 @@ namespace lamlai2.Controllers
             _context = context;
         }
 
-        // ✅ Lấy danh sách tất cả voucher
+        // GET: api/Vouchers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Voucher>>> GetVouchers()
         {
             return await _context.Vouchers.ToListAsync();
         }
 
-        // ✅ Lấy thông tin voucher theo ID
+        // GET: api/Vouchers/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Voucher>> GetVoucher(int id)
         {
@@ -34,29 +35,20 @@ namespace lamlai2.Controllers
 
             if (voucher == null)
             {
-                return NotFound("Voucher không tồn tại.");
+                return NotFound();
             }
 
             return voucher;
         }
 
-        // ✅ Thêm voucher mới
-        [HttpPost]
-        public async Task<ActionResult<Voucher>> PostVoucher(Voucher voucher)
-        {
-            _context.Vouchers.Add(voucher);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetVoucher), new { id = voucher.VoucherId }, voucher);
-        }
-
-        // ✅ Cập nhật voucher
+        // PUT: api/Vouchers/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutVoucher(int id, Voucher voucher)
         {
             if (id != voucher.VoucherId)
             {
-                return BadRequest("ID không khớp.");
+                return BadRequest();
             }
 
             _context.Entry(voucher).State = EntityState.Modified;
@@ -69,7 +61,7 @@ namespace lamlai2.Controllers
             {
                 if (!VoucherExists(id))
                 {
-                    return NotFound("Voucher không tồn tại.");
+                    return NotFound();
                 }
                 else
                 {
@@ -80,14 +72,25 @@ namespace lamlai2.Controllers
             return NoContent();
         }
 
-        // ✅ Xóa voucher
+        // POST: api/Vouchers
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Voucher>> PostVoucher(Voucher voucher)
+        {
+            _context.Vouchers.Add(voucher);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetVoucher", new { id = voucher.VoucherId }, voucher);
+        }
+
+        // DELETE: api/Vouchers/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteVoucher(int id)
         {
             var voucher = await _context.Vouchers.FindAsync(id);
             if (voucher == null)
             {
-                return NotFound("Voucher không tồn tại.");
+                return NotFound();
             }
 
             _context.Vouchers.Remove(voucher);

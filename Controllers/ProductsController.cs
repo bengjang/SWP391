@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using lamlai2.Models;
+using lamlai.Models;
 
-namespace lamlai2.Controllers
+
+namespace test2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -146,39 +147,7 @@ namespace lamlai2.Controllers
 
             return NoContent();
         }
-        [HttpPut("updateQuantity")]
-        public async Task<IActionResult> UpdateProductQuantity([FromBody] UpdateProductQuantityRequest request)
-        {
-            try
-            {
-                var product = await _context.Products.FindAsync(request.ProductId);
-                if (product == null)
-                {
-                    return NotFound("Sản phẩm không tồn tại.");
-                }
 
-                if (request.NewQuantity < 0)
-                {
-                    return BadRequest("Số lượng sản phẩm không thể nhỏ hơn 0.");
-                }
-
-                product.Quantity = request.NewQuantity;
-                await _context.SaveChangesAsync();
-
-                return Ok(new { message = "Cập nhật số lượng sản phẩm thành công!", product });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Lỗi: {ex.Message}");
-            }
-        }
-
-        // DTO để nhận dữ liệu từ client
-        public class UpdateProductQuantityRequest
-        {
-            public int ProductId { get; set; }
-            public int NewQuantity { get; set; }
-        }
         private bool ProductExists(int id)
         {
             return _context.Products.Any(e => e.ProductId == id);

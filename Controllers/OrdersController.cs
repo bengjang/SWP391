@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-using lamlai2.Models;
+using lamlai.Models;
 
 namespace lamlai2.Controllers
 {
@@ -397,6 +397,48 @@ namespace lamlai2.Controllers
             public int OrderId { get; set; }
             public int VoucherId { get; set; }
         }
+
+        [HttpGet("current/{userId}")]
+        public async Task<IActionResult> GetCurrentCart(int userId)
+        {
+            try
+            {
+                var order = await _context.Orders
+                    .Where(o => o.UserId == userId && o.OrderStatus == "Pending")
+                    .Include(o => o.OrderItems)
+                        .ThenInclude(oi => oi.Product) // Load thông tin sản phẩm
+                    .FirstOrDefaultAsync();
+
+                if (order == null)
+                {
+                    return NotFound(new { message = "Giỏ hàng hiện tại trống." });
+                }
+
+                var cartDto = new
+                {
+                    order.OrderId,
+                    order.UserId,
+                    order.OrderStatus,
+                    order.TotalAmount,
+                    Items = order.OrderItems.Select(oi => new
+                    {
+                        oi.OrderItemId,
+                        oi.ProductId,
+                        oi.Product.ProductName,
+                        oi.Quantity,
+                        oi.Price
+                    }).ToList()
+                };
+
+                return Ok(cartDto);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = ex.Message });
+            }
+        }
+
+
         [HttpPost("confirm-payment")]
         public async Task<IActionResult> ConfirmPayment([FromBody] ConfirmPaymentRequest request)
         {

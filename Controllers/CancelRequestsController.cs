@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using lamlai2.Models;
+using lamlai.Models;
 
-namespace lamlai2.Controllers
+
+namespace lamlai.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

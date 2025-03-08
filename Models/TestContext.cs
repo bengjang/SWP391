@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using lamlai.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace lamlai2.Models;
+namespace lamlai.Models;
 
 public partial class TestContext : DbContext
 {

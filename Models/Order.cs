@@ -1,7 +1,8 @@
-﻿using System;
+﻿using lamlai.Models;
+using System;
 using System.Collections.Generic;
 
-namespace lamlai2.Models;
+namespace lamlai.Models;
 
 public partial class Order
 {
@@ -18,7 +19,7 @@ public partial class Order
     public string? DeliveryAddress { get; set; }
 
     public decimal TotalAmount { get; set; }
-    
+
     public string? Note { get; set; }
 
     public int? VoucherId { get; set; }

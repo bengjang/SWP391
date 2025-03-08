@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace lamlai2.Models;
+namespace lamlai.Models;
 
 public partial class Product
 {
@@ -40,6 +40,7 @@ public partial class Product
     public virtual Category Category { get; set; } = null!;
 
     public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+
 
     public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 }

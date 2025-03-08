@@ -1,7 +1,8 @@
-﻿using System;
+﻿using lamlai.Models;
+using System;
 using System.Collections.Generic;
 
-namespace lamlai2.Models;
+namespace lamlai.Models;
 
 public partial class Payment
 {

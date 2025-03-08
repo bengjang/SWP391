@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
-namespace lamlai2.Models;
+namespace lamlai.Models;
 
 public partial class QuizAnswer
 {
@@ -13,6 +14,7 @@ public partial class QuizAnswer
 
     public string SkinType { get; set; } = null!;
 
+    [JsonIgnore] 
     public virtual QuizQuestion Question { get; set; } = null!;
 
     public virtual ICollection<UserQuizResponse> UserQuizResponses { get; set; } = new List<UserQuizResponse>();
