@@ -64,25 +64,65 @@ namespace lamlai2.Controllers
         //}
 
         // GET: api/Orders
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
-        {
-            return await _context.Orders.ToListAsync();
-        }
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
+        //{
+        //    return await _context.Orders.ToListAsync();
+        //}
 
-        // GET: api/Orders/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Order>> GetOrder(int id)
-        {
-            var order = await _context.Orders.FindAsync(id);
+        //// GET: api/Orders/5
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Order>> GetOrder(int id)
+        //{
+        //    var order = await _context.Orders.FindAsync(id);
 
-            if (order == null)
+        //    if (order == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return order;
+        //}
+        [HttpGet("{orderId}")]
+        public async Task<IActionResult> GetOrderById(int orderId)
+        {
+            try
             {
-                return NotFound();
-            }
+                var order = await _context.Orders
+                    .Where(o => o.OrderId == orderId)
+                    .Include(o => o.OrderItems)
+                    .ThenInclude(oi => oi.Product) // Load thông tin sản phẩm
+                    .FirstOrDefaultAsync();
 
-            return order;
+                if (order == null)
+                {
+                    return NotFound(new { message = "Đơn hàng không tồn tại." });
+                }
+
+                var orderDto = new
+                {
+                    order.OrderId,
+                    order.UserId,
+                    order.OrderStatus,
+                    order.TotalAmount,
+                    Items = order.OrderItems.Select(oi => new
+                    {
+                        oi.OrderItemId,
+                        oi.ProductId,
+                        ProductName = oi.Product != null ? oi.Product.ProductName : "Sản phẩm không tồn tại",
+                        oi.Quantity,
+                        oi.Price
+                    }).ToList()
+                };
+
+                return Ok(orderDto);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = ex.Message });
+            }
         }
+
 
         // PUT: api/Orders/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -431,6 +471,40 @@ namespace lamlai2.Controllers
                 };
 
                 return Ok(cartDto);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = ex.Message });
+            }
+        }
+
+        [HttpGet("all")]
+        public async Task<IActionResult> a()
+        {
+            try
+            {
+                var orders = await _context.Orders
+                    .Include(o => o.OrderItems)
+                    .ThenInclude(oi => oi.Product) // Load thông tin sản phẩm
+                    .ToListAsync();
+
+                var orderDtos = orders.Select(o => new
+                {
+                    o.OrderId,
+                    o.UserId,
+                    o.OrderStatus,
+                    o.TotalAmount,
+                    Items = o.OrderItems.Select(oi => new
+                    {
+                        oi.OrderItemId,
+                        oi.ProductId,
+                        ProductName = oi.Product != null ? oi.Product.ProductName : "Sản phẩm không tồn tại",
+                        oi.Quantity,
+                        oi.Price
+                    }).ToList()
+                });
+
+                return Ok(orderDtos);
             }
             catch (Exception ex)
             {

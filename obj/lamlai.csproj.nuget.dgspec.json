@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\PROJECT\\lamlai\\lamlai.csproj": {}
+    "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\lamlai.csproj": {}
   },
   "projects": {
-    "D:\\PROJECT\\lamlai\\lamlai.csproj": {
+    "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\lamlai.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\PROJECT\\lamlai\\lamlai.csproj",
+        "projectUniqueName": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\lamlai.csproj",
         "projectName": "lamlai",
-        "projectPath": "D:\\PROJECT\\lamlai\\lamlai.csproj",
+        "projectPath": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\lamlai.csproj",
         "packagesPath": "C:\\Users\\TUF\\.nuget\\packages\\",
-        "outputPath": "D:\\PROJECT\\lamlai\\obj\\",
+        "outputPath": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
