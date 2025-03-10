@@ -515,6 +515,41 @@ namespace lamlai2.Controllers
             }
         }
 
+        [HttpGet("history")]
+        public async Task<ActionResult<IEnumerable<object>>> GetOrderHistory([FromQuery] int userId)
+        {
+            var orders = await _context.Orders
+                .Where(o => o.UserId == userId)
+                .Include(o => o.OrderItems)
+                .Include(o => o.User)
+                .OrderByDescending(o => o.OrderDate)
+                .Select(o => new
+                {
+                    o.OrderId,
+                    o.OrderStatus,
+                    o.OrderDate,
+                    o.TotalAmount,
+                    o.DeliveryStatus, // Cập nhật đúng cột
+                    OrderItems = o.OrderItems.Select(oi => new
+                    {
+                        oi.ProductId,
+                        oi.ProductName,
+                        oi.Quantity,
+                        oi.Price
+                    }),
+                    Recipient = new
+                    {
+                        FullName = o.User.Name,
+                        Phone = o.User.Phone,
+                        Email = o.User.Email,
+                        Address = o.DeliveryAddress
+                    }
+                })
+                .ToListAsync();
+
+            return Ok(orders);
+        }
+
 
         [HttpGet("all")]
         public async Task<IActionResult> GetAllOrders()

@@ -808,6 +808,32 @@
   },
   {
     "ContainingType": "lamlai2.Controllers.OrdersController",
+    "Method": "GetOrderHistory",
+    "RelativePath": "api/Orders/history",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "lamlai2.Controllers.OrdersController",
     "Method": "MarkOrderAsDelivered",
     "RelativePath": "api/Orders/mark-delivered",
     "HttpMethod": "POST",
