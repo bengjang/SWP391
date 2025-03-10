@@ -91,7 +91,7 @@ namespace lamlai2.Controllers
                 var order = await _context.Orders
                     .Where(o => o.OrderId == orderId)
                     .Include(o => o.OrderItems)
-                    .ThenInclude(oi => oi.Product) // Load thông tin sản phẩm
+                    .ThenInclude(oi => oi.Product)
                     .FirstOrDefaultAsync();
 
                 if (order == null)
@@ -105,13 +105,32 @@ namespace lamlai2.Controllers
                     order.UserId,
                     order.OrderStatus,
                     order.TotalAmount,
+                    order.OrderDate,
                     Items = order.OrderItems.Select(oi => new
                     {
                         oi.OrderItemId,
                         oi.ProductId,
-                        ProductName = oi.Product != null ? oi.Product.ProductName : "Sản phẩm không tồn tại",
                         oi.Quantity,
-                        oi.Price
+                        oi.Price,
+                        Product = oi.Product == null ? null : new
+                        {
+                            oi.Product.ProductId,
+                            oi.Product.ProductCode,
+                            oi.Product.CategoryId,
+                            oi.Product.ProductName,
+                            oi.Product.Quantity,
+                            oi.Product.Capacity,
+                            oi.Product.Price,
+                            oi.Product.Brand,
+                            oi.Product.Origin,
+                            oi.Product.Status,
+                            oi.Product.ImgUrl,
+                            oi.Product.SkinType,
+                            oi.Product.Description,
+                            oi.Product.Ingredients,
+                            oi.Product.UsageInstructions,
+                            oi.Product.ManufactureDate
+                        }
                     }).ToList()
                 };
 
@@ -464,9 +483,27 @@ namespace lamlai2.Controllers
                     {
                         oi.OrderItemId,
                         oi.ProductId,
-                        oi.Product.ProductName,
                         oi.Quantity,
-                        oi.Price
+                        oi.Price,
+                        Product = oi.Product == null ? null : new
+                        {
+                            oi.Product.ProductId,
+                            oi.Product.ProductCode,
+                            oi.Product.CategoryId,
+                            oi.Product.ProductName,
+                            oi.Product.Quantity,
+                            oi.Product.Capacity,
+                            oi.Product.Price,
+                            oi.Product.Brand,
+                            oi.Product.Origin,
+                            oi.Product.Status,
+                            oi.Product.ImgUrl,
+                            oi.Product.SkinType,
+                            oi.Product.Description,
+                            oi.Product.Ingredients,
+                            oi.Product.UsageInstructions,
+                            oi.Product.ManufactureDate
+                        }
                     }).ToList()
                 };
 
@@ -478,8 +515,9 @@ namespace lamlai2.Controllers
             }
         }
 
+
         [HttpGet("all")]
-        public async Task<IActionResult> a()
+        public async Task<IActionResult> GetAllOrders()
         {
             try
             {
@@ -494,13 +532,32 @@ namespace lamlai2.Controllers
                     o.UserId,
                     o.OrderStatus,
                     o.TotalAmount,
+                    o.OrderDate,
                     Items = o.OrderItems.Select(oi => new
                     {
                         oi.OrderItemId,
                         oi.ProductId,
-                        ProductName = oi.Product != null ? oi.Product.ProductName : "Sản phẩm không tồn tại",
                         oi.Quantity,
-                        oi.Price
+                        oi.Price,
+                        Product = oi.Product == null ? null : new
+                        {
+                            oi.Product.ProductId,
+                            oi.Product.ProductCode,
+                            oi.Product.CategoryId,
+                            oi.Product.ProductName,
+                            oi.Product.Quantity,
+                            oi.Product.Capacity,
+                            oi.Product.Price,
+                            oi.Product.Brand,
+                            oi.Product.Origin,
+                            oi.Product.Status,
+                            oi.Product.ImgUrl,
+                            oi.Product.SkinType,
+                            oi.Product.Description,
+                            oi.Product.Ingredients,
+                            oi.Product.UsageInstructions,
+                            oi.Product.ManufactureDate
+                        }
                     }).ToList()
                 });
 
@@ -512,6 +569,54 @@ namespace lamlai2.Controllers
             }
         }
 
+        [HttpPost("mark-delivered")]
+        public async Task<IActionResult> MarkOrderAsDelivered([FromBody] UpdateOrderStatusRequest request)
+        {
+            try
+            {
+                var order = await _context.Orders
+                    .FirstOrDefaultAsync(o => o.OrderId == request.OrderId && o.OrderStatus == "Paid");
+
+                if (order == null)
+                    return NotFound("Không tìm thấy đơn hàng hoặc đơn hàng chưa thanh toán.");
+
+                // ✅ Cập nhật trạng thái giao hàng
+                order.DeliveryStatus = "Delivered";
+
+                // ✅ Nếu đơn hàng đã thanh toán, chuyển thành "Completed"
+                order.OrderStatus = "Completed";
+
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Trạng thái giao hàng đã được cập nhật & đơn hàng đã hoàn tất!", order });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Lỗi: {ex.InnerException?.Message ?? ex.Message}");
+            }
+        }
+    
+        public class UpdateOrderStatusRequest
+        {
+            public int OrderId { get; set; }
+        }
+
+        [HttpGet("sold-count/{productId}")]
+        public async Task<IActionResult> GetSoldCount(int productId)
+        {
+            try
+            {
+                var totalSold = await _context.OrderItems
+                    .Where(oi => oi.ProductId == productId)
+                    .SumAsync(oi => (int?)oi.Quantity) ?? 0; // Nếu null thì trả về 0
+
+                return Ok(new { ProductId = productId, TotalSold = totalSold });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Lỗi: {ex.InnerException?.Message ?? ex.Message}");
+            }
+        }
 
         [HttpPost("confirm-payment")]
         public async Task<IActionResult> ConfirmPayment([FromBody] ConfirmPaymentRequest request)
@@ -525,6 +630,12 @@ namespace lamlai2.Controllers
 
                 if (order == null)
                     return NotFound("Không tìm thấy đơn hàng hoặc đơn hàng không hợp lệ.");
+
+                // ✅ Cập nhật địa chỉ giao hàng nếu có nhập
+                if (!string.IsNullOrWhiteSpace(request.DeliveryAddress))
+                {
+                    order.DeliveryAddress = request.DeliveryAddress;
+                }
 
                 // ✅ Kiểm tra từng sản phẩm trong đơn hàng trước khi trừ kho
                 foreach (var orderItem in order.OrderItems)
@@ -579,11 +690,14 @@ namespace lamlai2.Controllers
         }
 
 
+
         // ✅ Định nghĩa class ngay trong API
         public class ConfirmPaymentRequest
         {
             public int OrderId { get; set; }
+            public string? DeliveryAddress { get; set; } // ✅ Đảm bảo có thuộc tính này
         }
+
 
 
     }

@@ -750,7 +750,7 @@
   },
   {
     "ContainingType": "lamlai2.Controllers.OrdersController",
-    "Method": "a",
+    "Method": "GetAllOrders",
     "RelativePath": "api/Orders/all",
     "HttpMethod": "GET",
     "IsController": true,
@@ -808,6 +808,22 @@
   },
   {
     "ContainingType": "lamlai2.Controllers.OrdersController",
+    "Method": "MarkOrderAsDelivered",
+    "RelativePath": "api/Orders/mark-delivered",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "lamlai2.Controllers.OrdersController\u002BUpdateOrderStatusRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "lamlai2.Controllers.OrdersController",
     "Method": "RemoveFromCart",
     "RelativePath": "api/Orders/removefromcart/{orderItemId}",
     "HttpMethod": "DELETE",
@@ -832,6 +848,22 @@
     "Parameters": [
       {
         "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "lamlai2.Controllers.OrdersController",
+    "Method": "GetSoldCount",
+    "RelativePath": "api/Orders/sold-count/{productId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -1479,26 +1511,6 @@
   },
   {
     "ContainingType": "test2.Controllers.ReviewsController",
-    "Method": "GetReviews",
-    "RelativePath": "api/Reviews",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai.Models.Review, lamlai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "test2.Controllers.ReviewsController",
     "Method": "PostReview",
     "RelativePath": "api/Reviews",
     "HttpMethod": "POST",
@@ -1514,6 +1526,26 @@
     "ReturnTypes": [
       {
         "Type": "lamlai.Models.Review",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "test2.Controllers.ReviewsController",
+    "Method": "GetReviews",
+    "RelativePath": "api/Reviews",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai.Models.Review, lamlai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1585,6 +1617,74 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test2.Controllers.ReviewsController",
+    "Method": "GetReviewsByProduct",
+    "RelativePath": "api/Reviews/product/{productId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai.Models.Review, lamlai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "test2.Controllers.ReviewsController",
+    "Method": "GetAverageRating",
+    "RelativePath": "api/Reviews/product/{productId}/average-rating",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test2.Controllers.ReviewsController",
+    "Method": "GetReviewsByUser",
+    "RelativePath": "api/Reviews/user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai.Models.Review, lamlai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "Program\u002B\u003C\u003Ec",
@@ -2027,9 +2127,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.VouchersController",
+    "ContainingType": "test2.Controllers.VoucherController",
     "Method": "GetVouchers",
-    "RelativePath": "api/Vouchers",
+    "RelativePath": "api/Voucher",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -2047,9 +2147,9 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.VouchersController",
-    "Method": "PostVoucher",
-    "RelativePath": "api/Vouchers",
+    "ContainingType": "test2.Controllers.VoucherController",
+    "Method": "CreateVoucher",
+    "RelativePath": "api/Voucher",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -2073,9 +2173,9 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.VouchersController",
+    "ContainingType": "test2.Controllers.VoucherController",
     "Method": "GetVoucher",
-    "RelativePath": "api/Vouchers/{id}",
+    "RelativePath": "api/Voucher/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -2099,9 +2199,9 @@
     ]
   },
   {
-    "ContainingType": "test2.Controllers.VouchersController",
-    "Method": "PutVoucher",
-    "RelativePath": "api/Vouchers/{id}",
+    "ContainingType": "test2.Controllers.VoucherController",
+    "Method": "UpdateVoucher",
+    "RelativePath": "api/Voucher/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -2120,9 +2220,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "test2.Controllers.VouchersController",
+    "ContainingType": "test2.Controllers.VoucherController",
     "Method": "DeleteVoucher",
-    "RelativePath": "api/Vouchers/{id}",
+    "RelativePath": "api/Voucher/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,

@@ -39,5 +39,5 @@ public partial class User
 
     public virtual ICollection<UserSkinTypeResult> UserSkinTypeResults { get; set; } = new List<UserSkinTypeResult>();
 
-    public virtual ICollection<Voucher> Vouchers { get; set; } = new List<Voucher>();
+  
 }

@@ -1,33 +1,32 @@
-﻿using System;
+﻿using lamlai.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using lamlai.Models;
+
 
 namespace test2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class VouchersController : ControllerBase
+    public class VoucherController : ControllerBase
     {
         private readonly TestContext _context;
 
-        public VouchersController(TestContext context)
+        public VoucherController(TestContext context)
         {
             _context = context;
         }
 
-        // GET: api/Vouchers
+        // GET: api/Voucher
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Voucher>>> GetVouchers()
         {
             return await _context.Vouchers.ToListAsync();
         }
 
-        // GET: api/Vouchers/5
+        // GET: api/Voucher/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Voucher>> GetVoucher(int id)
         {
@@ -41,10 +40,19 @@ namespace test2.Controllers
             return voucher;
         }
 
-        // PUT: api/Vouchers/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // POST: api/Voucher
+        [HttpPost]
+        public async Task<ActionResult<Voucher>> CreateVoucher(Voucher voucher)
+        {
+            _context.Vouchers.Add(voucher);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetVoucher), new { id = voucher.VoucherId }, voucher);
+        }
+
+        // PUT: api/Voucher/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutVoucher(int id, Voucher voucher)
+        public async Task<IActionResult> UpdateVoucher(int id, Voucher voucher)
         {
             if (id != voucher.VoucherId)
             {
@@ -72,18 +80,7 @@ namespace test2.Controllers
             return NoContent();
         }
 
-        // POST: api/Vouchers
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Voucher>> PostVoucher(Voucher voucher)
-        {
-            _context.Vouchers.Add(voucher);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetVoucher", new { id = voucher.VoucherId }, voucher);
-        }
-
-        // DELETE: api/Vouchers/5
+        // DELETE: api/Voucher/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteVoucher(int id)
         {

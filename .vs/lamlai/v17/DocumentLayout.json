@@ -7,8 +7,60 @@
       "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\controllers\\messagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:controllers\\messagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\controllers\\orderitemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:controllers\\orderitemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\controllers\\reviewscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:controllers\\reviewscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\controllers\\logingooglecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:controllers\\logingooglecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\models\\orderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:models\\orderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\models\\testcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:models\\testcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\models\\quizanswer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:models\\quizanswer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\models\\voucher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:models\\voucher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\controllers\\voucherscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:controllers\\voucherscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\controllers\\userskintyperesultscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:controllers\\userskintyperesultscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\controllers\\quizzcontrollers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:controllers\\quizzcontrollers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\controllers\\paymentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -23,14 +75,6 @@
       "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:lamlai.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\controllers\\quizzcontrollers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:controllers\\quizzcontrollers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\models\\userquizresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:models\\userquizresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -43,32 +87,12 @@
       "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\models\\quizanswer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:models\\quizanswer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\models\\quizquestion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:models\\quizquestion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\controllers\\orderitemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:controllers\\orderitemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\dtos\\quizanswerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:dtos\\quizanswerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\controllers\\userskintyperesultscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:controllers\\userskintyperesultscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\controllers\\voucherscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:controllers\\voucherscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -77,10 +101,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\controllers\\userquizresponsescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:controllers\\userquizresponsescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\controllers\\reviewscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:controllers\\reviewscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\controllers\\quizquestionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -111,24 +131,12 @@
       "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:models\\cancelrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\models\\orderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:models\\orderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\controllers\\notificationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:controllers\\notificationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\controllers\\messagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:controllers\\messagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\controllers\\conversationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -139,16 +147,8 @@
       "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\models\\voucher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:models\\voucher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\dtos\\quizquestiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:dtos\\quizquestiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\controllers\\logingooglecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:controllers\\logingooglecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\models\\review.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -166,7 +166,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
@@ -190,45 +190,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "lamlai",
-              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\lamlai.csproj",
-              "RelativeDocumentMoniker": "lamlai.csproj",
-              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\lamlai.csproj",
-              "RelativeToolTip": "lamlai.csproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-03-09T18:46:29.213Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "OrdersController.cs",
-              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\OrdersController.cs",
-              "RelativeDocumentMoniker": "Controllers\\OrdersController.cs",
-              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\OrdersController.cs",
-              "RelativeToolTip": "Controllers\\OrdersController.cs",
-              "ViewState": "AgIAAFYAAAAAAAAAAAAUwHwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T16:52:45.02Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TestContext.cs",
-              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\TestContext.cs",
-              "RelativeDocumentMoniker": "Models\\TestContext.cs",
-              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\TestContext.cs",
-              "RelativeToolTip": "Models\\TestContext.cs",
-              "ViewState": "AgIAACsAAAAAAAAAAAAlwDUAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T16:51:58.906Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 9,
               "Title": "QuizAnswer.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\QuizAnswer.cs",
               "RelativeDocumentMoniker": "Models\\QuizAnswer.cs",
@@ -240,57 +202,44 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "QuizQuestion.cs",
-              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\QuizQuestion.cs",
-              "RelativeDocumentMoniker": "Models\\QuizQuestion.cs",
-              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\QuizQuestion.cs",
-              "RelativeToolTip": "Models\\QuizQuestion.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "DocumentIndex": 8,
+              "Title": "TestContext.cs",
+              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\TestContext.cs",
+              "RelativeDocumentMoniker": "Models\\TestContext.cs",
+              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\TestContext.cs",
+              "RelativeToolTip": "Models\\TestContext.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAlwDAAAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T02:20:10.256Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Order.cs",
-              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\Order.cs",
-              "RelativeDocumentMoniker": "Models\\Order.cs",
-              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\Order.cs",
-              "RelativeToolTip": "Models\\Order.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-05T08:52:13.305Z"
+              "WhenOpened": "2025-03-04T16:51:58.906Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ProductsController.cs",
-              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\ProductsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ProductsController.cs",
-              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\ProductsController.cs",
-              "RelativeToolTip": "Controllers\\ProductsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Title": "ReviewsController.cs",
+              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\ReviewsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ReviewsController.cs",
+              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\ReviewsController.cs",
+              "RelativeToolTip": "Controllers\\ReviewsController.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAIAwwJIAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T01:46:56.742Z",
+              "WhenOpened": "2025-03-06T02:18:12.334Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "LoginGoogleController.cs",
+              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\LoginGoogleController.cs",
+              "RelativeDocumentMoniker": "Controllers\\LoginGoogleController.cs",
+              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\LoginGoogleController.cs",
+              "RelativeToolTip": "Controllers\\LoginGoogleController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJQAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-04T16:52:31.588Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "PaymentsController.cs",
-              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\PaymentsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\PaymentsController.cs",
-              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\PaymentsController.cs",
-              "RelativeToolTip": "Controllers\\PaymentsController.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAIAwwBgAAAA6AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T16:52:18.673Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
               "Title": "OrderItemsController.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\OrderItemsController.cs",
               "RelativeDocumentMoniker": "Controllers\\OrderItemsController.cs",
@@ -298,23 +247,134 @@
               "RelativeToolTip": "Controllers\\OrderItemsController.cs",
               "ViewState": "AgIAAGsAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T02:16:41.266Z"
+              "WhenOpened": "2025-03-06T02:16:41.266Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAmwCIAAAAhAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "MessagesController.cs",
+              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\MessagesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MessagesController.cs",
+              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\MessagesController.cs",
+              "RelativeToolTip": "Controllers\\MessagesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T16:55:02.997Z"
+              "WhenOpened": "2025-03-06T02:16:35.616Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "OrdersController.cs",
+              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\OrdersController.cs",
+              "RelativeDocumentMoniker": "Controllers\\OrdersController.cs",
+              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\OrdersController.cs",
+              "RelativeToolTip": "Controllers\\OrdersController.cs",
+              "ViewState": "AgIAADUCAAAAAAAAAAAswFQCAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-04T16:52:45.02Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "OrderItem.cs",
+              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\OrderItem.cs",
+              "RelativeDocumentMoniker": "Models\\OrderItem.cs",
+              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\OrderItem.cs",
+              "RelativeToolTip": "Models\\OrderItem.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAYwBcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T08:52:16.275Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "Order.cs",
+              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\Order.cs",
+              "RelativeDocumentMoniker": "Models\\Order.cs",
+              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\Order.cs",
+              "RelativeToolTip": "Models\\Order.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAAwCQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T08:52:13.305Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "Models\\Product.cs",
+              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\Product.cs",
+              "RelativeToolTip": "Models\\Product.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T01:46:59.929Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "PaymentsController.cs",
+              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\PaymentsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\PaymentsController.cs",
+              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\PaymentsController.cs",
+              "RelativeToolTip": "Controllers\\PaymentsController.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAIAwwBgAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-04T16:52:18.673Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\User.cs",
+              "RelativeDocumentMoniker": "Models\\User.cs",
+              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\User.cs",
+              "RelativeToolTip": "Models\\User.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAvwCkAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T02:17:53.564Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "UserSkinTypeResultsController.cs",
+              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\UserSkinTypeResultsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UserSkinTypeResultsController.cs",
+              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\UserSkinTypeResultsController.cs",
+              "RelativeToolTip": "Controllers\\UserSkinTypeResultsController.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAIwAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T02:18:04.475Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Voucher.cs",
+              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\Voucher.cs",
+              "RelativeDocumentMoniker": "Models\\Voucher.cs",
+              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\Voucher.cs",
+              "RelativeToolTip": "Models\\Voucher.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAYwBYAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T02:13:51.3Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "VouchersController.cs",
+              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\VouchersController.cs",
+              "RelativeDocumentMoniker": "Controllers\\VouchersController.cs",
+              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\VouchersController.cs",
+              "RelativeToolTip": "Controllers\\VouchersController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T02:17:59.238Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "QuizzControllers.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\QuizzControllers.cs",
               "RelativeDocumentMoniker": "Controllers\\QuizzControllers.cs",
@@ -326,7 +386,54 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 16,
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ProductsController.cs",
+              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\ProductsController.cs",
+              "RelativeToolTip": "Controllers\\ProductsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T01:46:56.742Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "QuizQuestion.cs",
+              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\QuizQuestion.cs",
+              "RelativeDocumentMoniker": "Models\\QuizQuestion.cs",
+              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\QuizQuestion.cs",
+              "RelativeToolTip": "Models\\QuizQuestion.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T02:20:10.256Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "lamlai",
+              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\lamlai.csproj",
+              "RelativeDocumentMoniker": "lamlai.csproj",
+              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\lamlai.csproj",
+              "RelativeToolTip": "lamlai.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-03-09T18:46:29.213Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAmwCIAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-04T16:55:02.997Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
               "Title": "UserQuizResponse.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\UserQuizResponse.cs",
               "RelativeDocumentMoniker": "Models\\UserQuizResponse.cs",
@@ -338,7 +445,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 22,
               "Title": "QuizAnswerDto.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\DTOs\\QuizAnswerDto.cs",
               "RelativeDocumentMoniker": "DTOs\\QuizAnswerDto.cs",
@@ -350,7 +457,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 19,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -362,43 +469,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "Product.cs",
-              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\Product.cs",
-              "RelativeDocumentMoniker": "Models\\Product.cs",
-              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\Product.cs",
-              "RelativeToolTip": "Models\\Product.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T01:46:59.929Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "VouchersController.cs",
-              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\VouchersController.cs",
-              "RelativeDocumentMoniker": "Controllers\\VouchersController.cs",
-              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\VouchersController.cs",
-              "RelativeToolTip": "Controllers\\VouchersController.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAWwBEAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T02:17:59.238Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "UserSkinTypeResultsController.cs",
-              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\UserSkinTypeResultsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\UserSkinTypeResultsController.cs",
-              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\UserSkinTypeResultsController.cs",
-              "RelativeToolTip": "Controllers\\UserSkinTypeResultsController.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAIwBEAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T02:18:04.475Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 23,
               "Title": "UsersController.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "Controllers\\UsersController.cs",
@@ -410,7 +481,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 24,
               "Title": "UserQuizResponsesController.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\UserQuizResponsesController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserQuizResponsesController.cs",
@@ -422,19 +493,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "ReviewsController.cs",
-              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\ReviewsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ReviewsController.cs",
-              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\ReviewsController.cs",
-              "RelativeToolTip": "Controllers\\ReviewsController.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAWwBEAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T02:18:12.334Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 25,
               "Title": "QuizQuestionsController.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\QuizQuestionsController.cs",
               "RelativeDocumentMoniker": "Controllers\\QuizQuestionsController.cs",
@@ -446,7 +505,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 26,
               "Title": "QuizAnswersController.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\QuizAnswersController.cs",
               "RelativeDocumentMoniker": "Controllers\\QuizAnswersController.cs",
@@ -458,7 +517,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 27,
               "Title": "QuizSubmissionDto.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\DTOs\\QuizSubmissionDto.cs",
               "RelativeDocumentMoniker": "DTOs\\QuizSubmissionDto.cs",
@@ -470,7 +529,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 28,
               "Title": "QuizResponseDto.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\DTOs\\QuizResponseDto.cs",
               "RelativeDocumentMoniker": "DTOs\\QuizResponseDto.cs",
@@ -482,7 +541,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 30,
               "Title": "ProductCodeCountersController.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\ProductCodeCountersController.cs",
               "RelativeDocumentMoniker": "Controllers\\ProductCodeCountersController.cs",
@@ -494,7 +553,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 29,
               "Title": "CancelRequestsController.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\CancelRequestsController.cs",
               "RelativeDocumentMoniker": "Controllers\\CancelRequestsController.cs",
@@ -506,19 +565,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\User.cs",
-              "RelativeDocumentMoniker": "Models\\User.cs",
-              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\User.cs",
-              "RelativeToolTip": "Models\\User.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAIA0wCEAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T02:17:53.564Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 32,
               "Title": "Payment.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\Payment.cs",
               "RelativeDocumentMoniker": "Models\\Payment.cs",
@@ -530,7 +577,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 31,
               "Title": "CancelRequest.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\CancelRequest.cs",
               "RelativeDocumentMoniker": "Models\\CancelRequest.cs",
@@ -542,19 +589,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "OrderItem.cs",
-              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\OrderItem.cs",
-              "RelativeDocumentMoniker": "Models\\OrderItem.cs",
-              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\OrderItem.cs",
-              "RelativeToolTip": "Models\\OrderItem.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAWwBMAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-05T08:52:16.275Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 33,
               "Title": "NotificationsController.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\NotificationsController.cs",
               "RelativeDocumentMoniker": "Controllers\\NotificationsController.cs",
@@ -566,19 +601,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "MessagesController.cs",
-              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\MessagesController.cs",
-              "RelativeDocumentMoniker": "Controllers\\MessagesController.cs",
-              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\MessagesController.cs",
-              "RelativeToolTip": "Controllers\\MessagesController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T02:16:35.616Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 35,
               "Title": "CategoriesController.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\CategoriesController.cs",
               "RelativeDocumentMoniker": "Controllers\\CategoriesController.cs",
@@ -590,7 +613,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 34,
               "Title": "ConversationsController.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\ConversationsController.cs",
               "RelativeDocumentMoniker": "Controllers\\ConversationsController.cs",
@@ -602,19 +625,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
-              "Title": "Voucher.cs",
-              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\Voucher.cs",
-              "RelativeDocumentMoniker": "Models\\Voucher.cs",
-              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\Voucher.cs",
-              "RelativeToolTip": "Models\\Voucher.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAwwAQAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T02:13:51.3Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 36,
               "Title": "QuizQuestionDto.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\DTOs\\QuizQuestionDto.cs",
               "RelativeDocumentMoniker": "DTOs\\QuizQuestionDto.cs",
@@ -623,18 +634,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-04T16:53:18.014Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 36,
-              "Title": "LoginGoogleController.cs",
-              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\LoginGoogleController.cs",
-              "RelativeDocumentMoniker": "Controllers\\LoginGoogleController.cs",
-              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\LoginGoogleController.cs",
-              "RelativeToolTip": "Controllers\\LoginGoogleController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJQAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T16:52:31.588Z"
             },
             {
               "$type": "Document",
