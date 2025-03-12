@@ -49,25 +49,44 @@ namespace test2.Controllers
             return Ok(reviews);
         }
 
-        // ✅ 3. Thêm review với kiểm tra hợp lệ (người dùng phải mua hàng trước)
         [HttpPost]
-        public async Task<ActionResult<Review>> PostReview(Review review)
+        public async Task<ActionResult<Review>> PostReview([FromBody] ReviewDto reviewDto)
         {
             // Kiểm tra xem người dùng đã mua sản phẩm này chưa
             var hasPurchased = await _context.OrderItems
                 .Include(oi => oi.Order)
-                .AnyAsync(oi => oi.ProductId == review.ProductId &&
-                                oi.Order.UserId == review.UserId &&
+                .AnyAsync(oi => oi.ProductId == reviewDto.ProductId &&
+                                oi.Order.UserId == reviewDto.UserId &&
                                 oi.Order.OrderStatus == "Completed"); // Chỉ tính đơn đã hoàn thành
 
             if (!hasPurchased)
                 return BadRequest("Bạn chỉ có thể đánh giá sản phẩm sau khi đã mua.");
+
+            // Tạo đối tượng Review từ dữ liệu đầu vào
+            var review = new Review
+            {
+                UserId = reviewDto.UserId,
+                ProductId = reviewDto.ProductId,
+                Rating = reviewDto.Rating,
+                ReviewDate = DateTime.UtcNow, // Tự động lấy thời gian hiện tại
+                ReviewComment = reviewDto.ReviewComment
+            };
 
             _context.Reviews.Add(review);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetReview), new { id = review.ReviewId }, review);
         }
+
+        // DTO để nhận dữ liệu từ request
+        public class ReviewDto
+        {
+            public int UserId { get; set; }
+            public int ProductId { get; set; }
+            public int Rating { get; set; }
+            public string? ReviewComment { get; set; }
+        }
+
 
         // ✅ 4. Thống kê điểm trung bình rating của sản phẩm
         [HttpGet("product/{productId}/average-rating")]
