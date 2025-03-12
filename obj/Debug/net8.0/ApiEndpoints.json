@@ -776,6 +776,22 @@
   },
   {
     "ContainingType": "lamlai2.Controllers.OrdersController",
+    "Method": "BuyNow",
+    "RelativePath": "api/Orders/buy-now",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "lamlai2.Controllers.OrdersController\u002BAddToCartRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "lamlai2.Controllers.OrdersController",
     "Method": "ConfirmPayment",
     "RelativePath": "api/Orders/confirm-payment",
     "HttpMethod": "POST",

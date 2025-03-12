@@ -278,6 +278,48 @@ namespace lamlai2.Controllers
             }
         }
 
+        [HttpPost("buy-now")]
+        public async Task<IActionResult> BuyNow([FromBody] AddToCartRequest request)
+        {
+            try
+            {
+                var product = await _context.Products.FindAsync(request.ProductId);
+                if (product == null)
+                    return NotFound("Không tìm thấy sản phẩm.");
+
+                if (product.Quantity < request.Quantity)
+                    return BadRequest("Số lượng sản phẩm không đủ.");
+
+                // 🛒 Tạo đơn hàng mới ngay lập tức
+                var order = new Order
+                {
+                    UserId = request.UserId,
+                    OrderDate = DateTime.UtcNow,
+                    OrderStatus = "Pending",
+                    TotalAmount = product.Price * request.Quantity,
+                    OrderItems = new List<OrderItem>
+            {
+                new OrderItem
+                {
+                    ProductId = product.ProductId,
+                    ProductName = product.ProductName,
+                    Quantity = request.Quantity,
+                    Price = product.Price * request.Quantity
+                }
+            }
+                };
+
+                _context.Orders.Add(order);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Mua hàng thành công, vui lòng thanh toán!", order });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Lỗi: {ex.InnerException?.Message ?? ex.Message}");
+            }
+        }
+
         [HttpPut("updatecartitem")]
         public async Task<IActionResult> UpdateCartItem([FromBody] UpdateCartItemRequest request)
         {
@@ -332,6 +374,7 @@ namespace lamlai2.Controllers
             }
         }
 
+      
 
         [HttpDelete("removefromcart/{orderItemId}")]
         public async Task<IActionResult> RemoveFromCart(int orderItemId)
