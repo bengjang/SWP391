@@ -131,6 +131,34 @@ namespace test2.Controllers
 
             return CreatedAtAction("GetProduct", new { id = product.ProductId }, product);
         }
+        // POST: api/Products/{id}/import
+        [HttpPost("{id}/import")]
+        public async Task<IActionResult> ImportStock(int id, [FromBody] int quantity)
+        {
+            if (quantity <= 0)
+            {
+                return BadRequest("Số lượng nhập phải lớn hơn 0.");
+            }
+
+            var product = await _context.Products.FindAsync(id);
+            if (product == null)
+            {
+                return NotFound("Sản phẩm không tồn tại.");
+            }
+
+            product.Quantity += quantity;
+            product.ImportDate = DateTime.UtcNow; // Gán ngày nhập kho là thời gian hiện tại
+
+            await _context.SaveChangesAsync();
+
+            return Ok(new
+            {
+                message = "Nhập hàng thành công!",
+                productId = product.ProductId,
+                updatedQuantity = product.Quantity,
+                importDate = product.ImportDate
+            });
+        }
 
         // DELETE: api/Products/5
         [HttpDelete("{id}")]

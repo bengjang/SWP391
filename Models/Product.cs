@@ -36,6 +36,7 @@ public partial class Product
     public string? UsageInstructions { get; set; }
 
     public DateTime? ManufactureDate { get; set; }
+    public DateTime? ImportDate { get; set; } // Thêm ngày nhập hàng vào kho
 
     public virtual Category Category { get; set; } = null!;
 

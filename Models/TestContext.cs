@@ -256,6 +256,7 @@ public partial class TestContext : DbContext
                 .HasMaxLength(255)
                 .HasColumnName("ImgURL");
             entity.Property(e => e.ManufactureDate).HasColumnType("datetime");
+            entity.Property(e => e.ImportDate).HasColumnType("datetime");
             entity.Property(e => e.Origin).HasMaxLength(50);
             entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.ProductCode).HasMaxLength(50);
