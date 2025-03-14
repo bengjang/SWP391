@@ -1,6 +1,43 @@
 [
   {
     "ContainingType": "lamlai2.Controllers.AdminController",
+    "Method": "CreateProduct",
+    "RelativePath": "api/Admin",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productDto",
+        "Type": "lamlai2.Controllers.AdminController\u002BProductDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "lamlai2.Controllers.AdminController",
+    "Method": "UpdateProduct",
+    "RelativePath": "api/Admin/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "productDto",
+        "Type": "lamlai2.Controllers.AdminController\u002BProductDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "lamlai2.Controllers.AdminController",
     "Method": "GetAllOrders",
     "RelativePath": "api/Admin/all",
     "HttpMethod": "GET",
