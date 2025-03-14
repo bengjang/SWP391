@@ -2265,14 +2265,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "voucher",
-        "Type": "lamlai.Models.Voucher",
+        "Name": "voucherDto",
+        "Type": "test2.Controllers.VoucherController\u002BVoucherDTO",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.Voucher",
+        "Type": "test2.Controllers.VoucherController\u002BVoucherDTO",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2322,8 +2322,8 @@
         "IsRequired": true
       },
       {
-        "Name": "voucher",
-        "Type": "lamlai.Models.Voucher",
+        "Name": "voucherDto",
+        "Type": "test2.Controllers.VoucherController\u002BVoucherDTO",
         "IsRequired": true
       }
     ],
