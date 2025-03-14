@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 using lamlai.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace lamlai2.Controllers
 {
@@ -60,13 +61,14 @@ namespace lamlai2.Controllers
             }
         }
         // Thêm sản phẩm mới
-        [HttpPost]
-        public async Task<IActionResult> CreateProduct([FromBody] ProductDTO productDto)
+        [HttpPost("Product")]
+        public async Task<IActionResult> CreateProduct([FromBody] ProductUpdateDTO productDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
             var product = new Product
             {
                 ProductName = productDto.ProductName,
@@ -84,15 +86,30 @@ namespace lamlai2.Controllers
                 UsageInstructions = productDto.UsageInstructions,
                 ManufactureDate = productDto.ManufactureDate
             };
-            _context.Products.Add(product);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction("GetProductById", new { id = product.ProductId }, product);
 
+            try
+            {
+                _context.Products.Add(product);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction("GetProductById", new
+                {
+                    id = product.ProductId
+                }, product);
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(500, new { error = "Lỗi khi lưu dữ liệu vào database.", details = ex.InnerException?.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = "Lỗi không xác định.", details = ex.Message });
+            }
         }
 
-        // Cập nhật sản phẩm
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductDTO productDto)
+
+        [HttpPut("{id}/product")]
+        public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductUpdateDTO productDto)
         {
             if (!ModelState.IsValid)
             {
@@ -105,49 +122,73 @@ namespace lamlai2.Controllers
                 return NotFound(new { message = "Sản phẩm không tồn tại." });
             }
 
-            product.ProductName = productDto.ProductName;
-            product.CategoryId = productDto.CategoryId;
-            product.Quantity = productDto.Quantity;
-            product.Capacity = productDto.Capacity;
-            product.Price = productDto.Price;
-            product.Brand = productDto.Brand;
-            product.Origin = productDto.Origin;
-            product.Status = productDto.Status;
-            product.ImgUrl = productDto.ImgUrl;
-            product.SkinType = productDto.SkinType;
-            product.Description = productDto.Description;
-            product.Ingredients = productDto.Ingredients;
-            product.UsageInstructions = productDto.UsageInstructions;
-            product.ManufactureDate = productDto.ManufactureDate;
+            try
+            {
+                // Cập nhật dữ liệu từ DTO
+                product.ProductName = productDto.ProductName;
+                product.CategoryId = productDto.CategoryId;
+                product.Quantity = productDto.Quantity;
+                product.Capacity = productDto.Capacity;
+                product.Price = productDto.Price;
+                product.Brand = productDto.Brand;
+                product.Origin = productDto.Origin;
+                product.Status = productDto.Status;
+                product.ImgUrl = productDto.ImgUrl;
+                product.SkinType = productDto.SkinType;
+                product.Description = productDto.Description;
+                product.Ingredients = productDto.Ingredients;
+                product.UsageInstructions = productDto.UsageInstructions;
+                product.ManufactureDate = productDto.ManufactureDate;
 
-            await _context.SaveChangesAsync();
-            return NoContent();
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Cập nhật sản phẩm thành công." });
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(500, new { error = "Lỗi khi lưu dữ liệu vào database.", details = ex.InnerException?.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = "Lỗi không xác định.", details = ex.Message });
+            }
         }
 
-        public class ProductDTO
+        public class ProductUpdateDTO
         {
-            public int ProductId { get; set; }
-            public string ProductName { get; set; }
+            [Required]
+            public string ProductName { get; set; } = null!;
+
+            [Required]
             public int CategoryId { get; set; }
+
+            [Required]
             public int Quantity { get; set; }
-            public string Capacity { get; set; }
+
+            [Required]
+            public string Capacity { get; set; } = null!;
+
+            [Required]
+            [Range(0, double.MaxValue, ErrorMessage = "Giá phải lớn hơn hoặc bằng 0.")]
             public decimal Price { get; set; }
-            public string Brand { get; set; }
-            public string Origin { get; set; }
-            public string Status { get; set; }
-            public string ImgUrl { get; set; }
-            public string SkinType { get; set; }
-            public string Description { get; set; }
-            public string Ingredients { get; set; }
-            public string UsageInstructions { get; set; }
+
+            public string Brand { get; set; } = null!;
+            public string Origin { get; set; } = null!;
+            public string Status { get; set; } = null!;
+            public string ImgUrl { get; set; } = null!;
+            public string SkinType { get; set; } = null!;
+            public string Description { get; set; } = null!;
+            public string Ingredients { get; set; } = null!;
+            public string UsageInstructions { get; set; } = null!;
             public DateTime ManufactureDate { get; set; }
         }
 
 
-    
-     
-        }
+
+
+
     }
+}
 
 
 

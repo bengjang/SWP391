@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -41,7 +42,7 @@ namespace test2.Controllers
         }
         // POST: api/Voucher
         [HttpPost]
-        public async Task<ActionResult<VoucherDTO>> CreateVoucher([FromBody] VoucherDTO voucherDto)
+        public async Task<ActionResult<VoucherDTO>> CreateVoucher([FromBody] VoucherUpdateDTO voucherDto)
         {
             if (!ModelState.IsValid)
             {
@@ -79,41 +80,48 @@ namespace test2.Controllers
         }
 
 
-        // PUT: api/Voucher/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateVoucher(int id, [FromBody] VoucherDTO voucherDto)
+        public async Task<IActionResult> UpdateVoucher(int id, [FromBody] VoucherUpdateDTO voucherDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var voucher = await _context.Vouchers.FindAsync(id);
             if (voucher == null)
             {
-                return NotFound(new { message = "Voucher không tồn tại." });
+                return NotFound(new { error = "Voucher không tồn tại." });
             }
 
-            voucher.VoucherName = voucherDto.VoucherName;
-            voucher.DiscountPercent = voucherDto.DiscountPercent;
-            voucher.MinOrderAmount = voucherDto.MinOrderAmount;
-            voucher.StartDate = voucherDto.StartDate;
-            voucher.EndDate = voucherDto.EndDate;
-            voucher.Quantity = voucherDto.Quantity;
-            voucher.Status = voucherDto.Status;
-            voucher.Description = voucherDto.Description;
-
-            await _context.SaveChangesAsync();
-
-            // Trả về JSON gọn hơn
-            return Ok(new VoucherDTO
+            try
             {
-                VoucherId = voucher.VoucherId,
-                VoucherName = voucher.VoucherName,
-                DiscountPercent = voucher.DiscountPercent,
-                MinOrderAmount = voucher.MinOrderAmount,
-                StartDate = voucher.StartDate,
-                EndDate = voucher.EndDate,
-                Quantity = voucher.Quantity,
-                Status = voucher.Status,
-                Description = voucher.Description
-            });
+                // Chỉ cập nhật các trường từ DTO, KHÔNG thay đổi voucherId
+                voucher.VoucherName = voucherDto.VoucherName;
+                voucher.DiscountPercent = voucherDto.DiscountPercent;
+                voucher.MinOrderAmount = voucherDto.MinOrderAmount;
+                voucher.StartDate = voucherDto.StartDate;
+                voucher.EndDate = voucherDto.EndDate;
+                voucher.Quantity = voucherDto.Quantity;
+                voucher.Status = voucherDto.Status;
+                voucher.Description = voucherDto.Description;
+
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Cập nhật voucher thành công." });
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(500, new { error = "Lỗi khi lưu dữ liệu vào database.", details = ex.InnerException?.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = "Lỗi không xác định.", details = ex.Message });
+            }
         }
+
+
+
         public class VoucherDTO
         {
             public int VoucherId { get; set; }
@@ -126,7 +134,28 @@ namespace test2.Controllers
             public string? Status { get; set; }
             public string? Description { get; set; }
         }
+        public class VoucherUpdateDTO
+        {
+            [Required]
+            public string VoucherName { get; set; } = null!;
 
+            [Range(0, 100, ErrorMessage = "Giá trị giảm giá phải từ 0 đến 100.")]
+            public decimal DiscountPercent { get; set; }
+
+            public decimal? MinOrderAmount { get; set; }
+
+            [Required]
+            public DateTime StartDate { get; set; }
+
+            [Required]
+            public DateTime EndDate { get; set; }
+
+            public int? Quantity { get; set; }
+
+            public string? Status { get; set; }
+
+            public string? Description { get; set; }
+        }
 
 
         // DELETE: api/Voucher/5

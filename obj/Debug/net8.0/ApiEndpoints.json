@@ -1,24 +1,8 @@
 [
   {
     "ContainingType": "lamlai2.Controllers.AdminController",
-    "Method": "CreateProduct",
-    "RelativePath": "api/Admin",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "productDto",
-        "Type": "lamlai2.Controllers.AdminController\u002BProductDTO",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "lamlai2.Controllers.AdminController",
     "Method": "UpdateProduct",
-    "RelativePath": "api/Admin/{id}",
+    "RelativePath": "api/Admin/{id}/product",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -30,7 +14,7 @@
       },
       {
         "Name": "productDto",
-        "Type": "lamlai2.Controllers.AdminController\u002BProductDTO",
+        "Type": "lamlai2.Controllers.AdminController\u002BProductUpdateDTO",
         "IsRequired": true
       }
     ],
@@ -44,6 +28,22 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "lamlai2.Controllers.AdminController",
+    "Method": "CreateProduct",
+    "RelativePath": "api/Admin/Product",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productDto",
+        "Type": "lamlai2.Controllers.AdminController\u002BProductUpdateDTO",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -2266,7 +2266,7 @@
     "Parameters": [
       {
         "Name": "voucherDto",
-        "Type": "test2.Controllers.VoucherController\u002BVoucherDTO",
+        "Type": "test2.Controllers.VoucherController\u002BVoucherUpdateDTO",
         "IsRequired": true
       }
     ],
@@ -2323,7 +2323,7 @@
       },
       {
         "Name": "voucherDto",
-        "Type": "test2.Controllers.VoucherController\u002BVoucherDTO",
+        "Type": "test2.Controllers.VoucherController\u002BVoucherUpdateDTO",
         "IsRequired": true
       }
     ],
