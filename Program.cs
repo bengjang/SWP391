@@ -30,6 +30,13 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
 });
 
+// Đăng ký Cloudinary Settings
+builder.Services.Configure<SWP391.Models.CloudinarySettings>(
+    builder.Configuration.GetSection("CloudinarySettings"));
+
+// Đăng ký PhotoService
+builder.Services.AddScoped<SWP391.Services.IPhotoService, SWP391.Services.PhotoService>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

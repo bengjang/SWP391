@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "r7+mgVIKcepUpPZrPRA9/+mhPQ0r0YsyWVvb8pQjw9U=",
+  "Hash": "dc415AND3KrNSh3yZhIHY5j5IJC/LaEON2+Blf3PGd4=",
   "Source": "lamlai",
   "BasePath": "_content/lamlai",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }

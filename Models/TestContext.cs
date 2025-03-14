@@ -50,9 +50,11 @@ public partial class TestContext : DbContext
 
     public virtual DbSet<Voucher> Vouchers { get; set; }
 
+    public virtual DbSet<ProductImage> ProductImages { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=LAPTOP-31MEM5BR\\GIANG0409;uid=sa;pwd=12345;database=test;TrustServerCertificate=True;Trusted_Connection=True;");
+        => optionsBuilder.UseSqlServer("Server=QUYDAM;uid=sa;pwd=12345;database=fix;TrustServerCertificate=True;Trusted_Connection=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -252,6 +254,9 @@ public partial class TestContext : DbContext
             entity.Property(e => e.Brand).HasMaxLength(50);
             entity.Property(e => e.Capacity).HasMaxLength(50);
             entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
+            entity.Property(e => e.Description).HasMaxLength(4000);
+            entity.Property(e => e.Ingredients).HasMaxLength(4000);
+            entity.Property(e => e.UsageInstructions).HasMaxLength(4000);
             entity.Property(e => e.ImgUrl)
                 .HasMaxLength(255)
                 .HasColumnName("ImgURL");
@@ -421,6 +426,22 @@ public partial class TestContext : DbContext
                 .HasMaxLength(50)
                 .HasDefaultValue("Active");
             entity.Property(e => e.VoucherName).HasMaxLength(255);
+        });
+
+        modelBuilder.Entity<ProductImage>(entity =>
+        {
+            entity.HasKey(e => e.ImageID).HasName("PK__ProductImages__ImageID");
+            
+            entity.Property(e => e.ImageID).HasColumnName("ImageID");
+            entity.Property(e => e.ProductId).HasColumnName("ProductID");
+            entity.Property(e => e.ImgUrl).HasMaxLength(500);
+            entity.Property(e => e.DisplayOrder).HasDefaultValue(0);
+            
+            entity.HasOne(d => d.Product)
+                .WithMany(p => p.ProductImages)
+                .HasForeignKey(d => d.ProductId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ProductImages_Products");
         });
 
         OnModelCreatingPartial(modelBuilder);
