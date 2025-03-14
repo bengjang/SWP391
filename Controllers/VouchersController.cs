@@ -178,5 +178,33 @@ namespace test2.Controllers
         {
             return _context.Vouchers.Any(e => e.VoucherId == id);
         }
+        [HttpPatch("{id}/toggle-status")]
+        public async Task<IActionResult> ToggleVoucherStatus(int id)
+        {
+            var voucher = await _context.Vouchers.FindAsync(id);
+            if (voucher == null)
+            {
+                return NotFound(new { error = "Voucher không tồn tại." });
+            }
+
+            // Đảo trạng thái giữa "Active" và "Inactive"
+            voucher.Status = (voucher.Status == "Active") ? "Inactive" : "Active";
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "Trạng thái voucher đã được cập nhật.", newStatus = voucher.Status });
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(500, new { error = "Lỗi khi lưu dữ liệu vào database.", details = ex.InnerException?.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = "Lỗi không xác định.", details = ex.Message });
+            }
+        }
+
     }
+
 }

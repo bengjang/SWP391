@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace lamlai.Models;
 
@@ -7,6 +8,7 @@ public partial class Product
 {
     public int ProductId { get; set; }
 
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public string? ProductCode { get; set; }
 
     public int CategoryId { get; set; }

@@ -22,6 +22,22 @@
   },
   {
     "ContainingType": "lamlai2.Controllers.AdminController",
+    "Method": "ToggleProductStatus",
+    "RelativePath": "api/Admin/{id}/toggle-status",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "lamlai2.Controllers.AdminController",
     "Method": "GetAllOrders",
     "RelativePath": "api/Admin/all",
     "HttpMethod": "GET",
@@ -2334,6 +2350,22 @@
     "Method": "DeleteVoucher",
     "RelativePath": "api/Voucher/{id}",
     "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test2.Controllers.VoucherController",
+    "Method": "ToggleVoucherStatus",
+    "RelativePath": "api/Voucher/{id}/toggle-status",
+    "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
     "Parameters": [

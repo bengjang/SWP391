@@ -10,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 
 using lamlai.Models;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace lamlai2.Controllers
 {
@@ -69,33 +71,52 @@ namespace lamlai2.Controllers
                 return BadRequest(ModelState);
             }
 
-            var product = new Product
-            {
-                ProductName = productDto.ProductName,
-                CategoryId = productDto.CategoryId,
-                Quantity = productDto.Quantity,
-                Capacity = productDto.Capacity,
-                Price = productDto.Price,
-                Brand = productDto.Brand,
-                Origin = productDto.Origin,
-                Status = productDto.Status,
-                ImgUrl = productDto.ImgUrl,
-                SkinType = productDto.SkinType,
-                Description = productDto.Description,
-                Ingredients = productDto.Ingredients,
-                UsageInstructions = productDto.UsageInstructions,
-                ManufactureDate = productDto.ManufactureDate
-            };
-
             try
             {
+                // Gọi stored procedure để lấy ProductCode
+                var productCodeParam = new SqlParameter("@NewProductCode", SqlDbType.NVarChar, 50) { Direction = ParameterDirection.Output };
+
+                await _context.Database.ExecuteSqlRawAsync(
+     "EXEC AddProduct @CategoryID, @ProductName, @Quantity, @Capacity, @Price, @Brand, @Origin, @Status, @ImgURL",
+     new SqlParameter("@CategoryID", productDto.CategoryId),
+     new SqlParameter("@ProductName", productDto.ProductName),
+     new SqlParameter("@Quantity", productDto.Quantity),
+     new SqlParameter("@Capacity", productDto.Capacity),
+     new SqlParameter("@Price", productDto.Price),
+     new SqlParameter("@Brand", productDto.Brand),
+     new SqlParameter("@Origin", productDto.Origin),
+     new SqlParameter("@Status", productDto.Status),
+     new SqlParameter("@ImgURL", productDto.ImgUrl)
+ );
+
+
+                // Lấy giá trị ProductCode từ stored procedure
+                var newProductCode = (string)productCodeParam.Value;
+
+                // Tạo sản phẩm và gán ProductCode
+                var product = new Product
+                {
+                    ProductCode = newProductCode, // Gán ProductCode từ stored procedure
+                    ProductName = productDto.ProductName,
+                    CategoryId = productDto.CategoryId,
+                    Quantity = productDto.Quantity,
+                    Capacity = productDto.Capacity,
+                    Price = productDto.Price,
+                    Brand = productDto.Brand,
+                    Origin = productDto.Origin,
+                    Status = productDto.Status,
+                    ImgUrl = productDto.ImgUrl,
+                    SkinType = productDto.SkinType,
+                    Description = productDto.Description,
+                    Ingredients = productDto.Ingredients,
+                    UsageInstructions = productDto.UsageInstructions,
+                    ManufactureDate = productDto.ManufactureDate
+                };
+
                 _context.Products.Add(product);
                 await _context.SaveChangesAsync();
 
-                return CreatedAtAction("GetProductById", new
-                {
-                    id = product.ProductId
-                }, product);
+                return CreatedAtAction("GetProductById", new { id = product.ProductId }, product);
             }
             catch (DbUpdateException ex)
             {
@@ -184,6 +205,32 @@ namespace lamlai2.Controllers
         }
 
 
+        [HttpPatch("{id}/toggle-status")]
+        public async Task<IActionResult> ToggleProductStatus(int id)
+        {
+            var product = await _context.Products.FindAsync(id);
+            if (product == null)
+            {
+                return NotFound(new { error = "Sản phẩm không tồn tại." });
+            }
+
+            // Đảo trạng thái giữa "Available" và "Unavailable"
+            product.Status = (product.Status == "Available") ? "Unavailable" : "Available";
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "Trạng thái sản phẩm đã được cập nhật.", newStatus = product.Status });
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(500, new { error = "Lỗi khi lưu dữ liệu vào database.", details = ex.InnerException?.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = "Lỗi không xác định.", details = ex.Message });
+            }
+        }
 
 
 
