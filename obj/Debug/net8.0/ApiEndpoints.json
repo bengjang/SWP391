@@ -1,5 +1,15 @@
 [
   {
+    "ContainingType": "lamlai2.Controllers.AdminController",
+    "Method": "GetAllOrders",
+    "RelativePath": "api/Admin/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "lamlai.Controllers.CancelRequestsController",
     "Method": "GetCancelRequests",
     "RelativePath": "api/CancelRequests",
@@ -1249,6 +1259,27 @@
     "Parameters": [
       {
         "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test2.Controllers.ProductsController",
+    "Method": "ImportStock",
+    "RelativePath": "api/Products/{id}/import",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "quantity",
         "Type": "System.Int32",
         "IsRequired": true
       }
