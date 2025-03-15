@@ -1,9 +1,18 @@
 ﻿using lamlai.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using WebAPI_FlowerShopSWP.Configurations;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Register IMemoryCache
+builder.Services.AddMemoryCache();
 
 // Hiển thị chuỗi kết nối để debug
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -46,6 +55,12 @@ builder.Services.Configure<SWP391.Models.CloudinarySettings>(
 // Đăng ký PhotoService
 builder.Services.AddScoped<SWP391.Services.IPhotoService, SWP391.Services.PhotoService>();
 
+// Register VNPayConfig
+builder.Services.Configure<VNPayConfig>(builder.Configuration.GetSection("VNPay"));
+
+// Register VNPayService
+builder.Services.AddScoped<VNPayService>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -78,6 +93,7 @@ app.UseHttpsRedirection();
 // Use CORS before auth and endpoints
 app.UseCors("AllowAll");
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

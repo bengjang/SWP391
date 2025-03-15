@@ -298,6 +298,14 @@ D:\PROJECT\lamlai\obj\Debug\net8.0\refint\lamlai.dll
 D:\PROJECT\lamlai\obj\Debug\net8.0\lamlai.pdb
 D:\PROJECT\lamlai\obj\Debug\net8.0\lamlai.genruntimeconfig.cache
 D:\PROJECT\lamlai\obj\Debug\net8.0\ref\lamlai.dll
+C:\Users\TUF\Documents\GitHub\SWP391\SWP391\obj\Debug\net8.0\lamlai.csproj.AssemblyReference.cache
+C:\Users\TUF\Documents\GitHub\SWP391\SWP391\obj\Debug\net8.0\lamlai.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\TUF\Documents\GitHub\SWP391\SWP391\obj\Debug\net8.0\lamlai.AssemblyInfoInputs.cache
+C:\Users\TUF\Documents\GitHub\SWP391\SWP391\obj\Debug\net8.0\lamlai.AssemblyInfo.cs
+C:\Users\TUF\Documents\GitHub\SWP391\SWP391\obj\Debug\net8.0\lamlai.csproj.CoreCompileInputs.cache
+C:\Users\TUF\Documents\GitHub\SWP391\SWP391\obj\Debug\net8.0\lamlai.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\TUF\Documents\GitHub\SWP391\SWP391\obj\Debug\net8.0\lamlai.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\TUF\Documents\GitHub\SWP391\SWP391\obj\Debug\net8.0\lamlai.sourcelink.json
 C:\Users\TUF\Documents\GitHub\SWP391\SWP391\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\TUF\Documents\GitHub\SWP391\SWP391\bin\Debug\net8.0\appsettings.json
 C:\Users\TUF\Documents\GitHub\SWP391\SWP391\bin\Debug\net8.0\lamlai.exe
@@ -307,6 +315,7 @@ C:\Users\TUF\Documents\GitHub\SWP391\SWP391\bin\Debug\net8.0\lamlai.dll
 C:\Users\TUF\Documents\GitHub\SWP391\SWP391\bin\Debug\net8.0\lamlai.pdb
 C:\Users\TUF\Documents\GitHub\SWP391\SWP391\bin\Debug\net8.0\Azure.Core.dll
 C:\Users\TUF\Documents\GitHub\SWP391\SWP391\bin\Debug\net8.0\Azure.Identity.dll
+C:\Users\TUF\Documents\GitHub\SWP391\SWP391\bin\Debug\net8.0\CloudinaryDotNet.dll
 C:\Users\TUF\Documents\GitHub\SWP391\SWP391\bin\Debug\net8.0\Humanizer.dll
 C:\Users\TUF\Documents\GitHub\SWP391\SWP391\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\TUF\Documents\GitHub\SWP391\SWP391\bin\Debug\net8.0\Microsoft.CodeAnalysis.dll
@@ -340,6 +349,7 @@ C:\Users\TUF\Documents\GitHub\SWP391\SWP391\bin\Debug\net8.0\Microsoft.OpenApi.d
 C:\Users\TUF\Documents\GitHub\SWP391\SWP391\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
 C:\Users\TUF\Documents\GitHub\SWP391\SWP391\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\TUF\Documents\GitHub\SWP391\SWP391\bin\Debug\net8.0\Mono.TextTemplating.dll
+C:\Users\TUF\Documents\GitHub\SWP391\SWP391\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Users\TUF\Documents\GitHub\SWP391\SWP391\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\TUF\Documents\GitHub\SWP391\SWP391\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\TUF\Documents\GitHub\SWP391\SWP391\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -425,14 +435,6 @@ C:\Users\TUF\Documents\GitHub\SWP391\SWP391\bin\Debug\net8.0\runtimes\win\lib\ne
 C:\Users\TUF\Documents\GitHub\SWP391\SWP391\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\TUF\Documents\GitHub\SWP391\SWP391\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 C:\Users\TUF\Documents\GitHub\SWP391\SWP391\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
-C:\Users\TUF\Documents\GitHub\SWP391\SWP391\obj\Debug\net8.0\lamlai.csproj.AssemblyReference.cache
-C:\Users\TUF\Documents\GitHub\SWP391\SWP391\obj\Debug\net8.0\lamlai.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\TUF\Documents\GitHub\SWP391\SWP391\obj\Debug\net8.0\lamlai.AssemblyInfoInputs.cache
-C:\Users\TUF\Documents\GitHub\SWP391\SWP391\obj\Debug\net8.0\lamlai.AssemblyInfo.cs
-C:\Users\TUF\Documents\GitHub\SWP391\SWP391\obj\Debug\net8.0\lamlai.csproj.CoreCompileInputs.cache
-C:\Users\TUF\Documents\GitHub\SWP391\SWP391\obj\Debug\net8.0\lamlai.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\TUF\Documents\GitHub\SWP391\SWP391\obj\Debug\net8.0\lamlai.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\TUF\Documents\GitHub\SWP391\SWP391\obj\Debug\net8.0\lamlai.sourcelink.json
 C:\Users\TUF\Documents\GitHub\SWP391\SWP391\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\TUF\Documents\GitHub\SWP391\SWP391\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\TUF\Documents\GitHub\SWP391\SWP391\obj\Debug\net8.0\staticwebassets\msbuild.lamlai.Microsoft.AspNetCore.StaticWebAssets.props
