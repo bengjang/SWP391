@@ -110,8 +110,7 @@
               "RelativeToolTip": "Models\\User.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-14T14:51:57.159Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-14T14:51:57.159Z"
             },
             {
               "$type": "Document",
@@ -119,9 +118,9 @@
               "Title": "AdminController.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\AdminController.cs",
               "RelativeDocumentMoniker": "Controllers\\AdminController.cs",
-              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\AdminController.cs*",
-              "RelativeToolTip": "Controllers\\AdminController.cs*",
-              "ViewState": "AgIAAMYAAAAAAAAAAAA7wOkAAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "Controllers\\AdminController.cs",
+              "ViewState": "AgIAAOMAAAAAAAAAAAAuwOkAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-14T14:08:45.332Z",
               "EditorCaption": ""
@@ -136,8 +135,7 @@
               "RelativeToolTip": "Controllers\\VouchersController.cs",
               "ViewState": "AgIAAL4AAAAAAAAAAAAcwM4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-14T15:20:41.768Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-14T15:20:41.768Z"
             },
             {
               "$type": "Document",
@@ -172,8 +170,7 @@
               "RelativeToolTip": "Models\\Product.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-13T16:11:01.968Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-13T16:11:01.968Z"
             },
             {
               "$type": "Document",
@@ -185,8 +182,7 @@
               "RelativeToolTip": "Models\\Voucher.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAAgwBwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-14T15:20:10.2Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-14T15:20:10.2Z"
             },
             {
               "$type": "Document",

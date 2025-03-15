@@ -231,7 +231,7 @@ namespace lamlai2.Controllers
                 return StatusCode(500, new { error = "Lỗi không xác định.", details = ex.Message });
             }
         }
-
+       
 
 
     }
