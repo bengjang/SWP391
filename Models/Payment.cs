@@ -16,9 +16,6 @@ public partial class Payment
 
     public string PaymentStatus { get; set; } = null!;
 
-    public decimal? DiscountAmount { get; set; }
-
-    public decimal OriginalAmount { get; set; }
 
     public virtual Order Order { get; set; } = null!;
 }

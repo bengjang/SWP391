@@ -23,6 +23,7 @@ public partial class Order
     public string? Note { get; set; }
 
     public int? VoucherId { get; set; }
+    public string? PaymentMethod { get; set; }
 
     public virtual ICollection<CancelRequest> CancelRequests { get; set; } = new List<CancelRequest>();
 

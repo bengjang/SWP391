@@ -703,16 +703,28 @@ namespace lamlai2.Controllers
             {
                 var order = await _context.Orders
                     .Include(o => o.OrderItems)
-                    .Include(o => o.Voucher) // ✅ Load Voucher nếu có
+                    .Include(o => o.Voucher)
                     .FirstOrDefaultAsync(o => o.OrderId == request.OrderId && o.OrderStatus == "Pending");
 
                 if (order == null)
                     return NotFound("Không tìm thấy đơn hàng hoặc đơn hàng không hợp lệ.");
 
-                // ✅ Cập nhật địa chỉ giao hàng nếu có nhập
+                // ✅ Cập nhật địa chỉ giao hàng nếu có
                 if (!string.IsNullOrWhiteSpace(request.DeliveryAddress))
                 {
                     order.DeliveryAddress = request.DeliveryAddress;
+                }
+
+                // ✅ Cập nhật phương thức thanh toán nếu có
+                if (!string.IsNullOrWhiteSpace(request.PaymentMethod))
+                {
+                    order.PaymentMethod = request.PaymentMethod;
+                }
+
+                // ✅ Cập nhật ghi chú nếu có
+                if (!string.IsNullOrWhiteSpace(request.Note))
+                {
+                    order.Note = request.Note;
                 }
 
                 // ✅ Kiểm tra từng sản phẩm trong đơn hàng trước khi trừ kho
@@ -725,8 +737,7 @@ namespace lamlai2.Controllers
                     if (product.Quantity < orderItem.Quantity)
                         return BadRequest($"Sản phẩm {orderItem.ProductName} không đủ số lượng trong kho.");
 
-                    // 🔽 Trừ số lượng sản phẩm trong kho
-                    product.Quantity -= orderItem.Quantity;
+                    product.Quantity -= orderItem.Quantity; // Trừ kho
                 }
 
                 // ✅ Áp dụng voucher nếu có
@@ -737,26 +748,22 @@ namespace lamlai2.Controllers
                     if (voucher == null)
                         return BadRequest("Voucher không hợp lệ.");
 
-                    // Kiểm tra ngày hết hạn
                     var now = DateTime.UtcNow;
                     if (now < voucher.StartDate || now > voucher.EndDate)
                         return BadRequest("Voucher đã hết hạn hoặc chưa có hiệu lực.");
 
-                    // Kiểm tra điều kiện giá trị đơn hàng tối thiểu
                     if (voucher.MinOrderAmount.HasValue && order.TotalAmount < voucher.MinOrderAmount.Value)
                         return BadRequest($"Đơn hàng chưa đạt giá trị tối thiểu {voucher.MinOrderAmount.Value:C} để áp dụng voucher.");
 
-                    // ✅ Tính tổng tiền sau khi giảm giá
                     var discountAmount = (order.TotalAmount * voucher.DiscountPercent) / 100;
                     order.TotalAmount -= discountAmount;
 
-                    // Nếu voucher có giới hạn số lượng, giảm số lượng voucher
                     if (voucher.Quantity.HasValue && voucher.Quantity > 0)
                         voucher.Quantity -= 1;
                 }
 
                 // ✅ Cập nhật trạng thái đơn hàng
-                order.OrderStatus = "Paid"; // Đánh dấu đơn hàng đã thanh toán
+                order.OrderStatus = "Paid";
                 await _context.SaveChangesAsync();
 
                 return Ok(new { message = "Thanh toán thành công!", order });
@@ -769,12 +776,16 @@ namespace lamlai2.Controllers
 
 
 
+
         // ✅ Định nghĩa class ngay trong API
         public class ConfirmPaymentRequest
         {
             public int OrderId { get; set; }
-            public string? DeliveryAddress { get; set; } // ✅ Đảm bảo có thuộc tính này
+            public string? DeliveryAddress { get; set; }
+            public string? PaymentMethod { get; set; } // ✅ Thêm phương thức thanh toán
+            public string? Note { get; set; }
         }
+
 
 
 

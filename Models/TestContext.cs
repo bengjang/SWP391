@@ -186,6 +186,9 @@ public partial class TestContext : DbContext
             entity.Property(e => e.TotalAmount).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.UserId).HasColumnName("UserID");
             entity.Property(e => e.VoucherId).HasColumnName("VoucherID");
+            entity.Property(e => e.PaymentMethod)
+        .HasMaxLength(50)
+        .IsRequired(false); 
 
             entity.HasOne(d => d.User).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.UserId)
@@ -230,9 +233,7 @@ public partial class TestContext : DbContext
 
             entity.Property(e => e.PaymentId).HasColumnName("PaymentID");
             entity.Property(e => e.Amount).HasColumnType("decimal(18, 2)");
-            entity.Property(e => e.DiscountAmount).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.OrderId).HasColumnName("OrderID");
-            entity.Property(e => e.OriginalAmount).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.PaymentDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
