@@ -15,11 +15,7 @@ public partial class Message
 
     public DateTime SendTime { get; set; }
 
-    public bool IsRead { get; set; }
 
-    public bool IsDeleted { get; set; }
-
-    public DateTime DeletedAt { get; set; }
 
     public string ImageUrl { get; set; } = null!;
 

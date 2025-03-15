@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using lamlai.Models;
 
-
 namespace lamlai.Controllers
 {
     [Route("api/[controller]")]
@@ -21,29 +20,95 @@ namespace lamlai.Controllers
             _context = context;
         }
 
-        // GET: api/CancelRequests
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CancelRequest>>> GetCancelRequests()
+        public async Task<ActionResult<IEnumerable<CancelRequestDto>>> GetCancelRequests()
         {
-            return await _context.CancelRequests.ToListAsync();
-        }
+            var cancelRequests = await _context.CancelRequests
+                .Select(cr => new CancelRequestDto
+                {
+                    CancelRequestId = cr.CancelRequestId,
+                    OrderId = cr.OrderId,
+                    FullName = cr.FullName,
+                    Phone = cr.Phone,
+                    Reason = cr.Reason,
+                    RequestDate = cr.RequestDate,
+                    Status = cr.Status
+                })
+                .ToListAsync();
 
-        // GET: api/CancelRequests/5
+            return Ok(cancelRequests);
+        }
         [HttpGet("{id}")]
-        public async Task<ActionResult<CancelRequest>> GetCancelRequest(int id)
+        public async Task<ActionResult<CancelRequestDto>> GetCancelRequest(int id)
         {
-            var cancelRequest = await _context.CancelRequests.FindAsync(id);
+            var cancelRequest = await _context.CancelRequests
+                .Where(cr => cr.CancelRequestId == id)
+                .Select(cr => new CancelRequestDto
+                {
+                    CancelRequestId = cr.CancelRequestId,
+                    OrderId = cr.OrderId,
+                    FullName = cr.FullName,
+                    Phone = cr.Phone,
+                    Reason = cr.Reason,
+                    RequestDate = cr.RequestDate,
+                    Status = cr.Status
+                })
+                .FirstOrDefaultAsync();
 
             if (cancelRequest == null)
             {
-                return NotFound();
+                return NotFound(new { error = "Yêu cầu hủy không tồn tại." });
             }
 
-            return cancelRequest;
+            return Ok(cancelRequest);
+        }
+
+        public class CancelRequestDto
+        {
+            public int CancelRequestId { get; set; }
+            public int OrderId { get; set; }
+            public string FullName { get; set; } = null!;
+            public string Phone { get; set; } = null!;
+            public string Reason { get; set; } = null!;
+            public DateTime RequestDate { get; set; }
+            public string Status { get; set; } = null!;
+        }
+
+        // API gửi yêu cầu hủy đơn hàng (chỉ khi OrderStatus = "Paid")
+        [HttpPost("request-cancel")]
+        public async Task<IActionResult> RequestCancel([FromBody] CancelRequestDto request)
+        {
+            // Kiểm tra đơn hàng có tồn tại không
+            var order = await _context.Orders.FindAsync(request.OrderId);
+            if (order == null)
+            {
+                return NotFound(new { error = "Đơn hàng không tồn tại." });
+            }
+
+            // Chỉ cho phép hủy nếu trạng thái đơn hàng là "Paid"
+            if (order.OrderStatus != "Paid")
+            {
+                return BadRequest(new { error = "Chỉ có thể hủy đơn hàng có trạng thái 'Paid'." });
+            }
+
+            // Tạo yêu cầu hủy đơn hàng
+            var cancelRequest = new CancelRequest
+            {
+                OrderId = request.OrderId,
+                FullName = request.FullName,
+                Phone = request.Phone,
+                Reason = request.Reason,
+                RequestDate = DateTime.UtcNow,
+                Status = "Pending"
+            };
+
+            _context.CancelRequests.Add(cancelRequest);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Yêu cầu hủy đơn hàng đã được gửi thành công.", cancelRequestId = cancelRequest.CancelRequestId });
         }
 
         // PUT: api/CancelRequests/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCancelRequest(int id, CancelRequest cancelRequest)
         {
@@ -73,17 +138,6 @@ namespace lamlai.Controllers
             return NoContent();
         }
 
-        // POST: api/CancelRequests
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<CancelRequest>> PostCancelRequest(CancelRequest cancelRequest)
-        {
-            _context.CancelRequests.Add(cancelRequest);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetCancelRequest", new { id = cancelRequest.CancelRequestId }, cancelRequest);
-        }
-
         // DELETE: api/CancelRequests/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCancelRequest(int id)
@@ -104,5 +158,14 @@ namespace lamlai.Controllers
         {
             return _context.CancelRequests.Any(e => e.CancelRequestId == id);
         }
+    }
+
+    // DTO để nhận dữ liệu từ request
+    public class CancelRequestDto
+    {
+        public int OrderId { get; set; }
+        public string FullName { get; set; } = null!;
+        public string Phone { get; set; } = null!;
+        public string Reason { get; set; } = null!;
     }
 }

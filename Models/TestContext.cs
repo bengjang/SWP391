@@ -103,7 +103,7 @@ public partial class TestContext : DbContext
             entity.HasIndex(e => e.UserId, "IX_Conversations_UserID");
 
             entity.Property(e => e.ConversationId).HasColumnName("ConversationID");
-            entity.Property(e => e.LastMessageId).HasColumnName("LastMessageID");
+         
             entity.Property(e => e.UpdateAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
@@ -125,7 +125,7 @@ public partial class TestContext : DbContext
 
             entity.Property(e => e.MessageId).HasColumnName("MessageID");
             entity.Property(e => e.ConversationId).HasColumnName("ConversationID");
-            entity.Property(e => e.DeletedAt).HasColumnType("datetime");
+           
             entity.Property(e => e.ImageUrl).HasMaxLength(255);
             entity.Property(e => e.SendTime)
                 .HasDefaultValueSql("(getdate())")

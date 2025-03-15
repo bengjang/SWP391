@@ -231,7 +231,69 @@ namespace lamlai2.Controllers
                 return StatusCode(500, new { error = "Lỗi không xác định.", details = ex.Message });
             }
         }
-       
+
+        [HttpPut("{id}/cancelrequest/approve")]
+        public async Task<IActionResult> ApproveCancelRequest(int id)
+        {
+            var cancelRequest = await _context.CancelRequests.FindAsync(id);
+            if (cancelRequest == null)
+            {
+                return NotFound(new { error = "Yêu cầu hủy không tồn tại." });
+            }
+
+            if (cancelRequest.Status != "Pending")
+            {
+                return BadRequest(new { error = "Yêu cầu hủy đã được xử lý trước đó." });
+            }
+
+            var order = await _context.Orders.FindAsync(cancelRequest.OrderId);
+            if (order == null)
+            {
+                return NotFound(new { error = "Đơn hàng không tồn tại." });
+            }
+
+            // Cập nhật trạng thái đơn hàng
+            order.OrderStatus = "Cancelled";
+            cancelRequest.Status = "Approved";
+
+            await _context.SaveChangesAsync();
+            return Ok(new { message = "Yêu cầu hủy đã được duyệt và đơn hàng đã bị hủy." });
+        }
+        [HttpPut("{id}/cancelrequest/reject")]
+        public async Task<IActionResult> RejectCancelRequest(int id)
+        {
+            var cancelRequest = await _context.CancelRequests.FindAsync(id);
+            if (cancelRequest == null)
+            {
+                return NotFound(new { error = "Yêu cầu hủy không tồn tại." });
+            }
+
+            if (cancelRequest.Status != "Pending")
+            {
+                return BadRequest(new { error = "Yêu cầu hủy đã được xử lý trước đó." });
+            }
+
+            cancelRequest.Status = "Rejected";
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Yêu cầu hủy đã bị từ chối." });
+        }
+
+        [HttpGet("status/{status}")]
+        public async Task<ActionResult<IEnumerable<CancelRequest>>> GetCancelRequestsByStatus(string status)
+        {
+            var validStatuses = new List<string> { "Pending", "Approved", "Rejected" };
+            if (!validStatuses.Contains(status))
+            {
+                return BadRequest(new { error = "Trạng thái không hợp lệ." });
+            }
+
+            var cancelRequests = await _context.CancelRequests
+                .Where(cr => cr.Status == status)
+                .ToListAsync();
+
+            return Ok(cancelRequests);
+        }
 
 
     }

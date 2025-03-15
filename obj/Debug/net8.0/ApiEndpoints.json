@@ -1,6 +1,38 @@
 [
   {
     "ContainingType": "lamlai2.Controllers.AdminController",
+    "Method": "ApproveCancelRequest",
+    "RelativePath": "api/Admin/{id}/cancelrequest/approve",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "lamlai2.Controllers.AdminController",
+    "Method": "RejectCancelRequest",
+    "RelativePath": "api/Admin/{id}/cancelrequest/reject",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "lamlai2.Controllers.AdminController",
     "Method": "UpdateProduct",
     "RelativePath": "api/Admin/{id}/product",
     "HttpMethod": "PUT",
@@ -63,13 +95,19 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "lamlai.Controllers.CancelRequestsController",
-    "Method": "GetCancelRequests",
-    "RelativePath": "api/CancelRequests",
+    "ContainingType": "lamlai2.Controllers.AdminController",
+    "Method": "GetCancelRequestsByStatus",
+    "RelativePath": "api/Admin/status/{status}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "status",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai.Models.CancelRequest, lamlai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
@@ -84,21 +122,15 @@
   },
   {
     "ContainingType": "lamlai.Controllers.CancelRequestsController",
-    "Method": "PostCancelRequest",
+    "Method": "GetCancelRequests",
     "RelativePath": "api/CancelRequests",
-    "HttpMethod": "POST",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "cancelRequest",
-        "Type": "lamlai.Models.CancelRequest",
-        "IsRequired": true
-      }
-    ],
+    "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.CancelRequest",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[lamlai.Controllers.CancelRequestsController\u002BCancelRequestDto, lamlai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -124,7 +156,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "lamlai.Models.CancelRequest",
+        "Type": "lamlai.Controllers.CancelRequestsController\u002BCancelRequestDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -166,6 +198,22 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "lamlai.Controllers.CancelRequestsController",
+    "Method": "RequestCancel",
+    "RelativePath": "api/CancelRequests/request-cancel",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "lamlai.Controllers.CancelRequestsController\u002BCancelRequestDto",
         "IsRequired": true
       }
     ],
@@ -383,6 +431,64 @@
     "Parameters": [
       {
         "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FeedbackController",
+    "Method": "GetPendingFeedbacks",
+    "RelativePath": "api/feedbacks/pending",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FeedbackController",
+    "Method": "ReplyFeedback",
+    "RelativePath": "api/feedbacks/reply",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FeedbackController\u002BAdminReplyDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FeedbackController",
+    "Method": "SendFeedback",
+    "RelativePath": "api/feedbacks/send",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FeedbackController\u002BFeedbackRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FeedbackController",
+    "Method": "GetUserFeedbacks",
+    "RelativePath": "api/feedbacks/user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
         "Type": "System.Int32",
         "IsRequired": true
       }

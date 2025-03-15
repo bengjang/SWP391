@@ -11,7 +11,7 @@ public partial class Conversation
 
     public DateTime UpdateAt { get; set; }
 
-    public int LastMessageId { get; set; }
+  
 
     public bool IsActive { get; set; }
 
