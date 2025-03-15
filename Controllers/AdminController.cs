@@ -215,7 +215,7 @@ namespace lamlai2.Controllers
             }
 
             // Đảo trạng thái giữa "Available" và "Unavailable"
-            product.Status = (product.Status == "Available") ? "Unavailable" : "Available";
+            product.Status = (product.Status == "Available") ? "Out of Stock" : "Available";
 
             try
             {
