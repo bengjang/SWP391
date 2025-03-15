@@ -5,9 +5,18 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Hiển thị chuỗi kết nối để debug
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+Console.WriteLine($"Connection string: {connectionString}");
+
 // Đăng ký DbContext với Dependency Injection
 builder.Services.AddDbContext<TestContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+{
+    options.UseSqlServer(connectionString);
+    // Thêm logging để xem các câu lệnh SQL
+    options.EnableSensitiveDataLogging();
+    options.LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information);
+});
 
 // Add CORS policy
 builder.Services.AddCors(options =>
@@ -29,6 +38,13 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
 });
+
+// Đăng ký Cloudinary Settings
+builder.Services.Configure<SWP391.Models.CloudinarySettings>(
+    builder.Configuration.GetSection("CloudinarySettings"));
+
+// Đăng ký PhotoService
+builder.Services.AddScoped<SWP391.Services.IPhotoService, SWP391.Services.PhotoService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
