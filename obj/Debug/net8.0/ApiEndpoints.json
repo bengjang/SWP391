@@ -213,7 +213,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "lamlai.Controllers.CancelRequestsController\u002BCancelRequestDto",
+        "Type": "lamlai.Controllers.CancelRequestsController\u002BCancelRequestDto2",
         "IsRequired": true
       }
     ],

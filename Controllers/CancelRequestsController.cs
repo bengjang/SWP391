@@ -73,10 +73,19 @@ namespace lamlai.Controllers
             public DateTime RequestDate { get; set; }
             public string Status { get; set; } = null!;
         }
-
+        public class CancelRequestDto2
+        {
+           
+            public int OrderId { get; set; }
+            public string FullName { get; set; } = null!;
+            public string Phone { get; set; } = null!;
+            public string Reason { get; set; } = null!;
+            public DateTime RequestDate { get; set; }
+            
+        }
         // API gửi yêu cầu hủy đơn hàng (chỉ khi OrderStatus = "Paid")
         [HttpPost("request-cancel")]
-        public async Task<IActionResult> RequestCancel([FromBody] CancelRequestDto request)
+        public async Task<IActionResult> RequestCancel([FromBody] CancelRequestDto2 request)
         {
             // Kiểm tra đơn hàng có tồn tại không
             var order = await _context.Orders.FindAsync(request.OrderId);

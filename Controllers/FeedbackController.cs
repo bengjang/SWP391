@@ -36,7 +36,9 @@ public class FeedbackController : ControllerBase
             UserId = request.UserId,
             MessageContent = request.MessageContent,
             SendTime = DateTime.UtcNow,
-            ImageUrl = request.ImageUrl ?? "" // Nếu không có ảnh thì để trống
+            ImageUrl = request.ImageUrl ?? "", // Nếu không có ảnh thì để trống
+            Email = request.Email, // Store email if needed
+            PhoneNumber = request.PhoneNumber // Store phone number if needed
         };
 
         _context.Messages.Add(message);
@@ -61,7 +63,11 @@ public class FeedbackController : ControllerBase
             UserId = request.UserId,
             MessageContent = request.MessageContent,
             SendTime = DateTime.UtcNow,
-            ImageUrl = request.ImageUrl ?? ""
+            ImageUrl = request.ImageUrl ?? "",
+
+            // Set default email and phone number
+            Email = "beautycomsmetics@gmail.vn", // Default email
+            PhoneNumber = "0956497123" // Default phone number
         };
 
         _context.Messages.Add(replyMessage);
@@ -128,5 +134,7 @@ public class FeedbackController : ControllerBase
         public int UserId { get; set; }
         public string MessageContent { get; set; } = null!;
         public string? ImageUrl { get; set; } // Ảnh kèm theo tin nhắn
+        public string? Email { get; set; } // Email field
+        public string? PhoneNumber { get; set; } // Phone number field
     }
 }

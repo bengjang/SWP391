@@ -15,9 +15,11 @@ public partial class Message
 
     public DateTime SendTime { get; set; }
 
+    public string? ImageUrl { get; set; }
 
-
-    public string ImageUrl { get; set; } = null!;
+    // New properties for email and phone number
+    public string? Email { get; set; } // Email field
+    public string? PhoneNumber { get; set; } // Phone number field
 
     public virtual Conversation Conversation { get; set; } = null!;
 
