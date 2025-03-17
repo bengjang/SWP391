@@ -2106,6 +2106,27 @@
   },
   {
     "ContainingType": "test2.Controllers.ReviewsController",
+    "Method": "RespondToReview",
+    "RelativePath": "api/Reviews/{id}/response",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "responseDto",
+        "Type": "test2.Controllers.ReviewsController\u002BReviewResponseDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "test2.Controllers.ReviewsController",
     "Method": "GetReviewsByProduct",
     "RelativePath": "api/Reviews/product/{productId}",
     "HttpMethod": "GET",

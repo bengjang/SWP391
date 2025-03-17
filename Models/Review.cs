@@ -16,7 +16,7 @@ public partial class Review
     public DateTime ReviewDate { get; set; }
 
     public string ReviewComment { get; set; } = null!;
-
+    public string? StaffResponse { get; set; }
     public virtual Product Product { get; set; } = null!;
 
     public virtual User User { get; set; } = null!;

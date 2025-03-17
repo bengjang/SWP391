@@ -709,25 +709,36 @@ namespace lamlai2.Controllers
                 if (order == null)
                     return NotFound("Không tìm thấy đơn hàng hoặc đơn hàng không hợp lệ.");
 
-                // ✅ Cập nhật địa chỉ giao hàng nếu có
+                // Cập nhật địa chỉ giao hàng nếu có
                 if (!string.IsNullOrWhiteSpace(request.DeliveryAddress))
                 {
                     order.DeliveryAddress = request.DeliveryAddress;
                 }
 
-                // ✅ Cập nhật phương thức thanh toán nếu có
+                // Cập nhật phương thức thanh toán nếu có
                 if (!string.IsNullOrWhiteSpace(request.PaymentMethod))
                 {
                     order.PaymentMethod = request.PaymentMethod;
                 }
 
-                // ✅ Cập nhật ghi chú nếu có
+                // Cập nhật ghi chú nếu có
                 if (!string.IsNullOrWhiteSpace(request.Note))
                 {
                     order.Note = request.Note;
                 }
 
-                // ✅ Kiểm tra từng sản phẩm trong đơn hàng trước khi trừ kho
+                // Cập nhật tên và số điện thoại
+                if (!string.IsNullOrWhiteSpace(request.Name))
+                {
+                    order.Name = request.Name; // Assuming you have added Name property to Order model
+                }
+
+                if (!string.IsNullOrWhiteSpace(request.PhoneNumber))
+                {
+                    order.PhoneNumber = request.PhoneNumber; // Assuming you have added PhoneNumber property to Order model
+                }
+
+                // Kiểm tra từng sản phẩm trong đơn hàng trước khi trừ kho
                 foreach (var orderItem in order.OrderItems)
                 {
                     var product = await _context.Products.FindAsync(orderItem.ProductId);
@@ -740,7 +751,7 @@ namespace lamlai2.Controllers
                     product.Quantity -= orderItem.Quantity; // Trừ kho
                 }
 
-                // ✅ Áp dụng voucher nếu có
+                // Áp dụng voucher nếu có
                 if (order.VoucherId.HasValue)
                 {
                     var voucher = order.Voucher;
@@ -762,7 +773,7 @@ namespace lamlai2.Controllers
                         voucher.Quantity -= 1;
                 }
 
-                // ✅ Cập nhật trạng thái đơn hàng
+                // Cập nhật trạng thái đơn hàng
                 order.OrderStatus = "Paid";
                 await _context.SaveChangesAsync();
 
@@ -782,8 +793,12 @@ namespace lamlai2.Controllers
         {
             public int OrderId { get; set; }
             public string? DeliveryAddress { get; set; }
-            public string? PaymentMethod { get; set; } // ✅ Thêm phương thức thanh toán
+            public string? PaymentMethod { get; set; } // Thêm phương thức thanh toán
             public string? Note { get; set; }
+            
+            // New properties for Name and PhoneNumber
+            public string? Name { get; set; } // Customer's name
+            public string? PhoneNumber { get; set; } // Customer's phone number
         }
 
 

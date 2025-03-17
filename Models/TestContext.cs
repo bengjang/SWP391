@@ -192,6 +192,9 @@ public partial class TestContext : DbContext
         .HasMaxLength(50)
         .IsRequired(false); 
 
+            entity.Property(e => e.Name).HasMaxLength(255);
+            entity.Property(e => e.PhoneNumber).HasMaxLength(50);
+
             entity.HasOne(d => d.User).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -348,7 +351,8 @@ public partial class TestContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.UserId).HasColumnName("UserID");
-
+            entity.HasKey(e => e.ReviewId);
+            entity.Property(e => e.StaffResponse).HasColumnType("nvarchar(max)");
             entity.HasOne(d => d.Product).WithMany(p => p.Reviews)
                 .HasForeignKey(d => d.ProductId)
                 .OnDelete(DeleteBehavior.ClientSetNull)

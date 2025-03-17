@@ -20,10 +20,29 @@ namespace lamlai.Controllers
             _context = context;
         }
 
+        public class OrderItemDto
+        {
+            public int ProductId { get; set; }
+            public string ProductName { get; set; } = null!;
+            public int Quantity { get; set; }
+            public decimal Price { get; set; }
+        }
+
+        public class OrderDto
+        {
+            public int OrderId { get; set; }
+            public string OrderStatus { get; set; } = null!;
+            public DateTime OrderDate { get; set; }
+            public decimal TotalAmount { get; set; }
+            public string DeliveryStatus { get; set; } = null!;
+            public List<OrderItemDto> OrderItems { get; set; } = new List<OrderItemDto>();
+        }
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CancelRequestDto>>> GetCancelRequests()
         {
             var cancelRequests = await _context.CancelRequests
+                .Include(cr => cr.Order)
                 .Select(cr => new CancelRequestDto
                 {
                     CancelRequestId = cr.CancelRequestId,
@@ -32,16 +51,33 @@ namespace lamlai.Controllers
                     Phone = cr.Phone,
                     Reason = cr.Reason,
                     RequestDate = cr.RequestDate,
-                    Status = cr.Status
+                    Status = cr.Status,
+                    OrderDetails = new OrderDto
+                    {
+                        OrderId = cr.Order.OrderId,
+                        OrderStatus = cr.Order.OrderStatus,
+                        OrderDate = cr.Order.OrderDate,
+                        TotalAmount = cr.Order.TotalAmount,
+                        DeliveryStatus = cr.Order.DeliveryStatus,
+                        OrderItems = cr.Order.OrderItems.Select(oi => new OrderItemDto
+                        {
+                            ProductId = oi.ProductId,
+                            ProductName = oi.Product.ProductName,
+                            Quantity = oi.Quantity,
+                            Price = oi.Price
+                        }).ToList()
+                    }
                 })
                 .ToListAsync();
 
             return Ok(cancelRequests);
         }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<CancelRequestDto>> GetCancelRequest(int id)
         {
             var cancelRequest = await _context.CancelRequests
+                .Include(cr => cr.Order)
                 .Where(cr => cr.CancelRequestId == id)
                 .Select(cr => new CancelRequestDto
                 {
@@ -51,7 +87,14 @@ namespace lamlai.Controllers
                     Phone = cr.Phone,
                     Reason = cr.Reason,
                     RequestDate = cr.RequestDate,
-                    Status = cr.Status
+                    Status = cr.Status,
+                    OrderDetails = new
+                    {
+                        cr.Order.OrderId,
+                        cr.Order.OrderStatus,
+                        cr.Order.TotalAmount,
+                        cr.Order.OrderDate,
+                    }
                 })
                 .FirstOrDefaultAsync();
 
@@ -72,6 +115,7 @@ namespace lamlai.Controllers
             public string Reason { get; set; } = null!;
             public DateTime RequestDate { get; set; }
             public string Status { get; set; } = null!;
+            public object OrderDetails { get; set; }
         }
         public class CancelRequestDto2
         {
@@ -172,9 +216,31 @@ namespace lamlai.Controllers
     // DTO để nhận dữ liệu từ request
     public class CancelRequestDto
     {
+        public int CancelRequestId { get; set; }
         public int OrderId { get; set; }
         public string FullName { get; set; } = null!;
         public string Phone { get; set; } = null!;
         public string Reason { get; set; } = null!;
+        public DateTime RequestDate { get; set; }
+        public string Status { get; set; } = null!;
+        public object OrderDetails { get; set; }
+    }
+
+    public class OrderItemDto
+    {
+        public int ProductId { get; set; }
+        public string ProductName { get; set; } = null!;
+        public int Quantity { get; set; }
+        public decimal Price { get; set; }
+    }
+
+    public class OrderDto
+    {
+        public int OrderId { get; set; }
+        public string OrderStatus { get; set; } = null!;
+        public DateTime OrderDate { get; set; }
+        public decimal TotalAmount { get; set; }
+        public string DeliveryStatus { get; set; } = null!;
+        public List<OrderItemDto> OrderItems { get; set; } = new List<OrderItemDto>();
     }
 }

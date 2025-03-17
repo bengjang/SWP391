@@ -160,10 +160,30 @@ namespace test2.Controllers
 
             return NoContent();
         }
+        [HttpPut("{id}/response")]
+        public async Task<IActionResult> RespondToReview(int id, [FromBody] ReviewResponseDto responseDto)
+        {
+            var review = await _context.Reviews.FindAsync(id);
+            if (review == null)
+            {
+                return NotFound("Không tìm thấy review.");
+            }
+
+            review.StaffResponse = responseDto.Response;
+            await _context.SaveChangesAsync();
+
+            return Ok(new { Message = "Phản hồi của staff đã được cập nhật." });
+        }
+
+        // DTO để nhận phản hồi từ staff
+        public class ReviewResponseDto
+        {
+            public string Response { get; set; } = null!;
+        }
 
         // POST: api/Reviews
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-   
+
         // DELETE: api/Reviews/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteReview(int id)

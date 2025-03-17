@@ -25,6 +25,10 @@ public partial class Order
     public int? VoucherId { get; set; }
     public string? PaymentMethod { get; set; }
 
+    // New properties for Name and PhoneNumber
+    public string? Name { get; set; } // Name of the customer
+    public string? PhoneNumber { get; set; } // Phone number of the customer
+
     public virtual ICollection<CancelRequest> CancelRequests { get; set; } = new List<CancelRequest>();
 
     public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();

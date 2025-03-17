@@ -47,6 +47,8 @@ namespace lamlai2.Controllers
                     order.Note,
                     order.VoucherId,
                     order.TotalAmount,
+                    order.Name,
+                    order.PhoneNumber,
                     Items = order.OrderItems.Select(oi => new
                     {
                         oi.Product.ProductName,
