@@ -51,16 +51,18 @@ public class FeedbackController : ControllerBase
     [HttpPost("reply")]
     public async Task<IActionResult> ReplyFeedback([FromBody] AdminReplyDto request)
     {
+        // Find the existing conversation by ID
         var conversation = await _context.Conversations.FindAsync(request.ConversationId);
         if (conversation == null)
         {
             return NotFound(new { error = "Cuộc trò chuyện không tồn tại." });
         }
 
+        // Create a new message for the admin's reply
         var replyMessage = new Message
         {
-            ConversationId = request.ConversationId,
-            UserId = request.UserId,
+            ConversationId = request.ConversationId, // Use the existing conversation ID
+            UserId = request.UserId, // This should be the admin's ID
             MessageContent = request.MessageContent,
             SendTime = DateTime.UtcNow,
             ImageUrl = request.ImageUrl ?? "",
@@ -70,8 +72,13 @@ public class FeedbackController : ControllerBase
             PhoneNumber = "0956497123" // Default phone number
         };
 
+        // Add the new message to the Messages table
         _context.Messages.Add(replyMessage);
+
+        // Update the conversation's last updated time
         conversation.UpdateAt = DateTime.UtcNow;
+
+        // Save changes to the database
         await _context.SaveChangesAsync();
 
         return Ok(new { message = "Admin đã trả lời phản hồi!" });
@@ -107,17 +114,83 @@ public class FeedbackController : ControllerBase
     public async Task<IActionResult> GetPendingFeedbacks()
     {
         var pendingConversations = await _context.Conversations
-            .Where(c => c.Messages.Count == 1)
+            .Include(c => c.User) // Include the User entity
+            .Where(c => c.Messages.Count == 1) // Only include conversations with a single message (pending)
             .Select(c => new
             {
                 c.ConversationId,
                 c.UserId,
-                c.UpdateAt,
-                FirstMessage = c.Messages.Any() ? c.Messages.OrderBy(m => m.SendTime).First().MessageContent : "No messages yet"
+                UserName = c.User.Name, // Get the user's name
+                Email = c.Messages.FirstOrDefault().Email, // Get the email from the first message
+                PhoneNumber = c.Messages.FirstOrDefault().PhoneNumber, // Get the phone number from the first message
+                MessageContent = c.Messages.FirstOrDefault().MessageContent, // Get the content of the first message
+                SendTime = c.Messages.FirstOrDefault().SendTime, // Get the send time of the first message
+                Status = "Pending" // Set the status to "Pending"
             })
             .ToListAsync();
 
         return Ok(pendingConversations);
+    }
+
+    // 📌 5️⃣ API: Lấy tất cả phản hồi
+    [HttpGet("all")]
+    public async Task<IActionResult> GetAllFeedbacks()
+    {
+        var feedbacks = await _context.Conversations
+            .Include(c => c.User) // Include the User entity
+            .Select(c => new
+            {
+                c.ConversationId,
+                c.UserId,
+                UserName = c.User.Name, // Get the user's name
+                Role = c.User.Role, // Get the user's role
+                Messages = c.Messages.Select(m => new
+                {
+                    m.MessageId,
+                    m.MessageContent,
+                    m.SendTime,
+                    m.UserId,
+                    m.ImageUrl,
+                    Email = m.Email,
+                    PhoneNumber = m.PhoneNumber,
+                    IsAdmin = m.UserId != c.UserId // Determine if the message is from an admin
+                }).ToList(),
+                Status = c.Messages.Count > 1 ? "Replied" : "Pending" // Set the status based on the number of messages
+            })
+            .ToListAsync();
+
+        return Ok(feedbacks);
+    }
+
+    // 📌 6️⃣ API: Lấy danh sách đơn hỗ trợ đã được staff trả lời
+    [HttpGet("replied")]
+    public async Task<IActionResult> GetRepliedSupportRequests()
+    {
+        var repliedRequests = await _context.Conversations
+            .Include(c => c.User) // Include the User entity
+            .Where(c => c.Messages.Count > 1) // Only include conversations with replies
+            .Select(c => new
+            {
+                c.ConversationId,
+                c.UserId,
+                UserName = c.User.Name, // Get the user's name
+                Role = c.User.Role, // Get the user's role
+                Messages = c.Messages.Select(m => new
+                {
+                    m.MessageId,
+                    m.MessageContent,
+                    m.SendTime,
+                    m.UserId,
+                    m.ImageUrl,
+                    Email = m.Email,
+                    PhoneNumber = m.PhoneNumber,
+                    IsAdmin = m.UserId != c.UserId // Determine if the message is from an admin
+                }).ToList(),
+                Status = "Replied" // Set the status to "Replied"
+            })
+            .ToListAsync();
+
+        return Ok(repliedRequests);
     }
 
     // 📌 DTOs

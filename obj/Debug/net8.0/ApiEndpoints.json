@@ -439,8 +439,28 @@
   },
   {
     "ContainingType": "FeedbackController",
+    "Method": "GetAllFeedbacks",
+    "RelativePath": "api/feedbacks/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FeedbackController",
     "Method": "GetPendingFeedbacks",
     "RelativePath": "api/feedbacks/pending",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FeedbackController",
+    "Method": "GetRepliedSupportRequests",
+    "RelativePath": "api/feedbacks/replied",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
