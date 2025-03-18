@@ -1,4 +1,4 @@
-﻿using lamlai.Models;
+using lamlai.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -89,20 +89,18 @@ public class FeedbackController : ControllerBase
     public async Task<IActionResult> GetUserFeedbacks(int userId)
     {
         var conversations = await _context.Conversations
+            .Include(c => c.User) // Include the User entity
             .Where(c => c.UserId == userId)
             .Select(c => new
             {
                 c.ConversationId,
-                c.UpdateAt,
-                Messages = c.Messages.OrderBy(m => m.SendTime)
-                    .Select(m => new
-                    {
-                        m.MessageId,
-                        m.MessageContent,
-                        m.SendTime,
-                        m.UserId,
-                        m.ImageUrl
-                    }).ToList()
+                c.UserId,
+                UserName = c.User.Name, // Get the user's name
+                Email = c.Messages.FirstOrDefault().Email, // Get the email from the first message
+                PhoneNumber = c.Messages.FirstOrDefault().PhoneNumber, // Get the phone number from the first message
+                MessageContent = c.Messages.OrderByDescending(m => m.SendTime).FirstOrDefault().MessageContent, // Get the content of the latest message
+                SendTime = c.Messages.OrderByDescending(m => m.SendTime).FirstOrDefault().SendTime, // Get the send time of the latest message
+                Status = c.Messages.Count > 1 ? "Replied" : "Pending" // Set the status based on the number of messages
             })
             .ToListAsync();
 
@@ -193,6 +191,41 @@ public class FeedbackController : ControllerBase
         return Ok(repliedRequests);
     }
 
+    [HttpGet("replied/{userId}")]
+    public async Task<IActionResult> GetRepliedSupportRequestsByUser(int userId)
+    {
+        var repliedRequests = await _context.Conversations
+            .Include(c => c.User)
+            .Where(c => c.UserId == userId && c.Messages.Count > 1)
+            .Select(c => new
+            {
+                c.ConversationId,
+                c.UserId,
+                UserName = c.User.Name,
+                Email = c.Messages.FirstOrDefault().Email,
+                PhoneNumber = c.Messages.FirstOrDefault().PhoneNumber,
+                MessageContent = c.Messages.OrderByDescending(m => m.SendTime).FirstOrDefault().MessageContent,
+                SendTime = c.Messages.OrderByDescending(m => m.SendTime).FirstOrDefault().SendTime,
+                Messages = c.Messages
+                    .OrderBy(m => m.SendTime) // Thêm sắp xếp tin nhắn theo thời gian tăng dần
+                    .Select(m => new
+                    {
+                        m.MessageId,
+                        m.MessageContent,
+                        m.SendTime,
+                        m.UserId,
+                        m.ImageUrl,
+                        Email = m.Email,
+                        PhoneNumber = m.PhoneNumber,
+                        IsAdmin = m.UserId != c.UserId
+                    })
+                    .ToList(),
+                Status = "Replied"
+            })
+            .ToListAsync();
+
+        return Ok(repliedRequests);
+    }
     // 📌 DTOs
     public class AdminReplyDto
     {
