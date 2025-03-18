@@ -10,6 +10,8 @@ using lamlai.Models;
 using SWP391.DTOs;
 using SWP391.Services;
 using Microsoft.Data.SqlClient;
+using System.IO;
+using System.Text;
 
 namespace SWP391.Controllers
 {
@@ -385,6 +387,25 @@ namespace SWP391.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, $"Lỗi khi sắp xếp lại ảnh: {ex.Message}");
+            }
+        }
+
+        // Hàm hỗ trợ để lấy Content-Type dựa trên phần mở rộng của file
+        private string GetContentType(string extension)
+        {
+            switch (extension.ToLower())
+            {
+                case ".jpg":
+                case ".jpeg":
+                    return "image/jpeg";
+                case ".png":
+                    return "image/png";
+                case ".gif":
+                    return "image/gif";
+                case ".webp":
+                    return "image/webp";
+                default:
+                    return "application/octet-stream";
             }
         }
     }
