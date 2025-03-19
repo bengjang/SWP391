@@ -96,6 +96,9 @@ app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
 
+// Thêm middleware phục vụ tệp tĩnh từ wwwroot
+app.UseStaticFiles();
+
 app.MapControllers();
 
 // Add endpoint để test kết nối
