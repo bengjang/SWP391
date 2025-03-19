@@ -23,13 +23,13 @@ namespace test2.Controllers
         private readonly VNPayConfig _vnpayConfig;
         private readonly ILogger<PaymentsController> _logger;
         private readonly IMemoryCache _memoryCache;
-        private readonly VNPayService _vnpayService;
+        private readonly WebAPI_FlowerShopSWP.Helpers.VNPayService _vnpayService;
 
         public PaymentsController(TestContext context,
             IOptions<VNPayConfig> vnpayConfig,
             ILogger<PaymentsController> logger,
             IMemoryCache memoryCache,
-            VNPayService vnpayService)
+            WebAPI_FlowerShopSWP.Helpers.VNPayService vnpayService)
         {
             _context = context;
             _vnpayConfig = vnpayConfig.Value;

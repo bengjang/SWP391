@@ -1,0 +1,62 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# C# files
+*.cs     diff=csharp
+
+# Visual Studio files
+*.sln    merge=union
+*.csproj merge=union
+*.vbproj merge=union
+*.fsproj merge=union
+*.dbproj merge=union
+
+# Standard to msysgit
+*.doc    diff=astextplain
+*.DOC    diff=astextplain
+*.docx   diff=astextplain
+*.DOCX   diff=astextplain
+*.dot    diff=astextplain
+*.DOT    diff=astextplain
+*.pdf    diff=astextplain
+*.PDF    diff=astextplain
+*.rtf    diff=astextplain
+*.RTF    diff=astextplain
+
+# Đánh dấu file binary (không merge)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.mov binary
+*.mp4 binary
+*.mp3 binary
+*.wav binary
+*.flv binary
+*.fla binary
+*.swf binary
+*.gz binary
+*.zip binary
+*.7z binary
+*.ttf binary
+*.eot binary
+*.woff binary
+*.woff2 binary
+*.pyc binary
+*.pdf binary
+*.dll binary
+*.exe binary
+
+# Đánh dấu các file cấu hình sẽ không gây xung đột merge
+*.json.user binary
+**/obj/**/*.json binary
+project.assets.json binary
+*.nuget.dgspec.json binary
+project.nuget.cache binary
+*.nuget.g.props binary
+*.nuget.g.targets binary
+
+# Ignore diff for yarn.lock and package-lock.json
+package-lock.json -diff
+yarn.lock -diff
