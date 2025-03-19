@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\controllers\\paymentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:controllers\\paymentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -17,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\controllers\\feedbackcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -73,10 +77,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\models\\review.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:models\\review.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\controllers\\paymentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|solutionrelative:controllers\\paymentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CD5CB8A0-9FFA-44E4-A36F-95F978F4B62C}|lamlai.csproj|c:\\users\\tuf\\documents\\github\\swp391\\swp391\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -174,7 +174,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
@@ -198,7 +198,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "UsersController.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "Controllers\\UsersController.cs",
@@ -211,20 +211,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UserQuizResponsesController.cs",
-              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\UserQuizResponsesController.cs",
-              "RelativeDocumentMoniker": "Controllers\\UserQuizResponsesController.cs",
-              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\UserQuizResponsesController.cs",
-              "RelativeToolTip": "Controllers\\UserQuizResponsesController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-19T09:53:32.821Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -236,19 +223,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "OrdersController.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\OrdersController.cs",
               "RelativeDocumentMoniker": "Controllers\\OrdersController.cs",
               "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\OrdersController.cs",
               "RelativeToolTip": "Controllers\\OrdersController.cs",
-              "ViewState": "AgIAACEDAAAAAAAAAAAQwDIDAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAP4CAAAAAAAAAAAYwG0DAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-14T14:08:29.56Z"
+              "WhenOpened": "2025-03-14T14:08:29.56Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "FeedbackController.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\FeedbackController.cs",
               "RelativeDocumentMoniker": "Controllers\\FeedbackController.cs",
@@ -260,7 +248,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "PhotosController.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\PhotosController.cs",
               "RelativeDocumentMoniker": "Controllers\\PhotosController.cs",
@@ -272,7 +260,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "ReviewsController.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\ReviewsController.cs",
               "RelativeDocumentMoniker": "Controllers\\ReviewsController.cs",
@@ -284,7 +272,32 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
+              "Title": "PaymentsController.cs",
+              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\PaymentsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\PaymentsController.cs",
+              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\PaymentsController.cs",
+              "RelativeToolTip": "Controllers\\PaymentsController.cs",
+              "ViewState": "AgIAAAEBAAAAAAAAAADwvwwBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-15T13:28:56.089Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UserQuizResponsesController.cs",
+              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\UserQuizResponsesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UserQuizResponsesController.cs",
+              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\UserQuizResponsesController.cs",
+              "RelativeToolTip": "Controllers\\UserQuizResponsesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-19T09:53:32.821Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "CancelRequestsController.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\CancelRequestsController.cs",
               "RelativeDocumentMoniker": "Controllers\\CancelRequestsController.cs",
@@ -292,12 +305,11 @@
               "RelativeToolTip": "Controllers\\CancelRequestsController.cs",
               "ViewState": "AgIAAO4AAAAAAAAAAAA6wPsAAABMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-14T16:06:34.43Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-14T16:06:34.43Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\User.cs",
               "RelativeDocumentMoniker": "Models\\User.cs",
@@ -309,7 +321,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "QuizzControllers.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\QuizzControllers.cs",
               "RelativeDocumentMoniker": "Controllers\\QuizzControllers.cs",
@@ -321,7 +333,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "ConversationsController.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\ConversationsController.cs",
               "RelativeDocumentMoniker": "Controllers\\ConversationsController.cs",
@@ -333,7 +345,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "CategoriesController.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\CategoriesController.cs",
               "RelativeDocumentMoniker": "Controllers\\CategoriesController.cs",
@@ -345,7 +357,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "TestContext.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\TestContext.cs",
               "RelativeDocumentMoniker": "Models\\TestContext.cs",
@@ -357,7 +369,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "lamlai",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\lamlai.csproj",
               "RelativeDocumentMoniker": "lamlai.csproj",
@@ -368,7 +380,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "ProductsController.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\ProductsController.cs",
               "RelativeDocumentMoniker": "Controllers\\ProductsController.cs",
@@ -380,7 +392,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "AdminController.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\AdminController.cs",
               "RelativeDocumentMoniker": "Controllers\\AdminController.cs",
@@ -392,7 +404,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "Order.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\Order.cs",
               "RelativeDocumentMoniker": "Models\\Order.cs",
@@ -401,18 +413,6 @@
               "ViewState": "AgIAAAgAAAAAAAAAAAAwwBgAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-15T14:05:22.381Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "PaymentsController.cs",
-              "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\PaymentsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\PaymentsController.cs",
-              "ToolTip": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Controllers\\PaymentsController.cs",
-              "RelativeToolTip": "Controllers\\PaymentsController.cs",
-              "ViewState": "AgIAAJMAAAAAAAAAAAAmwAkBAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T13:28:56.089Z"
             },
             {
               "$type": "Document",
@@ -428,7 +428,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "Review.cs",
               "DocumentMoniker": "C:\\Users\\TUF\\Documents\\GitHub\\SWP391\\SWP391\\Models\\Review.cs",
               "RelativeDocumentMoniker": "Models\\Review.cs",

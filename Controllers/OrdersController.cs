@@ -374,7 +374,7 @@ namespace lamlai2.Controllers
             }
         }
 
-      
+
 
         [HttpDelete("removefromcart/{orderItemId}")]
         public async Task<IActionResult> RemoveFromCart(int orderItemId)
@@ -673,7 +673,7 @@ namespace lamlai2.Controllers
                 return StatusCode(500, $"Lỗi: {ex.InnerException?.Message ?? ex.Message}");
             }
         }
-    
+
         public class UpdateOrderStatusRequest
         {
             public int OrderId { get; set; }
@@ -786,6 +786,60 @@ namespace lamlai2.Controllers
         }
 
 
+        // new
+        [HttpPost("remove-from-checkout")]
+        public async Task<IActionResult> RemoveItemFromCheckout([FromBody] RemoveItemRequest request)
+        {
+            try
+            {
+                // Kiểm tra xem đơn hàng tồn tại không
+                var order = await _context.Orders
+                    .Include(o => o.OrderItems)
+                    .ThenInclude(oi => oi.Product) // Đảm bảo load thông tin sản phẩm
+                    .FirstOrDefaultAsync(o => o.OrderId == request.OrderId);
+
+                if (order == null)
+                    return NotFound("Không tìm thấy đơn hàng");
+
+                // Kiểm tra số lượng sản phẩm trong đơn hàng
+                if (order.OrderItems.Count <= 1)
+                    return BadRequest("Đơn hàng cần ít nhất 1 sản phẩm");
+
+                // Tìm item cần xóa
+                var orderItem = order.OrderItems.FirstOrDefault(oi => oi.OrderItemId == request.OrderItemId);
+                if (orderItem == null)
+                    return NotFound("Không tìm thấy sản phẩm trong đơn hàng");
+
+                // Xóa item khỏi đơn hàng
+                _context.OrderItems.Remove(orderItem);
+
+                // Cập nhật tổng tiền đơn hàng
+                order.TotalAmount = order.OrderItems
+                    .Where(oi => oi.OrderItemId != request.OrderItemId)
+                    .Sum(oi => oi.Price);
+
+                await _context.SaveChangesAsync();
+
+                return Ok(new
+                {
+                    success = true,
+                    message = "Đã xóa sản phẩm khỏi đơn hàng",
+                    data = order
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    success = false,
+                    message = "Lỗi khi xóa sản phẩm",
+                    error = ex.Message
+                });
+            }
+        }
+
+
+
 
 
         // ✅ Định nghĩa class ngay trong API
@@ -795,7 +849,7 @@ namespace lamlai2.Controllers
             public string? DeliveryAddress { get; set; }
             public string? PaymentMethod { get; set; } // Thêm phương thức thanh toán
             public string? Note { get; set; }
-            
+
             // New properties for Name and PhoneNumber
             public string? Name { get; set; } // Customer's name
             public string? PhoneNumber { get; set; } // Customer's phone number
@@ -813,6 +867,11 @@ namespace lamlai2.Controllers
         public int Quantity { get; set; }
     }
 
-
+    //new
+    public class RemoveItemRequest
+    {
+        public int OrderId { get; set; }
+        public int OrderItemId { get; set; }
+    }
 }
 

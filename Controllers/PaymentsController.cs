@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using WebAPI_FlowerShopSWP.Helpers;
 using WebAPI_FlowerShopSWP.Configurations;
+using Azure.Core;
 
 namespace test2.Controllers
 {
@@ -129,7 +130,8 @@ namespace test2.Controllers
             }
 
             var vnpay = new VnPayLibrary();
-            var vnp_Returnurl = "https://localhost:7175/api/Payments/vnpay-return"; // URL trả về sau khi thanh toán
+            // var vnp_Returnurl = "https://localhost:7175/api/Payments/vnpay-return"; // URL trả về sau khi thanh toán
+            var vnp_Returnurl = request.ReturnUrl;
             var vnp_TxnRef = DateTime.Now.Ticks.ToString(); // Mã giao dịch
             var vnp_OrderInfo = request.OrderId.ToString();
 
@@ -170,14 +172,9 @@ namespace test2.Controllers
             }
 
             var vnp_SecureHash = Request.Query["vnp_SecureHash"].ToString();
-            var vnp_TransactionId = vnpay.GetResponseData("vnp_TransactionNo");
             var vnp_ResponseCode = vnpay.GetResponseData("vnp_ResponseCode");
-            var vnp_TxnRef = vnpay.GetResponseData("vnp_TxnRef");
-            var vnp_Amount = vnpay.GetResponseData("vnp_Amount");
-            var vnp_OrderInfo = vnpay.GetResponseData("vnp_OrderInfo"); // ✅ Chứa OrderId
-
-            _logger.LogInformation("VNPay Response: TxnRef={TxnRef}, TransactionId={TransactionId}, ResponseCode={ResponseCode}, Amount={Amount}, OrderInfo={OrderInfo}",
-                vnp_TxnRef, vnp_TransactionId, vnp_ResponseCode, vnp_Amount, vnp_OrderInfo);
+            var vnp_OrderInfo = vnpay.GetResponseData("vnp_OrderInfo");
+            var returnUrl = Request.Query["vnp_ReturnUrl"].ToString(); // Lấy ReturnUrl từ query string
 
             var checkSignature = vnpay.ValidateSignature(vnp_SecureHash, _vnpayConfig.HashSecret);
             if (!checkSignature)
@@ -203,21 +200,22 @@ namespace test2.Controllers
 
             if (vnp_ResponseCode == "00") // ✅ Thanh toán thành công
             {
-                var payment = new Payment
-                {
-                    OrderId = order.OrderId,
-                    Amount = decimal.Parse(vnp_Amount) / 100,
-                    PaymentDate = DateTime.Now,
-                    PaymentStatus = "Success"
-                };
-
                 try
                 {
+                    var payment = new Payment
+                    {
+                        OrderId = order.OrderId,
+                        Amount = decimal.Parse(vnpay.GetResponseData("vnp_Amount")) / 100, // Lấy amount từ response data
+                        PaymentDate = DateTime.Now,
+                        PaymentStatus = "Success"
+                    };
+
                     order.OrderStatus = "Completed";
                     _context.Payments.Add(payment);
                     await _context.SaveChangesAsync();
 
-                    return Ok(new { status = "success", message = "Thanh toán thành công" });
+                    // Sử dụng returnUrl từ query string
+                    return Redirect($"{returnUrl}?status=success&message=Thanh toán thành công");
                 }
                 catch (Exception ex)
                 {
@@ -230,7 +228,8 @@ namespace test2.Controllers
                 var failedPayment = new Payment
                 {
                     OrderId = order.OrderId,
-                    Amount = decimal.Parse(vnp_Amount) / 100,
+                    //Amount = decimal.Parse(vnp_Amount) / 100,
+                    Amount = decimal.Parse(vnpay.GetResponseData("vnp_Amount")) / 100,
                     PaymentDate = DateTime.Now,
                     PaymentStatus = "Failed"
                 };
@@ -245,20 +244,22 @@ namespace test2.Controllers
                     _logger.LogError(ex, "Error recording failed payment");
                 }
 
-                return Ok(new { status = "failed", message = $"Thanh toán không thành công. Mã lỗi: {vnp_ResponseCode}" });
+                // Sử dụng returnUrl từ query string
+                return Redirect($"{returnUrl}?status=error&message=Thanh toán không thành công");
             }
         }
 
-    
 
-    public class PaymentRequest
+
+        public class PaymentRequest
         {
             public decimal Amount { get; set; }
             public string OrderId { get; set; }
+            public string ReturnUrl { get; set; }//new
         }
 
 
-       
+
         private bool PaymentExists(int id)
         {
             return _context.Payments.Any(e => e.PaymentId == id);
