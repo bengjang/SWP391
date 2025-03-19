@@ -2425,6 +2425,32 @@
   },
   {
     "ContainingType": "test2.Controllers.UsersController",
+    "Method": "AddStaff",
+    "RelativePath": "api/Users/add-staff",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "registerRequest",
+        "Type": "test2.Controllers.UsersController\u002BRegisterRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "lamlai.Models.User",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "test2.Controllers.UsersController",
     "Method": "ForgotPassword",
     "RelativePath": "api/Users/forgot-password",
     "HttpMethod": "POST",
@@ -2507,7 +2533,7 @@
     "Parameters": [
       {
         "Name": "registerRequest",
-        "Type": "test2.Controllers.RegisterRequest",
+        "Type": "test2.Controllers.UsersController\u002BRegisterRequest",
         "IsRequired": true
       }
     ],
