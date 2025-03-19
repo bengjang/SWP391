@@ -38,6 +38,8 @@ public partial class TestContext : DbContext
 
     public virtual DbSet<ProductImage> ProductImages { get; set; }
 
+    public virtual DbSet<Post> Posts { get; set; }
+
     public virtual DbSet<QuizAnswer> QuizAnswers { get; set; }
 
     public virtual DbSet<QuizQuestion> QuizQuestions { get; set; }
@@ -60,7 +62,7 @@ public partial class TestContext : DbContext
         if (!optionsBuilder.IsConfigured)
         {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-            optionsBuilder.UseSqlServer("Server=QUYDAM;Database=lzquy;User ID=sa;Password=12345;TrustServerCertificate=True;MultipleActiveResultSets=true;");
+            optionsBuilder.UseSqlServer("Server=QUYDAM;Database=blog;User ID=sa;Password=12345;TrustServerCertificate=True;MultipleActiveResultSets=true;");
         }
     }
 
@@ -252,6 +254,25 @@ public partial class TestContext : DbContext
                 .HasForeignKey(d => d.OrderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Payments__OrderI__123EB7A3");
+        });
+
+        modelBuilder.Entity<Post>(entity =>
+        {
+            entity.HasKey(e => e.PostId).HasName("PK__Posts__AA12601834E6C9F3");
+
+            entity.HasIndex(e => e.UserId, "IX_Posts_UserID");
+
+            entity.Property(e => e.PostId).HasColumnName("PostID");
+            entity.Property(e => e.UserId).HasColumnName("UserID");
+            entity.Property(e => e.Title).HasMaxLength(255);
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Posts)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Posts__UserID__123EB7A3");
         });
 
         modelBuilder.Entity<Product>(entity =>
