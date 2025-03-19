@@ -392,3 +392,8 @@ appsettings.*.json
 *.vsidx
 *.json
 *.v2
+*.cs
+*.cache
+*.cache
+*.cache
+*.editorconfig
