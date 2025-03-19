@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("lamlai")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9fce6e25c4bc59f8844c5532116c17e0fc681a1a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e6ab909781831ccef276a7356f2db93671e90e35")]
 [assembly: System.Reflection.AssemblyProductAttribute("lamlai")]
 [assembly: System.Reflection.AssemblyTitleAttribute("lamlai")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

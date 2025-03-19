@@ -59,9 +59,82 @@ namespace test2.Controllers
 
             return user;
         }
+        [HttpPost("add-staff")]
+        public async Task<ActionResult<User>> AddStaff([FromBody] RegisterRequest registerRequest)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(registerRequest.Username) ||
+                    string.IsNullOrEmpty(registerRequest.Password) ||
+                    string.IsNullOrEmpty(registerRequest.Email))
+                {
+                    return BadRequest("Username, password and email are required.");
+                }
 
-        // GET: api/Users/profile/{id}
-        [HttpGet("profile/{id}")]
+                // Check if username exists
+                var existingUser = await _context.Users
+                    .FirstOrDefaultAsync(u => u.Name == registerRequest.Username);
+
+                if (existingUser != null)
+                {
+                    return Conflict("Username already exists.");
+                }
+
+                // Check if email exists
+                var existingEmail = await _context.Users
+                    .FirstOrDefaultAsync(u => u.Email == registerRequest.Email);
+
+                if (existingEmail != null)
+                {
+                    return Conflict("Email already exists.");
+                }
+
+                var newStaff = new User
+                {
+                    Name = registerRequest.Username,
+                    FullName = registerRequest.Username, // Using username as initial full name
+                    Password = registerRequest.Password, // Note: In production, this should be hashed
+                    Email = registerRequest.Email,
+                    Role = "Staff", // Set role to Staff
+                    Phone = "N/A", // Default phone
+                    Address = "N/A", // Default address
+                    RegistrationDate = DateTime.Now
+                };
+
+                _context.Users.Add(newStaff);
+                await _context.SaveChangesAsync();
+
+                return Ok(new
+                {
+                    newStaff.UserId,
+                    newStaff.Name,
+                    newStaff.FullName,
+                    newStaff.Email,
+                    newStaff.Phone,
+                    newStaff.Address,
+                    newStaff.Role,
+                    newStaff.RegistrationDate
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while adding staff: {ex.Message}");
+            }
+        }
+
+     
+    
+
+    public class RegisterRequest
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
+    }
+
+
+    // GET: api/Users/profile/{id}
+    [HttpGet("profile/{id}")]
         public async Task<ActionResult<object>> GetUserProfile(int id)
         {
             var user = await _context.Users

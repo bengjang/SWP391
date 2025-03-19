@@ -121,13 +121,11 @@ namespace lamlai.Controllers
         {
            
             public int OrderId { get; set; }
-            public string FullName { get; set; } = null!;
-            public string Phone { get; set; } = null!;
+         
             public string Reason { get; set; } = null!;
-            public DateTime RequestDate { get; set; }
+            
             
         }
-        // API gửi yêu cầu hủy đơn hàng (chỉ khi OrderStatus = "Paid")
         [HttpPost("request-cancel")]
         public async Task<IActionResult> RequestCancel([FromBody] CancelRequestDto2 request)
         {
@@ -144,14 +142,21 @@ namespace lamlai.Controllers
                 return BadRequest(new { error = "Chỉ có thể hủy đơn hàng có trạng thái 'Paid'." });
             }
 
+            // Lấy thông tin người dùng từ UserId
+            var user = await _context.Users.FindAsync(order.UserId);
+            if (user == null)
+            {
+                return NotFound(new { error = "Người dùng không tồn tại." });
+            }
+
             // Tạo yêu cầu hủy đơn hàng
             var cancelRequest = new CancelRequest
             {
                 OrderId = request.OrderId,
-                FullName = request.FullName,
-                Phone = request.Phone,
+                FullName = user.FullName, // Lấy FullName từ User
+                Phone = user.Phone, // Lấy Phone từ User
                 Reason = request.Reason,
-                RequestDate = DateTime.UtcNow,
+                RequestDate = DateTime.UtcNow, // Set the current date and time
                 Status = "Pending"
             };
 
@@ -161,8 +166,8 @@ namespace lamlai.Controllers
             return Ok(new { message = "Yêu cầu hủy đơn hàng đã được gửi thành công.", cancelRequestId = cancelRequest.CancelRequestId });
         }
 
-        // PUT: api/CancelRequests/5
-        [HttpPut("{id}")]
+            // PUT: api/CancelRequests/5
+            [HttpPut("{id}")]
         public async Task<IActionResult> PutCancelRequest(int id, CancelRequest cancelRequest)
         {
             if (id != cancelRequest.CancelRequestId)
@@ -244,3 +249,4 @@ namespace lamlai.Controllers
         public List<OrderItemDto> OrderItems { get; set; } = new List<OrderItemDto>();
     }
 }
+                                                                            

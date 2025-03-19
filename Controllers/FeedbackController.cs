@@ -89,20 +89,18 @@ public class FeedbackController : ControllerBase
     public async Task<IActionResult> GetUserFeedbacks(int userId)
     {
         var conversations = await _context.Conversations
+            .Include(c => c.User) // Include the User entity
             .Where(c => c.UserId == userId)
             .Select(c => new
             {
                 c.ConversationId,
-                c.UpdateAt,
-                Messages = c.Messages.OrderBy(m => m.SendTime)
-                    .Select(m => new
-                    {
-                        m.MessageId,
-                        m.MessageContent,
-                        m.SendTime,
-                        m.UserId,
-                        m.ImageUrl
-                    }).ToList()
+                c.UserId,
+                UserName = c.User.Name, // Get the user's name
+                Email = c.Messages.FirstOrDefault().Email, // Get the email from the first message
+                PhoneNumber = c.Messages.FirstOrDefault().PhoneNumber, // Get the phone number from the first message
+                MessageContent = c.Messages.OrderByDescending(m => m.SendTime).FirstOrDefault().MessageContent, // Get the content of the latest message
+                SendTime = c.Messages.OrderByDescending(m => m.SendTime).FirstOrDefault().SendTime, // Get the send time of the latest message
+                Status = c.Messages.Count > 1 ? "Replied" : "Pending" // Set the status based on the number of messages
             })
             .ToListAsync();
 
