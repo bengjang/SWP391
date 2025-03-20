@@ -59,7 +59,7 @@ builder.Services.AddScoped<SWP391.Services.IPhotoService, SWP391.Services.PhotoS
 builder.Services.Configure<VNPayConfig>(builder.Configuration.GetSection("VNPay"));
 
 // Register VNPayService
-builder.Services.AddScoped<VNPayService>();
+builder.Services.AddScoped<WebAPI_FlowerShopSWP.Helpers.VNPayService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

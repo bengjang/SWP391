@@ -54,8 +54,6 @@ public partial class TestContext : DbContext
 
     public virtual DbSet<Voucher> Vouchers { get; set; }
 
-    public virtual DbSet<Post> Posts { get; set; }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         // Chỉ cấu hình khi chưa được cấu hình (ví dụ: khi chạy từ DbContext Factory)
@@ -258,21 +256,20 @@ public partial class TestContext : DbContext
 
         modelBuilder.Entity<Post>(entity =>
         {
-            entity.HasKey(e => e.PostId).HasName("PK__Posts__AA12601834E6C9F3");
+            entity.HasKey(e => e.PostId).HasName("PK__Posts__PostId");
 
-            entity.HasIndex(e => e.UserId, "IX_Posts_UserID");
+            entity.Property(e => e.PostId).HasColumnName("PostId");
+            entity.Property(e => e.UserId).HasColumnName("UserId");
+            entity.Property(e => e.Title).HasMaxLength(255).IsRequired();
+            entity.Property(e => e.Content).IsRequired();
+            entity.Property(e => e.ImageUrl).HasMaxLength(255);
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("GETDATE()");
 
-            entity.Property(e => e.PostId).HasColumnName("PostID");
-            entity.Property(e => e.UserId).HasColumnName("UserID");
-            entity.Property(e => e.Title).HasMaxLength(255);
-            entity.Property(e => e.CreatedAt)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
-
-            entity.HasOne(d => d.User).WithMany(p => p.Posts)
+            entity.HasOne(d => d.User)
+                .WithMany(p => p.Posts)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Posts__UserID__123EB7A3");
+                .HasConstraintName("FK_Posts_Users");
         });
 
         modelBuilder.Entity<Product>(entity =>
@@ -478,24 +475,6 @@ public partial class TestContext : DbContext
                 .HasMaxLength(50)
                 .HasDefaultValue("Active");
             entity.Property(e => e.VoucherName).HasMaxLength(255);
-        });
-
-        modelBuilder.Entity<Post>(entity =>
-        {
-            entity.HasKey(e => e.PostId).HasName("PK__Posts__PostId");
-
-            entity.Property(e => e.PostId).HasColumnName("PostId");
-            entity.Property(e => e.UserId).HasColumnName("UserId");
-            entity.Property(e => e.Title).HasMaxLength(255).IsRequired();
-            entity.Property(e => e.Content).IsRequired();
-            entity.Property(e => e.ImageUrl).HasMaxLength(255);
-            entity.Property(e => e.CreatedAt).HasDefaultValueSql("GETDATE()");
-
-            entity.HasOne(d => d.User)
-                .WithMany(p => p.Posts)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Posts_Users");
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -4,7 +4,40 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <DefaultItemExcludes>$(DefaultItemExcludes);**\bin\**;**\obj\**;**\.vs\**</DefaultItemExcludes>
+    <BaseOutputPath>$(MSBuildProjectDirectory)\bin</BaseOutputPath>
+    <BaseIntermediateOutputPath>$(MSBuildProjectDirectory)\obj</BaseIntermediateOutputPath>
+    <RestorePackagesWithLockFile>false</RestorePackagesWithLockFile>
+    <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
+    <RestoreLockedMode>false</RestoreLockedMode>
+    <NoWarn>$(NoWarn);NU1603</NoWarn>
+    <RestoreIgnoreFailedSources>true</RestoreIgnoreFailedSources>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <GenerateRestoreOutputPackagesDirectory>true</GenerateRestoreOutputPackagesDirectory>
+    <RestoreImplicitPackageTargetFallback>true</RestoreImplicitPackageTargetFallback>
+    <GatherDependenciesInPackageFile>true</GatherDependenciesInPackageFile>
+    <AllowNoTargetAssets>true</AllowNoTargetAssets>
+    <GenerateProjectAssetsFile>true</GenerateProjectAssetsFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Controllers\**\*.cs" />
+    <Compile Include="Models\**\*.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Startup.cs" Condition="Exists('Startup.cs')" />
+    <Compile Include="Services\**\*.cs" Condition="Exists('Services')" />
+    <Compile Include="DTOs\**\*.cs" Condition="Exists('DTOs')" />
+    <Compile Include="Helpers\**\*.cs" Condition="Exists('Helpers')" />
+    <Compile Include="Repositories\**\*.cs" Condition="Exists('Repositories')" />
+    <Compile Include="Configurations\**\*.cs" Condition="Exists('Configurations')" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CloudinaryDotNet" Version="1.27.4" />
@@ -20,6 +53,65 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.1" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="**\*.cache" />
+    <None Remove="**\*.tmp" />
+    <None Remove="**\*.vsidx" />
+    <None Remove="**\*.v2" />
+    <None Remove="**\*.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="**\*.nuget.dgspec.json" />
+    <None Remove="**\project.nuget.cache" />
+    <None Remove="**\*.nuget.g.props" />
+    <None Remove="**\*.nuget.g.targets" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="**\.vs\**\*" />
+    <None Remove="**\.vs\**\*.suo" />
+    <None Remove="**\.vs\**\*.user" />
+    <None Remove="**\.vs\**\*.userosscache" />
+    <None Remove="**\.vs\**\*.sln.docstates" />
+    <None Remove="**\*.binlog" />
+    <None Remove="**\*ProjectEvaluation\*.metadata.v*" />
+    <None Remove="**\*ProjectEvaluation\*.projects.v*" />
+  </ItemGroup>
+
+  <Target Name="CleanNuGetCache" AfterTargets="Clean">
+    <ItemGroup>
+      <NuGetCacheFiles Include="$(BaseIntermediateOutputPath)\**\*.nuget.dgspec.json" />
+      <NuGetCacheFiles Include="$(BaseIntermediateOutputPath)\**\project.nuget.cache" />
+      <NuGetCacheFiles Include="$(BaseIntermediateOutputPath)\**\*.nuget.g.props" />
+      <NuGetCacheFiles Include="$(BaseIntermediateOutputPath)\**\*.nuget.g.targets" />
+    </ItemGroup>
+    <Delete Files="@(NuGetCacheFiles)" />
+    <Message Text="Deleted NuGet cache files: @(NuGetCacheFiles)" Importance="high" />
+  </Target>
+
+  <Target Name="CleanVisualStudioFiles" AfterTargets="Clean">
+    <ItemGroup>
+      <VSFilesToDelete Include="$(MSBuildProjectDirectory)\..\**\.vs\**\*" />
+      <VSFilesToDelete Include="$(MSBuildProjectDirectory)\..\**\.vs\**\*.suo" />
+      <VSFilesToDelete Include="$(MSBuildProjectDirectory)\..\**\*ProjectEvaluation\*.metadata.v*" />
+      <VSFilesToDelete Include="$(MSBuildProjectDirectory)\..\**\*ProjectEvaluation\*.projects.v*" />
+      <VSFilesToDelete Include="$(MSBuildProjectDirectory)\..\**\*.user" />
+      <VSFilesToDelete Include="$(MSBuildProjectDirectory)\..\**\*.userosscache" />
+      <VSFilesToDelete Include="$(MSBuildProjectDirectory)\..\**\*.sln.docstates" />
+    </ItemGroup>
+    <Delete Files="@(VSFilesToDelete)" />
+    <Message Text="Deleted Visual Studio files: @(VSFilesToDelete)" Importance="high" />
+  </Target>
+
+  <Target Name="CleanBinObj" AfterTargets="Clean">
+    <RemoveDir Directories="$(BaseOutputPath)" />
+    <RemoveDir Directories="$(BaseIntermediateOutputPath)" />
+    <RemoveDir Directories="$(MSBuildProjectDirectory)\..\**\.vs" />
+    <Message Text="Removed directories: $(BaseOutputPath), $(BaseIntermediateOutputPath), $(MSBuildProjectDirectory)\..\**\.vs" Importance="high" />
+  </Target>
 
 </Project>

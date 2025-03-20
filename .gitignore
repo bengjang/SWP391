@@ -25,6 +25,29 @@ msbuild.log
 msbuild.err
 msbuild.wrn
 
+# Các file NuGet cache
+*.nuget.dgspec.json
+project.assets.json
+project.nuget.cache
+*.nuget.g.props
+*.nuget.g.targets
+packages/
+packages.config
+.nuget/
+*.nupkg
+
+# Các file Visual Studio cache
+*.cache
+*.tmp
+*.vsidx
+*.v2
+*.editorconfig
+**/.vs/**/*
+**/ProjectEvaluation/**/*
+*.binlog
+*.dll
+*.exe
+
 # Visual Studio 2015/2017 cache/options directory
 .vs/
 
@@ -335,21 +358,6 @@ MigrationBackup/
 .ionide/
 
 # Các file binary khác
-*.dll
-*.exe
-*.bin
-*.so
-*.dylib
-*.o
-*.a
-*.lib
-*.exp
-*.pyd
-*.zip
-*.tar
-*.gz
-*.rar
-*.7z
 *.jpg
 *.jpeg
 *.png
@@ -371,9 +379,18 @@ MigrationBackup/
 *.ppt
 *.pptx
 
+# Bỏ qua các file JSON trong obj/
+obj/**/*.json
+
+# NGOẠI LỆ: Giữ lại các file JSON quan trọng
+!appsettings.json
+!appsettings.Development.json
+!package.json
+!tsconfig.json
+!.vscode/**/*.json
+
 # Các file cấu hình cụ thể cho môi trường
 appsettings.*.json
-!appsettings.json
 !appsettings.Development.json
 
 # Các file cấu hình bảo mật
@@ -387,15 +404,10 @@ appsettings.*.json
 # Các file tạm thời
 [Tt]emp/
 [Tt]mp/ 
-*.vsidx
-*.vsidx
-*.vsidx
-*.json
-*.v2
-*.cs
-*.cache
-*.cache
-*.cache
-*.editorconfig
-*.dll
-*.exe
+
+# ĐẢM BẢO TẤT CẢ FILE .CS KHÔNG BỊ BỎ QUA
+!**/*.cs
+!Models/*.cs
+!Controllers/*.cs
+!Models/Post.cs
+!Controllers/PostsController.cs
