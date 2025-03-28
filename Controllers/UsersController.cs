@@ -289,7 +289,7 @@ namespace test2.Controllers
                     FullName = registerRequest.Username, // Using username as initial full name
                     Password = registerRequest.Password,
                     Email = registerRequest.Email,
-                    Role = "Costumer", // Default role for new users
+                    Role = "Customer", // Đã sửa từ "Costumer" thành "Customer"
                     Phone = "N/A", // Default phone
                     Address = "N/A", // Default address
                     RegistrationDate = DateTime.Now
@@ -430,6 +430,103 @@ namespace test2.Controllers
             }
         }
 
+        // PUT: api/Users/update-role/{id}
+        [HttpPut("update-role/{id}")]
+        public async Task<IActionResult> UpdateUserRole(int id, [FromBody] UpdateRoleRequest request)
+        {
+            try 
+            {
+                // Kiểm tra role từ claims hoặc headers
+                string currentUserRole = null;
+                
+                // Ưu tiên lấy từ claims
+                var roleClaim = User.Claims.FirstOrDefault(c => c.Type == "Role");
+                if (roleClaim != null && !string.IsNullOrEmpty(roleClaim.Value))
+                {
+                    currentUserRole = roleClaim.Value;
+                    Console.WriteLine($"Đã lấy được role từ Claims: {currentUserRole}");
+                }
+                else 
+                {
+                    // Nếu không có claim, thử lấy từ headers
+                    if (Request.Headers.TryGetValue("User-Role", out var roleHeaderValue))
+                    {
+                        currentUserRole = roleHeaderValue;
+                        Console.WriteLine($"Đã lấy được role từ header User-Role: {currentUserRole}");
+                    }
+                    else if (Request.Headers.TryGetValue("X-User-Role", out roleHeaderValue))
+                    {
+                        currentUserRole = roleHeaderValue;
+                        Console.WriteLine($"Đã lấy được role từ header X-User-Role: {currentUserRole}");
+                    }
+                    else if (Request.Headers.TryGetValue("Role", out roleHeaderValue))
+                    {
+                        currentUserRole = roleHeaderValue;
+                        Console.WriteLine($"Đã lấy được role từ header Role: {currentUserRole}");
+                    }
+                }
+                
+                // Kiểm tra xem người dùng hiện tại có phải là Manager hoặc Admin
+                if (string.IsNullOrEmpty(currentUserRole) || (currentUserRole != "Manager" && currentUserRole != "Admin"))
+                {
+                    Console.WriteLine($"Vai trò không đủ quyền: {currentUserRole}");
+                    return Unauthorized("Chỉ Manager hoặc Admin có thể thay đổi vai trò người dùng");
+                }
+
+                // Tìm người dùng cần cập nhật
+                var user = await _context.Users.FindAsync(id);
+                if (user == null)
+                {
+                    return NotFound($"Không tìm thấy người dùng với ID {id}");
+                }
+
+                // Kiểm tra request hợp lệ
+                if (string.IsNullOrEmpty(request.Role))
+                {
+                    return BadRequest("Vai trò không được để trống");
+                }
+
+                // Kiểm tra vai trò hợp lệ
+                var validRoles = new[] { "Customer", "Staff", "Manager", "Admin" };
+                if (!validRoles.Contains(request.Role))
+                {
+                    return BadRequest($"Vai trò '{request.Role}' không hợp lệ. Vai trò phải là một trong: {string.Join(", ", validRoles)}");
+                }
+
+                // Ghi log chi tiết cho việc cập nhật vai trò
+                Console.WriteLine($"Cập nhật vai trò: Người dùng ID={id}, Vai trò cũ={user.Role}, Vai trò mới={request.Role}");
+
+                // Cập nhật vai trò
+                user.Role = request.Role;
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return Ok(new
+                    {
+                        user.UserId,
+                        user.Name,
+                        user.Email,
+                        user.Role,
+                        Message = $"Vai trò đã được cập nhật thành '{request.Role}'"
+                    });
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return StatusCode(500, "Đã xảy ra lỗi khi cập nhật vai trò người dùng");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ngoại lệ không xử lý: {ex.Message}");
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
+                }
+                return StatusCode(500, $"Lỗi không xử lý: {ex.Message}");
+            }
+        }
+
         // POST: api/Users/forgot-password
         [HttpPost("forgot-password")]
         public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequest request)
@@ -515,5 +612,10 @@ namespace test2.Controllers
     public class ForgotPasswordRequest
     {
         public string Email { get; set; }
+    }
+
+    public class UpdateRoleRequest
+    {
+        public string Role { get; set; }
     }
 }
