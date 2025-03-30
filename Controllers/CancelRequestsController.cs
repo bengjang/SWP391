@@ -142,6 +142,12 @@ namespace lamlai.Controllers
                 return BadRequest(new { error = "Chỉ có thể hủy đơn hàng có trạng thái 'Paid'." });
             }
 
+            // Kiểm tra thời gian đặt hàng
+            if (DateTime.UtcNow - order.OrderDate > TimeSpan.FromHours(24))
+            {
+                return BadRequest(new { error = "Không thể hủy đơn hàng sau 24 tiếng kể từ khi đặt." });
+            }
+
             // Lấy thông tin người dùng từ UserId
             var user = await _context.Users.FindAsync(order.UserId);
             if (user == null)
