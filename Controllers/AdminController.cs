@@ -64,7 +64,7 @@ namespace lamlai2.Controllers
                 return StatusCode(500, new { error = ex.Message });
             }
         }
-        // Thêm sản phẩm mới
+        // Thêm sản phẩm mới - Cho phép Staff thêm sản phẩm
         [HttpPost("Product")]
         public async Task<IActionResult> CreateProduct([FromBody] ProductUpdateDTO productDto)
         {
@@ -73,32 +73,64 @@ namespace lamlai2.Controllers
                 return BadRequest(ModelState);
             }
 
+            // Kiểm tra xác thực thủ công bằng cách đọc header
+            string userRole = null;
+            if (Request.Headers.ContainsKey("User-Role"))
+            {
+                userRole = Request.Headers["User-Role"].ToString();
+            }
+            else if (Request.Headers.ContainsKey("X-User-Role"))
+            {
+                userRole = Request.Headers["X-User-Role"].ToString();
+            }
+            else if (Request.Headers.ContainsKey("Role"))
+            {
+                userRole = Request.Headers["Role"].ToString();
+            }
+
+            if (string.IsNullOrEmpty(userRole) || 
+               (userRole != "Admin" && userRole != "Manager" && userRole != "Staff"))
+            {
+                return Unauthorized(new { error = "Bạn không có quyền thêm sản phẩm" });
+            }
+
             try
             {
-                // Gọi stored procedure để lấy ProductCode
-                var productCodeParam = new SqlParameter("@NewProductCode", SqlDbType.NVarChar, 50) { Direction = ParameterDirection.Output };
+                // Tạo ProductCode thủ công thay vì dùng stored procedure
+                string productPrefix = "SP";
+                int nextProductNumber = 1;
 
-                await _context.Database.ExecuteSqlRawAsync(
-     "EXEC AddProduct @CategoryID, @ProductName, @Quantity, @Capacity, @Price, @Brand, @Origin, @Status, @ImgURL",
-     new SqlParameter("@CategoryID", productDto.CategoryId),
-     new SqlParameter("@ProductName", productDto.ProductName),
-     new SqlParameter("@Quantity", productDto.Quantity),
-     new SqlParameter("@Capacity", productDto.Capacity),
-     new SqlParameter("@Price", productDto.Price),
-     new SqlParameter("@Brand", productDto.Brand),
-     new SqlParameter("@Origin", productDto.Origin),
-     new SqlParameter("@Status", productDto.Status),
-     new SqlParameter("@ImgURL", productDto.ImgUrl)
- );
+                try
+                {
+                    // Tìm ProductCode lớn nhất trong hệ thống để tạo mã tiếp theo
+                    var lastProductCode = await _context.Products
+                        .OrderByDescending(p => p.ProductId)
+                        .Select(p => p.ProductCode)
+                        .FirstOrDefaultAsync();
 
+                    if (!string.IsNullOrEmpty(lastProductCode) && lastProductCode.StartsWith(productPrefix))
+                    {
+                        string numericPart = lastProductCode.Substring(productPrefix.Length);
+                        if (int.TryParse(numericPart, out int lastNumber))
+                        {
+                            nextProductNumber = lastNumber + 1;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Nếu có lỗi khi tìm mã sản phẩm, sử dụng mã mặc định
+                    Console.WriteLine($"Lỗi khi tìm mã sản phẩm: {ex.Message}");
+                }
 
-                // Lấy giá trị ProductCode từ stored procedure
-                var newProductCode = (string)productCodeParam.Value;
+                // Tạo mã sản phẩm mới với định dạng "SPxxx"
+                string newProductCode = $"{productPrefix}{nextProductNumber:D3}";
+                Console.WriteLine($"Mã sản phẩm mới: {newProductCode}");
 
-                // Tạo sản phẩm và gán ProductCode
+                // Tạo sản phẩm với mã đã tạo
                 var product = new Product
                 {
-                    ProductCode = newProductCode, // Gán ProductCode từ stored procedure
+                    ProductCode = newProductCode,
                     ProductName = productDto.ProductName,
                     CategoryId = productDto.CategoryId,
                     Quantity = productDto.Quantity,
@@ -112,7 +144,8 @@ namespace lamlai2.Controllers
                     Description = productDto.Description,
                     Ingredients = productDto.Ingredients,
                     UsageInstructions = productDto.UsageInstructions,
-                    ManufactureDate = productDto.ManufactureDate
+                    ManufactureDate = productDto.ManufactureDate,
+                    ImportDate = DateTime.Now // Tự động đặt ngày nhập kho
                 };
 
                 _context.Products.Add(product);
@@ -130,6 +163,19 @@ namespace lamlai2.Controllers
             }
         }
 
+        // Thêm phương thức GetProductById để CreatedAtAction có thể hoạt động
+        [HttpGet("{id}/product")]
+        public async Task<ActionResult<Product>> GetProductById(int id)
+        {
+            var product = await _context.Products.FindAsync(id);
+
+            if (product == null)
+            {
+                return NotFound(new { error = "Không tìm thấy sản phẩm" });
+            }
+
+            return Ok(product);
+        }
 
         [HttpPut("{id}/product")]
         public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductUpdateDTO productDto)

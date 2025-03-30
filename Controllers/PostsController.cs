@@ -10,6 +10,7 @@ using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using System.IO;
 using Microsoft.Extensions.Configuration;
+using System.ComponentModel.DataAnnotations;
 
 namespace test2.Controllers
 {
@@ -306,6 +307,12 @@ namespace test2.Controllers
                         // Nếu lỗi upload ảnh, vẫn tiếp tục tạo bài viết nhưng không có ảnh
                     }
                 }
+                else
+                {
+                    Console.WriteLine("No image provided for this post");
+                    // Đặt ImageUrl là null hoặc một URL ảnh mặc định nếu cần
+                    post.ImageUrl = null;
+                }
 
                 // Thêm bài viết vào database
                 _context.Posts.Add(post);
@@ -381,6 +388,12 @@ namespace test2.Controllers
                         Console.WriteLine($"Error uploading new image: {ex.Message}");
                         // Nếu lỗi upload ảnh, vẫn tiếp tục cập nhật bài viết nhưng giữ ảnh cũ
                     }
+                }
+                else
+                {
+                    Console.WriteLine($"No new image provided, keeping existing image URL: {oldImageUrl}");
+                    // Giữ nguyên URL ảnh cũ
+                    existingPost.ImageUrl = oldImageUrl;
                 }
                 // Không có trường ImageUrl nữa, chỉ xử lý ảnh qua trường Image
                 
@@ -628,20 +641,23 @@ namespace test2.Controllers
         /// <summary>
         /// Tiêu đề của bài viết
         /// </summary>
+        [Required(ErrorMessage = "Tiêu đề là bắt buộc")]
         public string Title { get; set; }
 
         /// <summary>
         /// Nội dung của bài viết
         /// </summary>
+        [Required(ErrorMessage = "Nội dung là bắt buộc")]
         public string Content { get; set; }
 
         /// <summary>
         /// ID của người dùng tạo bài viết
         /// </summary>
+        [Required(ErrorMessage = "UserId là bắt buộc")]
         public int UserId { get; set; }
 
         /// <summary>
-        /// File ảnh được tải lên từ máy tính
+        /// File ảnh được tải lên từ máy tính (không bắt buộc)
         /// </summary>
         public IFormFile Image { get; set; }
     }
@@ -652,20 +668,23 @@ namespace test2.Controllers
         /// <summary>
         /// ID của bài viết cần cập nhật
         /// </summary>
+        [Required(ErrorMessage = "PostId là bắt buộc")]
         public int PostId { get; set; }
 
         /// <summary>
         /// Tiêu đề mới của bài viết
         /// </summary>
+        [Required(ErrorMessage = "Tiêu đề là bắt buộc")]
         public string Title { get; set; }
 
         /// <summary>
         /// Nội dung mới của bài viết
         /// </summary>
+        [Required(ErrorMessage = "Nội dung là bắt buộc")]
         public string Content { get; set; }
 
         /// <summary>
-        /// File ảnh mới được tải lên từ máy tính
+        /// File ảnh mới được tải lên từ máy tính (không bắt buộc)
         /// </summary>
         public IFormFile Image { get; set; }
     }
