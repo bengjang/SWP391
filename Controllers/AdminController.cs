@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
+using System.Globalization;
 
 using lamlai.Models;
 using System.ComponentModel.DataAnnotations;
@@ -64,7 +66,7 @@ namespace lamlai2.Controllers
                 return StatusCode(500, new { error = ex.Message });
             }
         }
-        // Thêm sản phẩm mới
+        // Thêm sản phẩm mới - Cho phép Staff thêm sản phẩm
         [HttpPost("Product")]
         public async Task<IActionResult> CreateProduct([FromBody] ProductUpdateDTO productDto)
         {
@@ -73,32 +75,121 @@ namespace lamlai2.Controllers
                 return BadRequest(ModelState);
             }
 
+            // Kiểm tra xác thực thủ công bằng cách đọc header
+            string userRole = null;
+            if (Request.Headers.ContainsKey("User-Role"))
+            {
+                userRole = Request.Headers["User-Role"].ToString();
+            }
+            else if (Request.Headers.ContainsKey("X-User-Role"))
+            {
+                userRole = Request.Headers["X-User-Role"].ToString();
+            }
+            else if (Request.Headers.ContainsKey("Role"))
+            {
+                userRole = Request.Headers["Role"].ToString();
+            }
+
+            if (string.IsNullOrEmpty(userRole) || 
+               (userRole != "Admin" && userRole != "Manager" && userRole != "Staff"))
+            {
+                return Unauthorized(new { error = "Bạn không có quyền thêm sản phẩm" });
+            }
+
             try
             {
-                // Gọi stored procedure để lấy ProductCode
-                var productCodeParam = new SqlParameter("@NewProductCode", SqlDbType.NVarChar, 50) { Direction = ParameterDirection.Output };
+                // Lấy thông tin danh mục để xác định tiền tố phù hợp
+                var category = await _context.Categories.FindAsync(productDto.CategoryId);
+                if (category == null)
+                {
+                    return BadRequest(new { error = "Danh mục không tồn tại" });
+                }
 
-                await _context.Database.ExecuteSqlRawAsync(
-     "EXEC AddProduct @CategoryID, @ProductName, @Quantity, @Capacity, @Price, @Brand, @Origin, @Status, @ImgURL",
-     new SqlParameter("@CategoryID", productDto.CategoryId),
-     new SqlParameter("@ProductName", productDto.ProductName),
-     new SqlParameter("@Quantity", productDto.Quantity),
-     new SqlParameter("@Capacity", productDto.Capacity),
-     new SqlParameter("@Price", productDto.Price),
-     new SqlParameter("@Brand", productDto.Brand),
-     new SqlParameter("@Origin", productDto.Origin),
-     new SqlParameter("@Status", productDto.Status),
-     new SqlParameter("@ImgURL", productDto.ImgUrl)
- );
+                // Xác định tiền tố dựa trên loại danh mục
+                string productPrefix;
+                switch (category.CategoryType)
+                {
+                    case "Làm Sạch Da":
+                        productPrefix = "LSD";
+                        break;
+                    case "Đặc Trị":
+                        productPrefix = "ĐT";
+                        break;
+                    case "Dưỡng Ẩm":
+                        productPrefix = "DA";
+                        break;
+                    case "Bộ Chăm Sóc Da Mặt":
+                        productPrefix = "BCSDM";
+                        break;
+                    case "Chống Nắng Da Mặt":
+                        productPrefix = "CNDM";
+                        break;
+                    case "Dưỡng Mắt":
+                        productPrefix = "DM";
+                        break;
+                    case "Dụng Cụ/Phụ Kiện Chăm Sóc Da":
+                        productPrefix = "PKCSD";
+                        break;
+                    case "Vấn Đề Về Da":
+                        productPrefix = "VDVD";
+                        break;
+                    case "Dưỡng Môi":
+                        productPrefix = "DMI";
+                        break;
+                    case "Mặt Nạ":
+                        productPrefix = "MN";
+                        break;
+                    default:
+                        // Mặc định, tạo tiền tố từ các chữ cái đầu của categoryType
+                        productPrefix = string.Join("", category.CategoryType.Split(' ')
+                            .Where(s => !string.IsNullOrEmpty(s))
+                            .Select(s => char.ToUpper(RemoveDiacritics(s[0]))));
+                        
+                        // Nếu không tạo được tiền tố hợp lệ, sử dụng "SP"
+                        if (string.IsNullOrEmpty(productPrefix))
+                        {
+                            productPrefix = "SP";
+                        }
+                        break;
+                }
 
+                int nextProductNumber = 1;
 
-                // Lấy giá trị ProductCode từ stored procedure
-                var newProductCode = (string)productCodeParam.Value;
+                try
+                {
+                    // Tìm ProductCode lớn nhất cho tiền tố này
+                    var lastProductCode = await _context.Products
+                        .Where(p => p.ProductCode.StartsWith(productPrefix))
+                        .OrderByDescending(p => p.ProductId)
+                        .Select(p => p.ProductCode)
+                        .FirstOrDefaultAsync();
 
-                // Tạo sản phẩm và gán ProductCode
+                    if (!string.IsNullOrEmpty(lastProductCode))
+                    {
+                        string numericPart = lastProductCode.Substring(productPrefix.Length);
+                        if (int.TryParse(numericPart, out int lastNumber))
+                        {
+                            nextProductNumber = lastNumber + 1;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Nếu có lỗi khi tìm mã sản phẩm, sử dụng mã mặc định
+                    Console.WriteLine($"Lỗi khi tìm mã sản phẩm: {ex.Message}");
+                }
+
+                // Tạo mã sản phẩm mới với định dạng theo tiền tố danh mục
+                string newProductCode = $"{productPrefix}{nextProductNumber:D3}";
+                Console.WriteLine($"Mã sản phẩm mới: {newProductCode}");
+
+                // Tạo ngày nhập kho với độ chính xác cao (bao gồm mili giây)
+                DateTime importDate = DateTime.Now;
+
+                // Tạo sản phẩm với mã đã tạo
                 var product = new Product
                 {
-                    ProductCode = newProductCode, // Gán ProductCode từ stored procedure
+                    ProductCode = newProductCode,
                     ProductName = productDto.ProductName,
                     CategoryId = productDto.CategoryId,
                     Quantity = productDto.Quantity,
@@ -112,7 +203,8 @@ namespace lamlai2.Controllers
                     Description = productDto.Description,
                     Ingredients = productDto.Ingredients,
                     UsageInstructions = productDto.UsageInstructions,
-                    ManufactureDate = productDto.ManufactureDate
+                    ManufactureDate = productDto.ManufactureDate,
+                    ImportDate = importDate // Sử dụng ngày hiện tại với độ chính xác cao
                 };
 
                 _context.Products.Add(product);
@@ -130,6 +222,37 @@ namespace lamlai2.Controllers
             }
         }
 
+        // Thêm hàm này để loại bỏ dấu
+        private static char RemoveDiacritics(char c)
+        {
+            string cStr = c.ToString();
+            string normalized = cStr.Normalize(NormalizationForm.FormD);
+            var sb = new StringBuilder();
+
+            foreach (char ch in normalized)
+            {
+                if (CharUnicodeInfo.GetUnicodeCategory(ch) != UnicodeCategory.NonSpacingMark)
+                {
+                    sb.Append(ch);
+                }
+            }
+
+            return sb.ToString().Normalize(NormalizationForm.FormC)[0];
+        }
+
+        // Thêm phương thức GetProductById để CreatedAtAction có thể hoạt động
+        [HttpGet("{id}/product")]
+        public async Task<ActionResult<Product>> GetProductById(int id)
+        {
+            var product = await _context.Products.FindAsync(id);
+
+            if (product == null)
+            {
+                return NotFound(new { error = "Không tìm thấy sản phẩm" });
+            }
+
+            return Ok(product);
+        }
 
         [HttpPut("{id}/product")]
         public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductUpdateDTO productDto)
@@ -147,6 +270,9 @@ namespace lamlai2.Controllers
 
             try
             {
+                // Lưu lại giá trị cũ của Quantity
+                int oldQuantity = product.Quantity;
+
                 // Cập nhật dữ liệu từ DTO
                 product.ProductName = productDto.ProductName;
                 product.CategoryId = productDto.CategoryId;
@@ -162,6 +288,12 @@ namespace lamlai2.Controllers
                 product.Ingredients = productDto.Ingredients;
                 product.UsageInstructions = productDto.UsageInstructions;
                 product.ManufactureDate = productDto.ManufactureDate;
+                
+                // Cập nhật ImportDate nếu số lượng tăng lên
+                if (productDto.Quantity > oldQuantity)
+                {
+                    product.ImportDate = DateTime.Now; // Cập nhật thời gian nhập kho với độ chính xác cao
+                }
 
                 await _context.SaveChangesAsync();
 
