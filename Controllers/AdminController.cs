@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
+using System.Globalization;
 
 using lamlai.Models;
 using System.ComponentModel.DataAnnotations;
@@ -96,19 +98,73 @@ namespace lamlai2.Controllers
 
             try
             {
-                // Tạo ProductCode thủ công thay vì dùng stored procedure
-                string productPrefix = "SP";
+                // Lấy thông tin danh mục để xác định tiền tố phù hợp
+                var category = await _context.Categories.FindAsync(productDto.CategoryId);
+                if (category == null)
+                {
+                    return BadRequest(new { error = "Danh mục không tồn tại" });
+                }
+
+                // Xác định tiền tố dựa trên loại danh mục
+                string productPrefix;
+                switch (category.CategoryType)
+                {
+                    case "Làm Sạch Da":
+                        productPrefix = "LSD";
+                        break;
+                    case "Đặc Trị":
+                        productPrefix = "ĐT";
+                        break;
+                    case "Dưỡng Ẩm":
+                        productPrefix = "DA";
+                        break;
+                    case "Bộ Chăm Sóc Da Mặt":
+                        productPrefix = "BCSDM";
+                        break;
+                    case "Chống Nắng Da Mặt":
+                        productPrefix = "CNDM";
+                        break;
+                    case "Dưỡng Mắt":
+                        productPrefix = "DM";
+                        break;
+                    case "Dụng Cụ/Phụ Kiện Chăm Sóc Da":
+                        productPrefix = "PKCSD";
+                        break;
+                    case "Vấn Đề Về Da":
+                        productPrefix = "VDVD";
+                        break;
+                    case "Dưỡng Môi":
+                        productPrefix = "DMI";
+                        break;
+                    case "Mặt Nạ":
+                        productPrefix = "MN";
+                        break;
+                    default:
+                        // Mặc định, tạo tiền tố từ các chữ cái đầu của categoryType
+                        productPrefix = string.Join("", category.CategoryType.Split(' ')
+                            .Where(s => !string.IsNullOrEmpty(s))
+                            .Select(s => char.ToUpper(RemoveDiacritics(s[0]))));
+                        
+                        // Nếu không tạo được tiền tố hợp lệ, sử dụng "SP"
+                        if (string.IsNullOrEmpty(productPrefix))
+                        {
+                            productPrefix = "SP";
+                        }
+                        break;
+                }
+
                 int nextProductNumber = 1;
 
                 try
                 {
-                    // Tìm ProductCode lớn nhất trong hệ thống để tạo mã tiếp theo
+                    // Tìm ProductCode lớn nhất cho tiền tố này
                     var lastProductCode = await _context.Products
+                        .Where(p => p.ProductCode.StartsWith(productPrefix))
                         .OrderByDescending(p => p.ProductId)
                         .Select(p => p.ProductCode)
                         .FirstOrDefaultAsync();
 
-                    if (!string.IsNullOrEmpty(lastProductCode) && lastProductCode.StartsWith(productPrefix))
+                    if (!string.IsNullOrEmpty(lastProductCode))
                     {
                         string numericPart = lastProductCode.Substring(productPrefix.Length);
                         if (int.TryParse(numericPart, out int lastNumber))
@@ -123,9 +179,12 @@ namespace lamlai2.Controllers
                     Console.WriteLine($"Lỗi khi tìm mã sản phẩm: {ex.Message}");
                 }
 
-                // Tạo mã sản phẩm mới với định dạng "SPxxx"
+                // Tạo mã sản phẩm mới với định dạng theo tiền tố danh mục
                 string newProductCode = $"{productPrefix}{nextProductNumber:D3}";
                 Console.WriteLine($"Mã sản phẩm mới: {newProductCode}");
+
+                // Tạo ngày nhập kho với độ chính xác cao (bao gồm mili giây)
+                DateTime importDate = DateTime.Now;
 
                 // Tạo sản phẩm với mã đã tạo
                 var product = new Product
@@ -145,7 +204,7 @@ namespace lamlai2.Controllers
                     Ingredients = productDto.Ingredients,
                     UsageInstructions = productDto.UsageInstructions,
                     ManufactureDate = productDto.ManufactureDate,
-                    ImportDate = DateTime.Now // Tự động đặt ngày nhập kho
+                    ImportDate = importDate // Sử dụng ngày hiện tại với độ chính xác cao
                 };
 
                 _context.Products.Add(product);
@@ -161,6 +220,24 @@ namespace lamlai2.Controllers
             {
                 return StatusCode(500, new { error = "Lỗi không xác định.", details = ex.Message });
             }
+        }
+
+        // Thêm hàm này để loại bỏ dấu
+        private static char RemoveDiacritics(char c)
+        {
+            string cStr = c.ToString();
+            string normalized = cStr.Normalize(NormalizationForm.FormD);
+            var sb = new StringBuilder();
+
+            foreach (char ch in normalized)
+            {
+                if (CharUnicodeInfo.GetUnicodeCategory(ch) != UnicodeCategory.NonSpacingMark)
+                {
+                    sb.Append(ch);
+                }
+            }
+
+            return sb.ToString().Normalize(NormalizationForm.FormC)[0];
         }
 
         // Thêm phương thức GetProductById để CreatedAtAction có thể hoạt động
@@ -193,6 +270,9 @@ namespace lamlai2.Controllers
 
             try
             {
+                // Lưu lại giá trị cũ của Quantity
+                int oldQuantity = product.Quantity;
+
                 // Cập nhật dữ liệu từ DTO
                 product.ProductName = productDto.ProductName;
                 product.CategoryId = productDto.CategoryId;
@@ -208,6 +288,12 @@ namespace lamlai2.Controllers
                 product.Ingredients = productDto.Ingredients;
                 product.UsageInstructions = productDto.UsageInstructions;
                 product.ManufactureDate = productDto.ManufactureDate;
+                
+                // Cập nhật ImportDate nếu số lượng tăng lên
+                if (productDto.Quantity > oldQuantity)
+                {
+                    product.ImportDate = DateTime.Now; // Cập nhật thời gian nhập kho với độ chính xác cao
+                }
 
                 await _context.SaveChangesAsync();
 
