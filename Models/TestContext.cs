@@ -39,6 +39,7 @@ public partial class TestContext : DbContext
     public virtual DbSet<ProductImage> ProductImages { get; set; }
 
     public virtual DbSet<Post> Posts { get; set; }
+    public virtual DbSet<SkincareRoutine> SkincareRoutines { get; set; }
 
     public virtual DbSet<QuizAnswer> QuizAnswers { get; set; }
 
@@ -127,7 +128,7 @@ public partial class TestContext : DbContext
 
             entity.Property(e => e.MessageId).HasColumnName("MessageID");
             entity.Property(e => e.ConversationId).HasColumnName("ConversationID");
-           
+
             entity.Property(e => e.ImageUrl).HasMaxLength(255);
             entity.Property(e => e.SendTime)
                 .HasDefaultValueSql("(getdate())")
@@ -146,6 +147,26 @@ public partial class TestContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Messages__UserID__06CD04F7");
         });
+
+        modelBuilder.Entity<SkincareRoutine>(entity =>
+        {
+            entity.HasKey(e => e.RoutineId);
+
+            entity.Property(e => e.SkinType).HasMaxLength(50).IsRequired();
+            entity.Property(e => e.Title).HasMaxLength(255).IsRequired();
+            entity.Property(e => e.Content).IsRequired();
+            entity.Property(e => e.ImageUrl).HasMaxLength(500);
+            entity.Property(e => e.CreatedAt)
+                .HasColumnType("datetime")
+                .HasDefaultValueSql("(getutcdate())");
+
+            entity.HasOne(d => d.User)
+                .WithMany(p => p.SkincareRoutines)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_SkincareRoutine_User");
+        });
+
 
         modelBuilder.Entity<Notification>(entity =>
         {
