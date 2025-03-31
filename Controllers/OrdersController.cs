@@ -775,6 +775,17 @@ namespace lamlai2.Controllers
 
                 // Cập nhật trạng thái đơn hàng
                 order.OrderStatus = "Paid";
+
+                // Thêm mới: Tạo một payment record
+                var payment = new Payment
+                {
+                    OrderId = order.OrderId,
+                    Amount = order.TotalAmount,
+                    PaymentDate = DateTime.UtcNow,
+                    PaymentStatus = "Success"
+                };
+
+                _context.Payments.Add(payment);
                 await _context.SaveChangesAsync();
 
                 return Ok(new { message = "Thanh toán thành công!", order });
