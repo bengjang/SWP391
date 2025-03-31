@@ -338,6 +338,26 @@ namespace lamlai2.Controllers
             public DateTime ManufactureDate { get; set; }
         }
 
+        [HttpGet("products/best-seller")]
+        public async Task<IActionResult> GetBestSellingProducts()
+        {
+            var bestSellers = await _context.OrderItems
+                .GroupBy(oi => oi.ProductId)
+                .Select(g => new
+                {
+                    ProductId = g.Key,
+                    TotalQuantity = g.Sum(oi => oi.Quantity)
+                })
+                .OrderByDescending(g => g.TotalQuantity)
+                .Take(10) // Lấy 10 sản phẩm bán chạy nhất
+                .ToListAsync();
+
+            if (!bestSellers.Any())
+                return NotFound("No products found.");
+
+            return Ok(bestSellers);
+        }
+
 
         [HttpPatch("{id}/toggle-status")]
         public async Task<IActionResult> ToggleProductStatus(int id)
@@ -413,6 +433,7 @@ namespace lamlai2.Controllers
             return Ok(new { message = "Yêu cầu hủy đã bị từ chối." });
         }
 
+
         [HttpGet("status/{status}")]
         public async Task<ActionResult<IEnumerable<CancelRequest>>> GetCancelRequestsByStatus(string status)
         {
@@ -428,9 +449,44 @@ namespace lamlai2.Controllers
 
             return Ok(cancelRequests);
         }
+        [HttpGet("revenue/monthly")]
+        public async Task<IActionResult> GetMonthlyRevenue(int year, int month)
+        {
+            var revenue = await _context.Orders
+                .Where(o => o.OrderDate.Year == year && o.OrderDate.Month == month && o.OrderStatus == "Completed")
+                .SumAsync(o => o.TotalAmount);
+            return Ok(revenue);
+        }
 
+        [HttpGet("orders/canceled")]
+        public async Task<IActionResult> GetTotalCanceledOrders()
+        {
+            var canceledOrders = await _context.Orders
+                .CountAsync(o => o.OrderStatus == "Canceled");
+            return Ok(canceledOrders);
+        }
 
+        [HttpGet("orders/confirmed")]
+        public async Task<IActionResult> GetTotalConfirmedOrders()
+        {
+            var confirmedOrders = await _context.Orders
+                .CountAsync(o => o.OrderStatus == "Completed");
+            return Ok(confirmedOrders);
+        }
+
+        [HttpGet("revenue/total")]
+        public async Task<IActionResult> GetTotalRevenue()
+        {
+            var totalRevenue = await _context.Orders
+                .Where(o => o.OrderStatus == "Completed")
+                .SumAsync(o => o.TotalAmount);
+            return Ok(totalRevenue);
+        }
+
+      
     }
+
+
 }
 
 
