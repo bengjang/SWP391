@@ -775,6 +775,17 @@ namespace lamlai2.Controllers
 
                 // Cập nhật trạng thái đơn hàng
                 order.OrderStatus = "Paid";
+
+                // Thêm mới: Tạo một payment record
+                var payment = new Payment
+                {
+                    OrderId = order.OrderId,
+                    Amount = order.TotalAmount,
+                    PaymentDate = DateTime.UtcNow,
+                    PaymentStatus = "Success"
+                };
+
+                _context.Payments.Add(payment);
                 await _context.SaveChangesAsync();
 
                 return Ok(new { message = "Thanh toán thành công!", order });
@@ -792,10 +803,10 @@ namespace lamlai2.Controllers
         {
             try
             {
-                // Kiểm tra xem đơn hàng tồn tại không
+               
                 var order = await _context.Orders
                     .Include(o => o.OrderItems)
-                    .ThenInclude(oi => oi.Product) // Đảm bảo load thông tin sản phẩm
+                    .ThenInclude(oi => oi.Product) 
                     .FirstOrDefaultAsync(o => o.OrderId == request.OrderId);
 
                 if (order == null)
@@ -842,17 +853,17 @@ namespace lamlai2.Controllers
 
 
 
-        // ✅ Định nghĩa class ngay trong API
+        
         public class ConfirmPaymentRequest
         {
             public int OrderId { get; set; }
             public string? DeliveryAddress { get; set; }
-            public string? PaymentMethod { get; set; } // Thêm phương thức thanh toán
+            public string? PaymentMethod { get; set; } 
             public string? Note { get; set; }
 
-            // New properties for Name and PhoneNumber
-            public string? Name { get; set; } // Customer's name
-            public string? PhoneNumber { get; set; } // Customer's phone number
+          
+            public string? Name { get; set; } 
+            public string? PhoneNumber { get; set; } 
         }
 
 
@@ -860,14 +871,14 @@ namespace lamlai2.Controllers
 
     }
 
-    // DTO nhận dữ liệu từ client
+  
     public class UpdateCartItemRequest
     {
         public int OrderItemId { get; set; }
         public int Quantity { get; set; }
     }
 
-    //new
+   
     public class RemoveItemRequest
     {
         public int OrderId { get; set; }

@@ -249,7 +249,54 @@ namespace test2.Controllers
             }
         }
 
+        [HttpPost("confirmCodPayment")]
+        public async Task<IActionResult> ConfirmCodPayment([FromBody] CodPaymentRequest request)
+        {
+            try
+            {
+                // Log thông tin để debug
+                _logger.LogInformation($"Xử lý thanh toán COD cho đơn hàng {request.OrderId} với số tiền {request.Amount}");
 
+                // Kiểm tra order có tồn tại không
+                var order = await _context.Orders.FindAsync(request.OrderId);
+                if (order == null)
+                {
+                    _logger.LogWarning($"Không tìm thấy đơn hàng với ID {request.OrderId}");
+                    return NotFound(new { message = "Không tìm thấy đơn hàng." });
+                }
+
+                // Kiểm tra xem đơn hàng đã có payment chưa
+                var existingPayment = await _context.Payments
+                    .FirstOrDefaultAsync(p => p.OrderId == request.OrderId);
+
+                if (existingPayment != null)
+                {
+                    _logger.LogInformation($"Đơn hàng {request.OrderId} đã có bản ghi payment, trả về payment hiện có");
+                    return Ok(new { success = true, message = "Đơn hàng đã có bản ghi thanh toán.", payment = existingPayment });
+                }
+
+                // Tạo bản ghi payment mới
+                var payment = new Payment
+                {
+                    OrderId = request.OrderId,
+                    Amount = request.Amount,
+                    PaymentDate = DateTime.UtcNow,
+                    PaymentStatus = "Success"
+                };
+
+                _context.Payments.Add(payment);
+                await _context.SaveChangesAsync();
+
+                _logger.LogInformation($"Đã tạo bản ghi payment thành công cho đơn hàng {request.OrderId}");
+
+                return Ok(new { success = true, message = "Đã ghi nhận thanh toán COD.", payment });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Lỗi xử lý thanh toán COD cho đơn hàng {request.OrderId}");
+                return StatusCode(500, new { success = false, message = ex.Message });
+            }
+        }
 
         public class PaymentRequest
         {
@@ -258,7 +305,11 @@ namespace test2.Controllers
             public string ReturnUrl { get; set; }//new
         }
 
-
+        public class CodPaymentRequest
+        {
+            public int OrderId { get; set; }
+            public decimal Amount { get; set; }
+        }
 
         private bool PaymentExists(int id)
         {
