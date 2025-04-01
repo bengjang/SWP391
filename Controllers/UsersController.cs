@@ -527,42 +527,7 @@ namespace test2.Controllers
             }
         }
 
-        // POST: api/Users/forgot-password
-        [HttpPost("forgot-password")]
-        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequest request)
-        {
-            if (string.IsNullOrEmpty(request.Email))
-            {
-                return BadRequest("Email is required");
-            }
-
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
-            if (user == null)
-            {
-                // For security reasons, don't reveal that the email doesn't exist
-                return Ok(new { message = "If your email is registered, you will receive a password reset link." });
-            }
-
-            // Generate a random temporary password
-            var tempPassword = GenerateRandomPassword();
-            user.Password = tempPassword; // Note: In production, this should be hashed
-
-            try
-            {
-                await _context.SaveChangesAsync();
-                
-                // Here you would typically send an email with the temporary password
-                // For demo purposes, we'll just return it in the response
-                return Ok(new { 
-                    message = "Password has been reset. Please check your email.",
-                    temporaryPassword = tempPassword // Remove this in production
-                });
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, "An error occurred while processing your request");
-            }
-        }
+        
 
         private string GenerateRandomPassword()
         {
