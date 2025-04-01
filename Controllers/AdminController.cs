@@ -240,7 +240,7 @@ namespace lamlai2.Controllers
             return sb.ToString().Normalize(NormalizationForm.FormC)[0];
         }
 
-        // Thêm phương thức GetProductById để CreatedAtAction có thể hoạt động
+        // Thêm phương thức GetProductById để CreatedAtAction có thể hoạt động.
         [HttpGet("{id}/product")]
         public async Task<ActionResult<Product>> GetProductById(int id)
         {
