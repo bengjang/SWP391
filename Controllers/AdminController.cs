@@ -270,10 +270,59 @@ namespace lamlai2.Controllers
 
             try
             {
-                // Lưu lại giá trị cũ của Quantity
                 int oldQuantity = product.Quantity;
 
-                // Cập nhật dữ liệu từ DTO
+                // Nếu CategoryId thay đổi, cập nhật ProductCode mới
+                if (product.CategoryId != productDto.CategoryId)
+                {
+                    var category = await _context.Categories.FindAsync(productDto.CategoryId);
+                    if (category == null)
+                    {
+                        return BadRequest(new { error = "Danh mục không tồn tại" });
+                    }
+
+                    // Tạo tiền tố mới
+                    var categoryPrefixes = new Dictionary<string, string>
+            {
+                { "Làm Sạch Da", "LSD" },
+                { "Đặc Trị", "ĐT" },
+                { "Dưỡng Ẩm", "DA" },
+                { "Bộ Chăm Sóc Da Mặt", "BCSDM" },
+                { "Chống Nắng Da Mặt", "CNDM" },
+                { "Dưỡng Mắt", "DM" },
+                { "Dụng Cụ/Phụ Kiện Chăm Sóc Da", "PKCSD" },
+                { "Vấn Đề Về Da", "VDVD" },
+                { "Dưỡng Môi", "DMI" },
+                { "Mặt Nạ", "MN" }
+            };
+
+                    string productPrefix = categoryPrefixes.TryGetValue(category.CategoryType, out string prefix)
+                        ? prefix
+                        : string.Concat(category.CategoryType.Split(' ').Select(s => char.ToUpper(RemoveDiacritics(s[0]))));
+                    productPrefix = string.IsNullOrEmpty(productPrefix) ? "SP" : productPrefix;
+
+                    // Tìm mã sản phẩm lớn nhất trong danh mục mới
+                    var lastProductCode = await _context.Products
+                        .Where(p => p.ProductCode.StartsWith(productPrefix))
+                        .OrderByDescending(p => p.ProductCode)
+                        .Select(p => p.ProductCode)
+                        .FirstOrDefaultAsync();
+
+                    int nextProductNumber = 1;
+                    if (!string.IsNullOrEmpty(lastProductCode))
+                    {
+                        string numericPart = lastProductCode.Substring(productPrefix.Length);
+                        if (int.TryParse(numericPart, out int lastNumber))
+                        {
+                            nextProductNumber = lastNumber + 1;
+                        }
+                    }
+
+                    // Cập nhật ProductCode mới
+                    product.ProductCode = $"{productPrefix}{nextProductNumber:D3}";
+                }
+
+                // Cập nhật dữ liệu khác từ DTO
                 product.ProductName = productDto.ProductName;
                 product.CategoryId = productDto.CategoryId;
                 product.Quantity = productDto.Quantity;
@@ -288,16 +337,15 @@ namespace lamlai2.Controllers
                 product.Ingredients = productDto.Ingredients;
                 product.UsageInstructions = productDto.UsageInstructions;
                 product.ManufactureDate = productDto.ManufactureDate;
-                
-                // Cập nhật ImportDate nếu số lượng tăng lên
+
                 if (productDto.Quantity > oldQuantity)
                 {
-                    product.ImportDate = DateTime.Now; // Cập nhật thời gian nhập kho với độ chính xác cao
+                    product.ImportDate = DateTime.Now;
                 }
 
                 await _context.SaveChangesAsync();
 
-                return Ok(new { message = "Cập nhật sản phẩm thành công." });
+                return Ok(new { message = "Cập nhật sản phẩm thành công.", newProductCode = product.ProductCode });
             }
             catch (DbUpdateException ex)
             {
@@ -483,7 +531,19 @@ namespace lamlai2.Controllers
             return Ok(totalRevenue);
         }
 
-      
+      [HttpGet("summary")]
+public async Task<ActionResult<IEnumerable<object>>> GetPaymentSummary()
+{
+    var payments = await _context.Payments
+        .Select(p => new 
+        {
+            p.PaymentDate,
+            p.Amount
+        })
+        .ToListAsync();
+
+    return Ok(payments);
+}
     }
 
 
