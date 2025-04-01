@@ -27,7 +27,7 @@ public partial class Product
 
     public string Status { get; set; } = null!;
 
-    public string ImgUrl { get; set; } = null!;
+    
 
     public string? SkinType { get; set; }
 
@@ -47,4 +47,6 @@ public partial class Product
     public virtual ICollection<ProductImage> ProductImages { get; set; } = new List<ProductImage>();
 
     public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
+    
+    // Thêm quan hệ với SkincareRoutineCategory
 }

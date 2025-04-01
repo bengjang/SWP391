@@ -124,7 +124,7 @@ namespace lamlai2.Controllers
                             oi.Product.Brand,
                             oi.Product.Origin,
                             oi.Product.Status,
-                            oi.Product.ImgUrl,
+                            
                             oi.Product.SkinType,
                             oi.Product.Description,
                             oi.Product.Ingredients,
@@ -540,7 +540,7 @@ namespace lamlai2.Controllers
                             oi.Product.Brand,
                             oi.Product.Origin,
                             oi.Product.Status,
-                            oi.Product.ImgUrl,
+                            
                             oi.Product.SkinType,
                             oi.Product.Description,
                             oi.Product.Ingredients,
@@ -629,7 +629,7 @@ namespace lamlai2.Controllers
                             oi.Product.Brand,
                             oi.Product.Origin,
                             oi.Product.Status,
-                            oi.Product.ImgUrl,
+                            
                             oi.Product.SkinType,
                             oi.Product.Description,
                             oi.Product.Ingredients,

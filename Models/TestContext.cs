@@ -40,6 +40,7 @@ public partial class TestContext : DbContext
 
     public virtual DbSet<Post> Posts { get; set; }
     public virtual DbSet<SkincareRoutine> SkincareRoutines { get; set; }
+    
 
     public virtual DbSet<QuizAnswer> QuizAnswers { get; set; }
 
@@ -167,6 +168,7 @@ public partial class TestContext : DbContext
                 .HasConstraintName("FK_SkincareRoutine_User");
         });
 
+        
 
         modelBuilder.Entity<Notification>(entity =>
         {
@@ -307,9 +309,8 @@ public partial class TestContext : DbContext
             entity.Property(e => e.Brand).HasMaxLength(50);
             entity.Property(e => e.Capacity).HasMaxLength(50);
             entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
-            entity.Property(e => e.ImgUrl)
-                .HasMaxLength(255)
-                .HasColumnName("ImgURL");
+            
+              
             entity.Property(e => e.ManufactureDate).HasColumnType("datetime");
             entity.Property(e => e.ImportDate).HasColumnType("datetime");
             entity.Property(e => e.Origin).HasMaxLength(50);
