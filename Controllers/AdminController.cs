@@ -160,7 +160,7 @@ namespace lamlai2.Controllers
                     // Tìm ProductCode lớn nhất cho tiền tố này
                     var lastProductCode = await _context.Products
                         .Where(p => p.ProductCode.StartsWith(productPrefix))
-                        .OrderByDescending(p => p.ProductId)
+                        .OrderByDescending(p => p.ProductCode)
                         .Select(p => p.ProductCode)
                         .FirstOrDefaultAsync();
 
@@ -586,21 +586,6 @@ namespace lamlai2.Controllers
             return Ok(totalRevenue);
         }
 
-<<<<<<< Updated upstream
-      [HttpGet("summary")]
-public async Task<ActionResult<IEnumerable<object>>> GetPaymentSummary()
-{
-    var payments = await _context.Payments
-        .Select(p => new 
-        {
-            p.PaymentDate,
-            p.Amount
-        })
-        .ToListAsync();
-
-    return Ok(payments);
-}
-=======
         [HttpGet("summary")]
         public async Task<ActionResult<IEnumerable<object>>> GetPaymentSummary()
         {
@@ -614,10 +599,7 @@ public async Task<ActionResult<IEnumerable<object>>> GetPaymentSummary()
 
             return Ok(payments);
         }
->>>>>>> Stashed changes
     }
-
-
 }
 
 
