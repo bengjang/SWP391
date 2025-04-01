@@ -198,7 +198,7 @@ namespace lamlai2.Controllers
                     Brand = productDto.Brand,
                     Origin = productDto.Origin,
                     Status = productDto.Status,
-                    ImgUrl = productDto.ImgUrl,
+                    
                     SkinType = productDto.SkinType,
                     Description = productDto.Description,
                     Ingredients = productDto.Ingredients,
@@ -253,6 +253,61 @@ namespace lamlai2.Controllers
 
             return Ok(product);
         }
+
+        //[HttpPut("{id}/product")]
+        //public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductUpdateDTO productDto)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    var product = await _context.Products.FindAsync(id);
+        //    if (product == null)
+        //    {
+        //        return NotFound(new { message = "Sản phẩm không tồn tại." });
+        //    }
+
+        //    try
+        //    {
+        //        // Lưu lại giá trị cũ của Quantity
+        //        int oldQuantity = product.Quantity;
+
+        //        // Cập nhật dữ liệu từ DTO
+        //        product.ProductName = productDto.ProductName;
+        //        product.CategoryId = productDto.CategoryId;
+        //        product.Quantity = productDto.Quantity;
+        //        product.Capacity = productDto.Capacity;
+        //        product.Price = productDto.Price;
+        //        product.Brand = productDto.Brand;
+        //        product.Origin = productDto.Origin;
+        //        product.Status = productDto.Status;
+
+        //        product.SkinType = productDto.SkinType;
+        //        product.Description = productDto.Description;
+        //        product.Ingredients = productDto.Ingredients;
+        //        product.UsageInstructions = productDto.UsageInstructions;
+        //        product.ManufactureDate = productDto.ManufactureDate;
+
+        //        // Cập nhật ImportDate nếu số lượng tăng lên
+        //        if (productDto.Quantity > oldQuantity)
+        //        {
+        //            product.ImportDate = DateTime.Now; // Cập nhật thời gian nhập kho với độ chính xác cao
+        //        }
+
+        //        await _context.SaveChangesAsync();
+
+        //        return Ok(new { message = "Cập nhật sản phẩm thành công." });
+        //    }
+        //    catch (DbUpdateException ex)
+        //    {
+        //        return StatusCode(500, new { error = "Lỗi khi lưu dữ liệu vào database.", details = ex.InnerException?.Message });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, new { error = "Lỗi không xác định.", details = ex.Message });
+        //    }
+        //}
 
         [HttpPut("{id}/product")]
         public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductUpdateDTO productDto)
@@ -331,7 +386,7 @@ namespace lamlai2.Controllers
                 product.Brand = productDto.Brand;
                 product.Origin = productDto.Origin;
                 product.Status = productDto.Status;
-                product.ImgUrl = productDto.ImgUrl;
+                
                 product.SkinType = productDto.SkinType;
                 product.Description = productDto.Description;
                 product.Ingredients = productDto.Ingredients;
@@ -531,6 +586,7 @@ namespace lamlai2.Controllers
             return Ok(totalRevenue);
         }
 
+<<<<<<< Updated upstream
       [HttpGet("summary")]
 public async Task<ActionResult<IEnumerable<object>>> GetPaymentSummary()
 {
@@ -544,6 +600,21 @@ public async Task<ActionResult<IEnumerable<object>>> GetPaymentSummary()
 
     return Ok(payments);
 }
+=======
+        [HttpGet("summary")]
+        public async Task<ActionResult<IEnumerable<object>>> GetPaymentSummary()
+        {
+            var payments = await _context.Payments
+                .Select(p => new
+                {
+                    p.PaymentDate,
+                    p.Amount
+                })
+                .ToListAsync();
+
+            return Ok(payments);
+        }
+>>>>>>> Stashed changes
     }
 
 

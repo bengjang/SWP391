@@ -53,7 +53,7 @@ namespace test2.Controllers
                         Name = p.Category.CategoryName,
                         Type = p.Category.CategoryType
                     },
-                    ImageUrl = p.ImgUrl
+                    
                 }).ToListAsync();
 
                 if (!products.Any())
