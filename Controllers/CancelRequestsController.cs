@@ -148,6 +148,15 @@ namespace lamlai.Controllers
                 return BadRequest(new { error = "Không thể hủy đơn hàng sau 24 tiếng kể từ khi đặt." });
             }
 
+            // Kiểm tra nếu đã có bất kỳ yêu cầu hủy nào cho đơn hàng này
+            var existingCancelRequest = await _context.CancelRequests
+                .AnyAsync(cr => cr.OrderId == request.OrderId);
+
+            if (existingCancelRequest)
+            {
+                return BadRequest(new { error = "Bạn chỉ có thể gửi yêu cầu hủy một lần cho đơn hàng này." });
+            }
+
             // Lấy thông tin người dùng từ UserId
             var user = await _context.Users.FindAsync(order.UserId);
             if (user == null)
@@ -172,8 +181,9 @@ namespace lamlai.Controllers
             return Ok(new { message = "Yêu cầu hủy đơn hàng đã được gửi thành công.", cancelRequestId = cancelRequest.CancelRequestId });
         }
 
-            // PUT: api/CancelRequests/5
-            [HttpPut("{id}")]
+
+        // PUT: api/CancelRequests/5
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutCancelRequest(int id, CancelRequest cancelRequest)
         {
             if (id != cancelRequest.CancelRequestId)
