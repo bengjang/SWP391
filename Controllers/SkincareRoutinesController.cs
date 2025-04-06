@@ -146,30 +146,62 @@ namespace test2.Controllers
                     skinType = mappedSkinType;
                 }
 
-                // Tìm các sản phẩm phù hợp cho loại da
-                var products = await _context.Products
-                    .Where(p => p.IsActive && 
-                               (p.SuitableSkinTypes.Contains(skinType) || 
-                                string.IsNullOrEmpty(p.SuitableSkinTypes) || 
-                                p.SuitableSkinTypes.Contains("Tất cả loại da")))
-                    .Select(p => new {
-                        id = p.ProductId,
-                        name = p.ProductName,
-                        price = p.Price,
-                        brand = p.Brand,
-                        image = p.ProductImage,
-                        category = p.CategoryName,
-                        productType = p.ProductType,
-                        stepName = MapProductTypeToStepName(p.ProductType) // Hàm helper để map loại sản phẩm sang bước chăm sóc da
-                    })
-                    .ToListAsync();
+                // Tìm quy trình chăm sóc da phù hợp với loại da
+                var routine = await _context.SkincareRoutines
+                    .FirstOrDefaultAsync(r => r.SkinType.ToLower() == skinType.ToLower());
 
-                if (products == null || !products.Any())
+                if (routine == null)
                 {
-                    return NotFound($"Không tìm thấy sản phẩm đề xuất cho loại da {skinType}");
+                    return NotFound($"Không tìm thấy quy trình chăm sóc da cho loại da {skinType}");
                 }
 
-                return Ok(products);
+                // Lấy các sản phẩm được gán cho quy trình này từ bảng SkincareRoutineProducts
+                var routineProducts = await _context.SkincareRoutineProducts
+                    .Where(rp => rp.RoutineId == routine.RoutineId)
+                    .OrderBy(rp => rp.OrderIndex)
+                    .ToListAsync();
+
+                if (routineProducts == null || !routineProducts.Any())
+                {
+                    return NotFound($"Không tìm thấy sản phẩm đề xuất cho quy trình chăm sóc da {skinType}");
+                }
+
+                // Lấy thông tin chi tiết của từng sản phẩm
+                var productDetails = new List<object>();
+                foreach (var routineProduct in routineProducts)
+                {
+                    var product = await _context.Products
+                        .Where(p => p.ProductId == routineProduct.ProductID && p.Status == "Active")
+                        .FirstOrDefaultAsync();
+
+                    if (product != null)
+                    {
+                        // Lấy hình ảnh sản phẩm
+                        var productImage = await _context.ProductImages
+                            .Where(pi => pi.ProductId == product.ProductId)
+                            .Select(pi => pi.ImgUrl)
+                            .FirstOrDefaultAsync();
+
+                        productDetails.Add(new
+                        {
+                            id = product.ProductId,
+                            name = product.ProductName,
+                            price = product.Price,
+                            brand = product.Brand,
+                            imageUrl = productImage ?? "",
+                            stepName = routineProduct.StepName,
+                            orderIndex = routineProduct.OrderIndex,
+                            customDescription = routineProduct.CustomDescription
+                        });
+                    }
+                }
+
+                if (productDetails.Count == 0)
+                {
+                    return NotFound($"Không tìm thấy thông tin chi tiết sản phẩm cho quy trình chăm sóc da {skinType}");
+                }
+
+                return Ok(productDetails);
             }
             catch (Exception ex)
             {

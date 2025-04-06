@@ -40,6 +40,7 @@ public partial class TestContext : DbContext
 
     public virtual DbSet<Post> Posts { get; set; }
     public virtual DbSet<SkincareRoutine> SkincareRoutines { get; set; }
+    public virtual DbSet<SkincareRoutineProduct> SkincareRoutineProducts { get; set; }
     
 
     public virtual DbSet<QuizAnswer> QuizAnswers { get; set; }
