@@ -1,8 +1,10 @@
-﻿using System;
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace lamlai.Models;
 
+[Table("SkincareRoutinesContent", Schema = "dbo")]
 public partial class SkincareRoutine
 {
     public int RoutineId { get; set; }
