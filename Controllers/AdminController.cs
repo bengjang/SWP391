@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -492,21 +492,20 @@ namespace lamlai2.Controllers
         [HttpPut("{id}/cancelrequest/approve")]
         public async Task<IActionResult> ApproveCancelRequest(int id)
         {
-            var cancelRequest = await _context.CancelRequests.FindAsync(id);
-            if (cancelRequest == null)
-            {
-                return NotFound(new { error = "Yêu cầu hủy không tồn tại." });
-            }
-
-            if (cancelRequest.Status != "Pending")
-            {
-                return BadRequest(new { error = "Yêu cầu hủy đã được xử lý trước đó." });
-            }
-
-            var order = await _context.Orders.FindAsync(cancelRequest.OrderId);
+            // id ở đây là OrderId, không phải CancelRequestId
+            var order = await _context.Orders.FindAsync(id);
             if (order == null)
             {
                 return NotFound(new { error = "Đơn hàng không tồn tại." });
+            }
+
+            // Tìm yêu cầu hủy theo OrderId và trạng thái Pending
+            var cancelRequest = await _context.CancelRequests
+                .FirstOrDefaultAsync(cr => cr.OrderId == id && cr.Status == "Pending");
+
+            if (cancelRequest == null)
+            {
+                return NotFound(new { error = "Không tìm thấy yêu cầu hủy đơn hàng đang chờ xử lý." });
             }
 
             // Cập nhật trạng thái đơn hàng
@@ -519,15 +518,26 @@ namespace lamlai2.Controllers
         [HttpPut("{id}/cancelrequest/reject")]
         public async Task<IActionResult> RejectCancelRequest(int id)
         {
-            var cancelRequest = await _context.CancelRequests.FindAsync(id);
-            if (cancelRequest == null)
+            // id ở đây là OrderId, không phải CancelRequestId
+            var order = await _context.Orders.FindAsync(id);
+            if (order == null)
             {
-                return NotFound(new { error = "Yêu cầu hủy không tồn tại." });
+                return NotFound(new { error = "Đơn hàng không tồn tại." });
             }
 
-            if (cancelRequest.Status != "Pending")
+            // Tìm yêu cầu hủy theo OrderId và trạng thái Pending
+            var cancelRequest = await _context.CancelRequests
+                .FirstOrDefaultAsync(cr => cr.OrderId == id && cr.Status == "Pending");
+
+            if (cancelRequest == null)
             {
-                return BadRequest(new { error = "Yêu cầu hủy đã được xử lý trước đó." });
+                return NotFound(new { error = "Không tìm thấy yêu cầu hủy đơn hàng đang chờ xử lý." });
+            }
+
+            // Cập nhật trạng thái đơn hàng trở lại thành 'Paid' nếu đang ở trạng thái 'Cancelling'
+            if (order.OrderStatus == "Cancelling")
+            {
+                order.OrderStatus = "Paid";
             }
 
             cancelRequest.Status = "Rejected";
@@ -601,6 +611,3 @@ namespace lamlai2.Controllers
         }
     }
 }
-
-
-
