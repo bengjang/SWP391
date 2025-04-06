@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using lamlai.Models;
 using Microsoft.EntityFrameworkCore;
@@ -152,6 +152,9 @@ public partial class TestContext : DbContext
         modelBuilder.Entity<SkincareRoutine>(entity =>
         {
             entity.HasKey(e => e.RoutineId);
+            
+            // Ánh xạ model SkincareRoutine với bảng SkincareRoutinesContent trong cơ sở dữ liệu
+            entity.ToTable("SkincareRoutinesContent");
 
             entity.Property(e => e.SkinType).HasMaxLength(50).IsRequired();
             entity.Property(e => e.Title).HasMaxLength(255).IsRequired();

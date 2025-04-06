@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -537,6 +537,50 @@ namespace test2.Controllers
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
+        // PUT: api/Users/{id}/change-password
+        [HttpPut("{id}/change-password")]
+        public async Task<IActionResult> ChangePassword(int id, [FromBody] ChangePasswordRequest request)
+        {
+            try
+            {
+                // Kiểm tra nếu request hợp lệ
+                if (string.IsNullOrEmpty(request.CurrentPassword) || string.IsNullOrEmpty(request.NewPassword))
+                {
+                    return BadRequest("Mật khẩu hiện tại và mật khẩu mới không được để trống");
+                }
+
+                // Tìm người dùng
+                var user = await _context.Users.FindAsync(id);
+                if (user == null)
+                {
+                    return NotFound($"Không tìm thấy người dùng với ID {id}");
+                }
+
+                // Xác thực mật khẩu hiện tại
+                if (user.Password != request.CurrentPassword)
+                {
+                    return BadRequest("Mật khẩu hiện tại không đúng");
+                }
+
+                // Cập nhật mật khẩu mới
+                user.Password = request.NewPassword;
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return Ok(new { Message = "Mật khẩu đã được cập nhật thành công" });
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return StatusCode(500, "Đã xảy ra lỗi khi cập nhật mật khẩu");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Lỗi không xử lý: {ex.Message}");
+            }
+        }
+
         private bool UserExists(int id)
         {
             return _context.Users.Any(e => e.UserId == id);
@@ -582,5 +626,11 @@ namespace test2.Controllers
     public class UpdateRoleRequest
     {
         public string Role { get; set; }
+    }
+
+    public class ChangePasswordRequest
+    {
+        public string CurrentPassword { get; set; }
+        public string NewPassword { get; set; }
     }
 }
