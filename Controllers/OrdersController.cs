@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -104,8 +104,15 @@ namespace lamlai2.Controllers
                     order.OrderId,
                     order.UserId,
                     order.OrderStatus,
+                    order.DeliveryStatus,
+                    order.DeliveryAddress,
                     order.TotalAmount,
                     order.OrderDate,
+                    order.Note,
+                    order.VoucherId,
+                    order.PaymentMethod,
+                    order.Name,
+                    order.PhoneNumber,
                     Items = order.OrderItems.Select(oi => new
                     {
                         oi.OrderItemId,
@@ -609,8 +616,15 @@ namespace lamlai2.Controllers
                     o.OrderId,
                     o.UserId,
                     o.OrderStatus,
+                    o.DeliveryStatus,
+                    o.DeliveryAddress,
                     o.TotalAmount,
                     o.OrderDate,
+                    o.Note,
+                    o.VoucherId,
+                    o.PaymentMethod,
+                    o.Name,
+                    o.PhoneNumber,
                     Items = o.OrderItems.Select(oi => new
                     {
                         oi.OrderItemId,
@@ -629,7 +643,6 @@ namespace lamlai2.Controllers
                             oi.Product.Brand,
                             oi.Product.Origin,
                             oi.Product.Status,
-                            
                             oi.Product.SkinType,
                             oi.Product.Description,
                             oi.Product.Ingredients,
@@ -885,4 +898,3 @@ namespace lamlai2.Controllers
         public int OrderItemId { get; set; }
     }
 }
-
