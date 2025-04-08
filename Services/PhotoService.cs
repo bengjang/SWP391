@@ -35,7 +35,8 @@ namespace SWP391.Services
                 var uploadParams = new ImageUploadParams
                 {
                     File = new FileDescription(file.FileName, stream),
-                    Transformation = new Transformation().Height(500).Width(500).Crop("fill").Gravity("face")
+                    // Bu1ecf giu1edbi hu1ea1n ku00edch thu01b0u1edbc u1ea3nh, cho phu00e9p u1ea3nh giu1eef nguyên ku00edch thu01b0u1edbc
+                    Transformation = new Transformation().Quality(100)
                 };
                 uploadResult = await _cloudinary.UploadAsync(uploadParams);
             }
