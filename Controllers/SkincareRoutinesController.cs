@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using lamlai.Models;
+using System.Globalization; // Thêm để chuẩn hóa chuỗi
+using System.Text; // Thêm để chuẩn hóa chuỗi
 
 namespace test2.Controllers
 {
@@ -70,38 +72,12 @@ namespace test2.Controllers
                     return BadRequest("Loại da không được để trống");
                 }
 
-                // Tìm kiếm chính xác trước
-                var routine = await _context.SkincareRoutines
-                    .FirstOrDefaultAsync(r => r.SkinType.ToLower() == skinType.ToLower());
+                string normalizedSkinType = skinType.ToLower();
+                Console.WriteLine($"[Backend Log - GET] Received skinType: {skinType}");
+                Console.WriteLine($"[Backend Log - GET] Normalized skinType: {normalizedSkinType}");
 
-                // Nếu không tìm thấy, thử tìm kiếm bằng Contains
-                if (routine == null)
-                {
-                    routine = await _context.SkincareRoutines
-                        .FirstOrDefaultAsync(r => r.SkinType.ToLower().Contains(skinType.ToLower()) || 
-                                               skinType.ToLower().Contains(r.SkinType.ToLower()));
-                }
-
-                // Xử lý các trường hợp đặc biệt
-                if (routine == null)
-                {
-                    // Ánh xạ các tên không dấu với tên có dấu
-                    var skinTypeMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "dadau", "Da dầu" },
-                        { "dakho", "Da khô" },
-                        { "dathuong", "Da thường" },
-                        { "dahonhop", "Da hỗn hợp" },
-                        { "danhaycam", "Da nhạy cảm" }
-                    };
-
-                    // Nếu skinType là một trong các key không dấu
-                    if (skinTypeMap.TryGetValue(skinType.ToLower(), out string mappedSkinType))
-                    {
-                        routine = await _context.SkincareRoutines
-                            .FirstOrDefaultAsync(r => r.SkinType.ToLower() == mappedSkinType.ToLower());
-                    }
-                }
+                // Find routine logic (use the same logic as before to find the correct routine)
+                var routine = await FindRoutineByNormalizedSkinTypeAsync(normalizedSkinType); // Use helper method
 
                 if (routine == null)
                 {
@@ -112,7 +88,66 @@ namespace test2.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine($"[Backend Error - GET] Error getting routine for skin type {skinType}: {ex.ToString()}");
                 return StatusCode(500, $"Lỗi khi lấy quy trình chăm sóc da theo loại da: {ex.Message}");
+            }
+        }
+
+        // PUT: api/SkincareRoutines/skintype/{skinType}/content
+        [HttpPut("skintype/{skinType}/content")]
+        public async Task<IActionResult> UpdateRoutineContentBySkinType(string skinType, [FromBody] SkincareRoutineUpdateRequest request)
+        {
+            if (request == null)
+            {
+                return BadRequest("Dữ liệu cập nhật không hợp lệ.");
+            }
+
+            try
+            {
+                // Chuẩn hóa chuỗi đầu vào
+                skinType = skinType?.Trim();
+                
+                if (string.IsNullOrEmpty(skinType))
+                {
+                    return BadRequest("Loại da không được để trống");
+                }
+
+                string normalizedSkinType = skinType.ToLower();
+                Console.WriteLine($"[Backend Log - PUT] Received skinType: {skinType}");
+                Console.WriteLine($"[Backend Log - PUT] Normalized skinType: {normalizedSkinType}");
+
+                // Tìm quy trình hiện có (sử dụng logic tương tự GetRoutineBySkinType)
+                var routine = await FindRoutineByNormalizedSkinTypeAsync(normalizedSkinType); // Reuse helper method
+
+                if (routine == null)
+                {
+                    return NotFound($"Không tìm thấy quy trình chăm sóc da cho loại da {skinType} để cập nhật.");
+                }
+
+                Console.WriteLine($"[Backend Log - PUT] Found routine to update: ID {routine.RoutineId}, Title: {routine.Title}");
+
+                // Cập nhật các trường từ request
+                routine.Title = request.Title;
+                routine.Content = request.Content;
+                routine.ImageUrl = request.ImageUrl;
+                // Giữ nguyên SkinType và RoutineId
+
+                _context.Entry(routine).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+
+                Console.WriteLine($"[Backend Log - PUT] Successfully updated routine for skin type: {skinType}");
+                return NoContent(); // Hoặc return Ok(routine); nếu muốn trả về đối tượng đã cập nhật
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                Console.WriteLine($"[Backend Error - PUT] Concurrency error updating routine for skin type {skinType}: {ex.ToString()}");
+                // Có thể xảy ra nếu có xung đột cập nhật đồng thời
+                return StatusCode(StatusCodes.Status409Conflict, "Xung đột cập nhật. Vui lòng thử lại.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[Backend Error - PUT] Error updating routine for skin type {skinType}: {ex.ToString()}");
+                return StatusCode(500, $"Lỗi máy chủ nội bộ khi cập nhật quy trình: {ex.Message}");
             }
         }
 
@@ -310,13 +345,13 @@ namespace test2.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateRoutine(int id, SkincareRoutine routine)
         {
+            if (id != routine.RoutineId)
+            {
+                return BadRequest(new { message = "ID không khớp" });
+            }
+
             try
             {
-                if (id != routine.RoutineId)
-                {
-                    return BadRequest("ID không khớp");
-                }
-
                 var existingRoutine = await _context.SkincareRoutines.FindAsync(id);
                 if (existingRoutine == null)
                 {
@@ -333,11 +368,11 @@ namespace test2.Controllers
                 _context.Entry(existingRoutine).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
 
-                return NoContent();
+                return Ok(new { message = "Cập nhật quy trình thành công" });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Lỗi khi cập nhật quy trình chăm sóc da: {ex.Message}");
+                return StatusCode(500, new { message = "Lỗi khi cập nhật quy trình", error = ex.Message });
             }
         }
 
@@ -350,18 +385,177 @@ namespace test2.Controllers
                 var routine = await _context.SkincareRoutines.FindAsync(id);
                 if (routine == null)
                 {
-                    return NotFound($"Không tìm thấy quy trình chăm sóc da với ID {id}");
+                    return NotFound(new { message = "Không tìm thấy quy trình" });
                 }
 
                 _context.SkincareRoutines.Remove(routine);
                 await _context.SaveChangesAsync();
-
-                return NoContent();
+                return Ok(new { message = "Xóa quy trình thành công" });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Lỗi khi xóa quy trình chăm sóc da: {ex.Message}");
+                return StatusCode(500, new { message = "Lỗi khi xóa quy trình", error = ex.Message });
             }
         }
+
+        // PUT: api/SkincareRoutines/skintype/{skinType}/products
+        [HttpPut("skintype/{skinType}/products")]
+        public async Task<IActionResult> UpdateRoutineProducts(string skinType, [FromBody] List<SkincareRoutineProduct> products)
+        {
+            try
+            {
+                // Tìm routine theo skinType
+                var routine = await _context.SkincareRoutines
+                    .FirstOrDefaultAsync(r => r.SkinType.ToLower() == skinType.ToLower());
+
+                if (routine == null)
+                {
+                    return NotFound($"Không tìm thấy quy trình cho loại da {skinType}");
+                }
+
+                // Xóa tất cả sản phẩm cũ của routine
+                var existingProducts = await _context.SkincareRoutineProducts
+                    .Where(p => p.RoutineId == routine.RoutineId)
+                    .ToListAsync();
+                _context.SkincareRoutineProducts.RemoveRange(existingProducts);
+
+                // Thêm sản phẩm mới
+                foreach (var product in products)
+                {
+                    product.RoutineId = routine.RoutineId;
+                    _context.SkincareRoutineProducts.Add(product);
+                }
+
+                await _context.SaveChangesAsync();
+                return Ok("Cập nhật sản phẩm thành công");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Lỗi khi cập nhật sản phẩm: {ex.Message}");
+            }
+        }
+
+        // PUT: api/SkincareRoutines/content/{skinType}
+        [HttpPut("content/{skinType}")]
+        public async Task<IActionResult> UpdateRoutineContent(string skinType, [FromBody] SkincareRoutine content)
+        {
+            try
+            {
+                var existingContent = await _context.SkincareRoutines
+                    .FirstOrDefaultAsync(r => r.SkinType == skinType);
+
+                if (existingContent == null)
+                {
+                    content.SkinType = skinType;
+                    _context.SkincareRoutines.Add(content);
+                }
+                else
+                {
+                    existingContent.Title = content.Title;
+                    existingContent.Content = content.Content;
+                    existingContent.ImageUrl = content.ImageUrl;
+                }
+
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "Cập nhật nội dung quy trình thành công" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Lỗi khi cập nhật nội dung quy trình", error = ex.Message });
+            }
+        }
+
+        // GET: api/SkincareRoutines/content/{skinType}
+        [HttpGet("content/{skinType}")]
+        public async Task<IActionResult> GetRoutineContent(string skinType)
+        {
+            try
+            {
+                var content = await _context.SkincareRoutines
+                    .FirstOrDefaultAsync(r => r.SkinType == skinType);
+
+                if (content == null)
+                {
+                    return NotFound(new { message = "Không tìm thấy nội dung quy trình cho loại da này" });
+                }
+
+                return Ok(content);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Lỗi khi lấy nội dung quy trình", error = ex.Message });
+            }
+        }
+
+        // Helper method to find routine by normalized skin type (Extracted for reuse)
+        // Consider making this private if only used within this controller
+        private async Task<SkincareRoutine> FindRoutineByNormalizedSkinTypeAsync(string normalizedSkinType)
+        {
+            Console.WriteLine($"[Backend Log - Helper] Finding routine for normalized skinType: {normalizedSkinType}");
+            // Ánh xạ các tên không dấu với tên có dấu
+            var skinTypeMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            {
+                { "dadau", "Da dầu" },
+                { "dakho", "Da khô" },
+                { "dathuong", "Da thường" },
+                { "dahonhop", "Da hỗn hợp" },
+                { "danhaycam", "Da nhạy cảm" }
+            };
+
+            string mappedSkinType = null;
+            if (skinTypeMap.TryGetValue(normalizedSkinType, out string value))
+            {
+                mappedSkinType = value;
+            }
+            Console.WriteLine($"[Backend Log - Helper] Mapped skinType: {mappedSkinType}");
+
+            // Tìm kiếm chính xác trước (theo tên gốc đã chuẩn hóa)
+            var routine = await _context.SkincareRoutines
+                .FirstOrDefaultAsync(r => r.SkinType.ToLower() == normalizedSkinType);
+            Console.WriteLine($"[Backend Log - Helper] Routine found by normalized name: {(routine != null ? routine.RoutineId.ToString() : "NULL")}");
+
+            // Nếu không tìm thấy, thử tìm bằng tên đã ánh xạ
+            if (routine == null && mappedSkinType != null)
+            {
+                routine = await _context.SkincareRoutines
+                    .FirstOrDefaultAsync(r => r.SkinType.ToLower() == mappedSkinType.ToLower());
+                Console.WriteLine($"[Backend Log - Helper] Routine found by mapped name: {(routine != null ? routine.RoutineId.ToString() : "NULL")}");
+            }
+
+            // Nếu vẫn không tìm thấy, thử tìm kiếm bằng Contains (cả tên gốc và tên ánh xạ nếu có)
+            // Ưu tiên tìm Contains trên tên gốc trước
+            if (routine == null)
+            {
+                routine = await _context.SkincareRoutines
+                    .FirstOrDefaultAsync(r => r.SkinType.ToLower().Contains(normalizedSkinType) || 
+                                            normalizedSkinType.Contains(r.SkinType.ToLower()));
+                Console.WriteLine($"[Backend Log - Helper] Routine found by Contains (normalized): {(routine != null ? routine.RoutineId.ToString() : "NULL")}");
+            }
+            // Nếu vẫn không tìm thấy và có tên ánh xạ, thử Contains trên tên ánh xạ
+            if (routine == null && mappedSkinType != null)
+            {
+                routine = await _context.SkincareRoutines
+                    .FirstOrDefaultAsync(r => r.SkinType.ToLower().Contains(mappedSkinType.ToLower()) || 
+                                             mappedSkinType.ToLower().Contains(r.SkinType.ToLower()));
+                Console.WriteLine($"[Backend Log - Helper] Routine found by Contains (mapped): {(routine != null ? routine.RoutineId.ToString() : "NULL")}");
+            }
+
+            // Bỏ phần tìm kiếm bằng map đặc biệt vì nó trùng lặp logic ánh xạ ở trên.
+
+            return routine;
+        }
+    }
+
+    // *** NEW DTO CLASS ***
+    public class SkincareRoutineUpdateRequest
+    {
+        public string? Title { get; set; } // Cho phép null để linh hoạt hơn
+        public string? Content { get; set; }
+        public string? ImageUrl { get; set; }
+    }
+
+    public class SkincareRoutineProductUpdateDto
+    {
+
     }
 }
