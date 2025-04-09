@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -175,9 +175,6 @@ namespace lamlai.Controllers
                 Status = "Pending"
             };
 
-            // Cập nhật trạng thái đơn hàng thành 'Cancelling'
-            order.OrderStatus = "Cancelling";
-
             _context.CancelRequests.Add(cancelRequest);
             await _context.SaveChangesAsync();
 
@@ -268,3 +265,4 @@ namespace lamlai.Controllers
         public List<OrderItemDto> OrderItems { get; set; } = new List<OrderItemDto>();
     }
 }
+                                                                            
